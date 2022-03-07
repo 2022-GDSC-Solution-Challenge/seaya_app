@@ -3,6 +3,8 @@ import 'package:seaya_app/widgets/menuwidget/Menu.dart';
 import 'package:seaya_app/screens/loginpage/login.dart';
 import 'package:seaya_app/screens/mainhomepage/Sea.dart';
 import 'package:seaya_app/widgets/menuwidget/appBar.dart';
+import 'package:seaya_app/screens/mainhomepage/News.dart';
+import 'package:seaya_app/screens/mainhomepage/Campaign.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,12 +16,6 @@ class Home extends StatefulWidget {
 // ignore: camel_case_types
 class HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-
-  final List<Widget> _widgetOptions = <Widget>[
-    Sea(),
-    Sea(),
-    Sea(),
-  ];
 
   @override
   void initState() {
@@ -35,6 +31,9 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -42,8 +41,8 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
           padding: const EdgeInsets.all(18.0),
           child: Column(
             children: [
-              //앱바 추가---------
-              appBar(),
+              //appbar
+             appBar(),
               const SizedBox(
                 height: 15,
               ),
@@ -98,7 +97,8 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
-                  children: const [
+                  children: [
+                    //메인화면 탭
                     Center(
                       child: Text(
                         'Sea',
@@ -108,24 +108,14 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         ),
                       ),
                     ),
+                    //뉴스 탭
                     Center(
-                      child: Text(
-                        'News',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontFamily: 'PTSansRegular',
-                        ),
-                      ),
+                      child: News(),
                     ),
+                    //캠페인 탭
                     Center(
-                      child: Text(
-                        'Campaign',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontFamily: 'PTSansRegular',
+                        child: Campaign(),
                         ),
-                      ),
-                    ),
                   ],
                 ),
               ),
