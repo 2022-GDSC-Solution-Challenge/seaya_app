@@ -21,6 +21,9 @@ class _NewsState extends State<News> with SingleTickerProviderStateMixin {
       backgroundColor: Colors.white,
       body: Column(
         children: [
+          const SizedBox(
+                height: 15,
+              ),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.all(0.0),
