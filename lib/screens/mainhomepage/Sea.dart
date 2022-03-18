@@ -34,29 +34,34 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
 
     final standardDeviceWidth = 390;
     final standardDeviceHeight = 844;
+    final double sh = (height / standardDeviceHeight);
+    final double sd = (width / standardDeviceWidth);
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        child: Container(
-          //color: Colors.amber,
-          width: 350 * (width / standardDeviceWidth),
-          height: 685 * (height / standardDeviceHeight),
-          child: Card(
-            elevation: 5.0,
-            margin: EdgeInsets.fromLTRB(5, 10, 5, 5),
-            shadowColor: Colors.grey.withOpacity(0.4),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
+        scrollDirection: Axis.vertical,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              height: 10 * (height / standardDeviceHeight),
             ),
-            child: Container(
-              padding: new EdgeInsets.fromLTRB(0, 15, 0, 0),
-              //width: 340 * (width / standardDeviceWidth),
-              //height: 650 * (height / standardDeviceHeight),
-              // decoration: BoxDecoration(
-              //   borderRadius: BorderRadius.circular(10.0),
-              // ),
-              child: Column(
+            Card(
+              elevation: 5.0,
+              margin: EdgeInsets.fromLTRB(10*sd,10 * sh, 10*sd, 10 * sh),
+              shadowColor: Colors.grey.withOpacity(0.4),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: Container(
+                padding: new EdgeInsets.fromLTRB(15*sd, 20 * sh, 15*sd, 20*sh),
+                width: 340 * (width / standardDeviceWidth),
+                //height: 680 * (height / standardDeviceHeight),
+                // decoration: BoxDecoration(
+                //   borderRadius: BorderRadius.circular(10.0),
+                // ),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     //user info card
@@ -67,13 +72,14 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: Container(
-                        height: 45 * (height / standardDeviceHeight),
-                        width: 300 * (width / standardDeviceWidth),
+                        //height: 45 * (height / standardDeviceHeight),
+                        //width: 300 * (width / standardDeviceWidth),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
+                          
                         ),
                         child: Container(
-                          padding: const EdgeInsets.only(left: 20, top: 3),
+                          padding:  EdgeInsets.fromLTRB(20*sd,13*sh,15*sd,13*sh),
                           child: Row(children: [
                             //사용자 이름
                             Text(
@@ -126,16 +132,12 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
                       ]),
                     ),
                     SizedBox(
-                      height: 10 * (height / standardDeviceHeight),
+                      height: 20 * (height / standardDeviceHeight),
                     ),
                     //메인 배경 이미지
                     Stack(
                       alignment: Alignment.center,
                       children: [
-                        // Positioned(
-                        //     top: 12 * (height / standardDeviceHeight),
-                        //left: 50 * ( width / standardDeviceWidth) ,
-                        //child:
                         Container(
                           child: Image(
                             width: 240.0 * (width / standardDeviceWidth),
@@ -146,26 +148,22 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
                         ),
                         //),
                         //북극곰 이미지
-                        // Positioned(
-                        //   top: 72 * (height / standardDeviceHeight),
-                        //   //left: 113,
-                        //   child: 
                         Container(
-                            child: Image(
-                              width: 115.0 * (width / standardDeviceWidth),
-                              image: AssetImage(
-                                'images/mainImage.png',
-                              ),
+                          child: Image(
+                            width: 115.0 * (width / standardDeviceWidth),
+                            image: AssetImage(
+                              'images/mainImage.png',
                             ),
                           ),
-                       // ),
+                        ),
+                        // ),
                         Positioned(
-                          top: 44 * (height / standardDeviceHeight),
-                          left: 0 * (width / standardDeviceWidth),
+                          top: 43 * (height / standardDeviceHeight),
+                          left: 1 * (width / standardDeviceWidth),
                           child: Container(
                             width: 82.0 * (width / standardDeviceWidth),
-                            height: 82.0 * (height / standardDeviceHeight),
-                            padding: const EdgeInsets.fromLTRB(0,7,0,0),
+                            //height: 82.0 * (height / standardDeviceHeight),
+                            padding: const EdgeInsets.fromLTRB(0, 7, 0, 7),
                             decoration: new BoxDecoration(
                               color: Color.fromARGB(255, 118, 200, 241),
                               shape: BoxShape.circle,
@@ -184,8 +182,8 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
                                   overflow: TextOverflow.fade,
                                 ),
                                 SizedBox(
-                      height: 3 * (height / standardDeviceHeight),
-                    ),
+                                  height: 3 * (height / standardDeviceHeight),
+                                ),
                                 Text(
                                   "72",
                                   style: TextStyle(
@@ -200,7 +198,7 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
                       ],
                     ),
                     SizedBox(
-                      height: 20 * (height / standardDeviceHeight),
+                      height: 30 * (height / standardDeviceHeight),
                     ),
                     //세부점수 카드
                     Card(
@@ -210,23 +208,20 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                       child: Container(
-                        height: 75 * (height / standardDeviceHeight),
+                        //height: 75 * (height / standardDeviceHeight),
                         width: 300 * (width / standardDeviceWidth),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
-                          //color: Colors.amberAccent,
+                          //color: Color.fromARGB(255, 43, 145, 204),
                         ),
                         child: Container(
-                          padding: const EdgeInsets.only(top: 10),
-
+                          padding:  EdgeInsets.fromLTRB(0,10*sh,0,10*sh),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 //퀴즈 점수
                                 Container(
-                                  //color: Colors.blue,
-                                  height: 63 * (height / standardDeviceHeight),
-
+                                  //height: 63 * (height / standardDeviceHeight),
                                   child: Column(
                                     children: [
                                       Text(
@@ -260,7 +255,7 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
                                 //뉴스&켐페인 점수
                                 Container(
                                   //color: Colors.blue,
-                                  height: 63 * (height / standardDeviceHeight),
+                                  //height: 63 * (height / standardDeviceHeight),
 
                                   child: Column(
                                     crossAxisAlignment:
@@ -297,7 +292,7 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
                                 //미션 점수
                                 Container(
                                   ///color: Colors.blue,
-                                  height: 63 * (height / standardDeviceHeight),
+                                  //height: 63 * (height / standardDeviceHeight),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
@@ -323,9 +318,14 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
                         ),
                       ),
                     ),
-                  ]),
+                    SizedBox(
+                      height: 10 * (height / standardDeviceHeight),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
