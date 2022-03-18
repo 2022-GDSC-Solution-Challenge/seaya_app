@@ -15,112 +15,319 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
   //use "with SingleThickerProviderStateMixin" at last of class declaration
   //where you have to pass "vsync" argument, add this
 
-  late Animation<double> animation;
-  late AnimationController _controller; //controller for animation
-
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(duration: Duration(seconds: 9), vsync: this);
-    _controller.repeat();
-    //we set animation duration, and repeat for infinity
-
-    animation = Tween<double>(begin: -1000, end: 0).animate(_controller);
-    //we have set begin to -600 and end to 0, it will provide the value for
-    //left or right position for Positioned() widget to creat movement from left to right
-    animation.addListener(() {
-      setState(() {}); //update UI on every animation value update
-    });
   }
 
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose(); //destory anmiation to free memory on last
   }
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
+    print(height);
+    print(width);
+
+    final standardDeviceWidth = 390;
+    final standardDeviceHeight = 844;
+
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        child: Stack(//stack helps to overlaps widgets
-            children: [
-          Positioned(
-            //helps to position widget where ever we want
-            bottom: 470, //position at the bottom
-            right: animation.value, //value of right from animation controller
-            child: ClipPath(
-              clipper: MyWaveClipper(), //applying our custom clipper
-              child: Opacity(
-                opacity: 0.5,
-                child: Container(
-                  color: Color.fromARGB(255, 193, 241, 243),
-                  width: 2000,
-                  height: 200,
-                ),
-              ),
+      body: SingleChildScrollView(
+        child: Container(
+          //color: Colors.amber,
+          width: 350 * (width / standardDeviceWidth),
+          height: 685 * (height / standardDeviceHeight),
+          child: Card(
+            elevation: 5.0,
+            margin: EdgeInsets.fromLTRB(5, 10, 5, 5),
+            shadowColor: Colors.grey.withOpacity(0.4),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            child: Container(
+              padding: new EdgeInsets.fromLTRB(0, 15, 0, 0),
+              //width: 340 * (width / standardDeviceWidth),
+              //height: 650 * (height / standardDeviceHeight),
+              // decoration: BoxDecoration(
+              //   borderRadius: BorderRadius.circular(10.0),
+              // ),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    //user info card
+                    Card(
+                      elevation: 3.0,
+                      shadowColor: Colors.grey.withOpacity(0.4),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Container(
+                        height: 45 * (height / standardDeviceHeight),
+                        width: 300 * (width / standardDeviceWidth),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 20, top: 3),
+                          child: Row(children: [
+                            //사용자 이름
+                            Text(
+                              "YoonJin",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  fontFamily: 'PTSansRegular'),
+                            ),
+                            SizedBox(
+                              width: 160 * (width / standardDeviceWidth),
+                            ),
+                            //상위 몇 퍼센트 인지
+                            Text(
+                              "Top 30%",
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                  fontFamily: 'PTSansRegular'),
+                            ),
+                          ]),
+                        ),
+                      ),
+                    ),
+                    //기여도 -> 총 점수 10점 당 0.2%씩 증가 (ex. 총점수 72, 기여도 1.4%)
+                    SizedBox(
+                      height: 4 * (height / standardDeviceHeight),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Column(children: [
+                        Text(
+                          "1.4 %",
+                          style: TextStyle(
+                              fontSize: 32,
+                              color: Color(0xff0068C1),
+                              fontFamily: 'PTSansRegular'),
+                        ),
+                        SizedBox(
+                          height: 7 * (height / standardDeviceHeight),
+                        ),
+                        Text(
+                          " the view of the sea \n has been expanded.",
+                          style: TextStyle(
+                              fontSize: 17,
+                              letterSpacing: 1.0,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                              fontFamily: 'PTSansRegular'),
+                        ),
+                      ]),
+                    ),
+                    SizedBox(
+                      height: 10 * (height / standardDeviceHeight),
+                    ),
+                    //메인 배경 이미지
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        // Positioned(
+                        //     top: 12 * (height / standardDeviceHeight),
+                        //left: 50 * ( width / standardDeviceWidth) ,
+                        //child:
+                        Container(
+                          child: Image(
+                            width: 240.0 * (width / standardDeviceWidth),
+                            image: AssetImage(
+                              'images/circle.png',
+                            ),
+                          ),
+                        ),
+                        //),
+                        //북극곰 이미지
+                        // Positioned(
+                        //   top: 72 * (height / standardDeviceHeight),
+                        //   //left: 113,
+                        //   child: 
+                        Container(
+                            child: Image(
+                              width: 115.0 * (width / standardDeviceWidth),
+                              image: AssetImage(
+                                'images/mainImage.png',
+                              ),
+                            ),
+                          ),
+                       // ),
+                        Positioned(
+                          top: 44 * (height / standardDeviceHeight),
+                          left: 0 * (width / standardDeviceWidth),
+                          child: Container(
+                            width: 82.0 * (width / standardDeviceWidth),
+                            height: 82.0 * (height / standardDeviceHeight),
+                            padding: const EdgeInsets.fromLTRB(0,7,0,0),
+                            decoration: new BoxDecoration(
+                              color: Color.fromARGB(255, 118, 200, 241),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Total",
+                                  style: TextStyle(
+                                      fontSize: 11,
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      fontFamily: 'PTSansRegular'),
+                                  textAlign: TextAlign.center,
+                                  softWrap: true,
+                                  overflow: TextOverflow.fade,
+                                ),
+                                SizedBox(
+                      height: 3 * (height / standardDeviceHeight),
+                    ),
+                                Text(
+                                  "72",
+                                  style: TextStyle(
+                                      fontSize: 32,
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      fontFamily: 'PTSansRegular'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20 * (height / standardDeviceHeight),
+                    ),
+                    //세부점수 카드
+                    Card(
+                      elevation: 3.0,
+                      shadowColor: Colors.grey.withOpacity(0.4),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: Container(
+                        height: 75 * (height / standardDeviceHeight),
+                        width: 300 * (width / standardDeviceWidth),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          //color: Colors.amberAccent,
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.only(top: 10),
+
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                //퀴즈 점수
+                                Container(
+                                  //color: Colors.blue,
+                                  height: 63 * (height / standardDeviceHeight),
+
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "Quiz",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                            fontFamily: 'PTSansRegular'),
+                                      ),
+                                      Text(
+                                        "12",
+                                        style: TextStyle(
+                                            fontSize: 28,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                            fontFamily: 'PTSansRegular'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 24.5 * (width / standardDeviceWidth),
+                                ),
+                                Container(
+                                  width: 1 * (width / standardDeviceWidth),
+                                  height: 35 * (height / standardDeviceHeight),
+                                  color: Colors.black,
+                                ),
+                                SizedBox(
+                                  width: 24.5 * (width / standardDeviceWidth),
+                                ),
+                                //뉴스&켐페인 점수
+                                Container(
+                                  //color: Colors.blue,
+                                  height: 63 * (height / standardDeviceHeight),
+
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "News / Campaign",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                            fontFamily: 'PTSansRegular'),
+                                      ),
+                                      Text(
+                                        "27",
+                                        style: TextStyle(
+                                            fontSize: 28,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                            fontFamily: 'PTSansRegular'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 24.5 * (width / standardDeviceWidth),
+                                ),
+                                Container(
+                                  width: 1 * (width / standardDeviceWidth),
+                                  height: 35 * (height / standardDeviceHeight),
+                                  color: Colors.black,
+                                ),
+                                SizedBox(
+                                  width: 24.5,
+                                ),
+                                //미션 점수
+                                Container(
+                                  ///color: Colors.blue,
+                                  height: 63 * (height / standardDeviceHeight),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Mission",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                            fontFamily: 'PTSansRegular'),
+                                      ),
+                                      Text(
+                                        "33",
+                                        style: TextStyle(
+                                            fontSize: 28,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                            fontFamily: 'PTSansRegular'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ]),
+                        ),
+                      ),
+                    ),
+                  ]),
             ),
           ),
-          Positioned(
-            //helps to position widget where ever we want
-            bottom: 470, //position at the bottom
-            left: animation.value, //value of left from animation controller
-            child: ClipPath(
-              clipper: MyWaveClipper(), //applying our custom clipper
-              child: Opacity(
-                opacity: 0.5,
-                child: Container(
-                  color: Color.fromARGB(255, 207, 228, 255),
-                  width: 2000,
-                  height: 200,
-                ),
-              ),
-            ),
-          ),
-        ]),
+        ),
       ),
     );
-  }
-}
-
-//our custom clipper with Path class
-class MyWaveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = new Path();
-    path.lineTo(0.0, 40.0);
-    path.lineTo(0.0, size.height);
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width, 40.0);
-
-    //see my previous post to understand about Bezier Curve waves
-    // https://www.hellohpc.com/flutter-how-to-make-bezier-curve-waves-using-custom-clippath/
-
-    for (int i = 0; i < 10; i++) {
-      if (i % 2 == 0) {
-        path.quadraticBezierTo(
-            size.width - (size.width / 16) - (i * size.width / 8),
-            0.0,
-            size.width - ((i + 1) * size.width / 8),
-            size.height - 160);
-      } else {
-        path.quadraticBezierTo(
-            size.width - (size.width / 16) - (i * size.width / 8),
-            size.height - 120,
-            size.width - ((i + 1) * size.width / 8),
-            size.height - 160);
-      }
-    }
-
-    path.lineTo(0.0, 40.0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
   }
 }

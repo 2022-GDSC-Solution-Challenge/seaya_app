@@ -18,13 +18,17 @@ class _friendsListState extends State<friendsList>
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
+
+    final standardDeviceWidth = 390;
+    final standardDeviceHeight = 844;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
                         children: [
                           //검색 바
                           Container(
-                            height: 65,
+                            height: 70 * (height / standardDeviceHeight),
                             padding:
                                 const EdgeInsets.only(top: 20.0, bottom: 10),
                             child: TextField(
@@ -44,7 +48,7 @@ class _friendsListState extends State<friendsList>
                             ),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 10 * (height / standardDeviceHeight),
                           ),
                           Text(
                             'Competition List',
@@ -55,7 +59,7 @@ class _friendsListState extends State<friendsList>
                             ),
                           ),
                           SizedBox(
-                            height: 5,
+                            height:  5 * (height / standardDeviceHeight),
                           ),
                           //겨루기 리스트
                           Expanded(
@@ -63,14 +67,14 @@ class _friendsListState extends State<friendsList>
                               padding: const EdgeInsets.all(0.0),
                               children: [
                                 Container(
-                                  height: 80,
+                                  height: 80 * (height / standardDeviceHeight),
                                   child: Stack(
                                     children: [
                                       Positioned(
                                           top: 5,
                                           child: Material(
                                             child: Container(
-                                              height: 70.0,
+                                              height: 70.0 * (height / standardDeviceHeight),
                                               width: width * 0.91,
                                               decoration: BoxDecoration(
                                                   color: Color.fromARGB(
@@ -94,7 +98,7 @@ class _friendsListState extends State<friendsList>
                                           left: 10,
                                           child: Material(
                                             child: Container(
-                                              height: 60.0,
+                                              height: 60.0 * (height / standardDeviceHeight),
                                               width: width * 0.3,
                                               decoration: BoxDecoration(
                                                 color: Color(0xffFAFAFA),
@@ -103,7 +107,7 @@ class _friendsListState extends State<friendsList>
                                               ),
                                               child: Column(children: [
                                                 SizedBox(
-                                                  height: 10,
+                                                  height: 10 * (height / standardDeviceHeight),
                                                 ),
                                                 Text(
                                                   'Friend 1',
@@ -129,7 +133,7 @@ class _friendsListState extends State<friendsList>
                                           left: 265,
                                           child: Material(
                                             child: Container(
-                                              height: 60.0,
+                                              height: 60.0 * (height / standardDeviceHeight),
                                               width: width * 0.2,
                                               decoration: BoxDecoration(
                                                 color: Color.fromARGB(
@@ -139,7 +143,7 @@ class _friendsListState extends State<friendsList>
                                               ),
                                               child: Column(children: [
                                                 SizedBox(
-                                                  height: 20,
+                                                  height: 20 * (height / standardDeviceHeight),
                                                 ),
                                                 Text(
                                                   'D-day',
@@ -157,7 +161,7 @@ class _friendsListState extends State<friendsList>
                                           left: 135,
                                           child: Material(
                                             child: Container(
-                                              height: 60.0,
+                                              height: 60.0 * (height / standardDeviceHeight),
                                               width: width * 0.3,
                                               decoration: BoxDecoration(
                                                 color: Color(0xffFAFAFA),
@@ -166,7 +170,7 @@ class _friendsListState extends State<friendsList>
                                               ),
                                               child: Column(children: [
                                                 SizedBox(
-                                                  height: 10,
+                                                  height: 10 * (height / standardDeviceHeight),
                                                 ),
                                                 Text(
                                                   'Me',
@@ -191,14 +195,14 @@ class _friendsListState extends State<friendsList>
                                   ),
                                 ),
                                 Container(
-                                  height: 80,
+                                  height: 80 * (height / standardDeviceHeight),
                                   child: Stack(
                                     children: [
                                       Positioned(
                                           top: 5,
                                           child: Material(
                                             child: Container(
-                                              height: 70.0,
+                                              height: 70.0 * (height / standardDeviceHeight),
                                               width: width * 0.91,
                                               decoration: BoxDecoration(
                                                   color: Color.fromARGB(
@@ -222,7 +226,7 @@ class _friendsListState extends State<friendsList>
                                           left: 10,
                                           child: Material(
                                             child: Container(
-                                              height: 60.0,
+                                              height: 60.0 * (height / standardDeviceHeight),
                                               width: width * 0.3,
                                               decoration: BoxDecoration(
                                                 color: Color(0xffFAFAFA),
@@ -257,7 +261,7 @@ class _friendsListState extends State<friendsList>
                                           left: 265,
                                           child: Material(
                                             child: Container(
-                                              height: 60.0,
+                                              height: 60.0 * (height / standardDeviceHeight),
                                               width: width * 0.2,
                                               decoration: BoxDecoration(
                                                 color: Color.fromARGB(
@@ -267,7 +271,7 @@ class _friendsListState extends State<friendsList>
                                               ),
                                               child: Column(children: [
                                                 SizedBox(
-                                                  height: 20,
+                                                  height: 20 * (height / standardDeviceHeight),
                                                 ),
                                                 Text(
                                                   'D-day',
@@ -285,7 +289,7 @@ class _friendsListState extends State<friendsList>
                                           left: 135,
                                           child: Material(
                                             child: Container(
-                                              height: 60.0,
+                                              height: 60.0 * (height / standardDeviceHeight),
                                               width: width * 0.3,
                                               decoration: BoxDecoration(
                                                 color: Color(0xffFAFAFA),
@@ -294,7 +298,7 @@ class _friendsListState extends State<friendsList>
                                               ),
                                               child: Column(children: [
                                                 SizedBox(
-                                                  height: 10,
+                                                  height: 10 * (height / standardDeviceHeight),
                                                 ),
                                                 Text(
                                                   'Me',
@@ -319,14 +323,14 @@ class _friendsListState extends State<friendsList>
                                   ),
                                 ),
                                 Container(
-                                  height: 80,
+                                  height: 80 * (height / standardDeviceHeight),
                                   child: Stack(
                                     children: [
                                       Positioned(
                                           top: 5,
                                           child: Material(
                                             child: Container(
-                                              height: 70.0,
+                                              height: 70.0 * (height / standardDeviceHeight),
                                               width: width * 0.91,
                                               decoration: BoxDecoration(
                                                   color: Color.fromARGB(
@@ -350,7 +354,7 @@ class _friendsListState extends State<friendsList>
                                           left: 10,
                                           child: Material(
                                             child: Container(
-                                              height: 60.0,
+                                              height: 60.0 * (height / standardDeviceHeight),
                                               width: width * 0.3,
                                               decoration: BoxDecoration(
                                                 color: Color(0xffFAFAFA),
@@ -359,7 +363,7 @@ class _friendsListState extends State<friendsList>
                                               ),
                                               child: Column(children: [
                                                 SizedBox(
-                                                  height: 10,
+                                                  height: 10 * (height / standardDeviceHeight),
                                                 ),
                                                 Text(
                                                   'Friend 3',
@@ -385,7 +389,7 @@ class _friendsListState extends State<friendsList>
                                           left: 265,
                                           child: Material(
                                             child: Container(
-                                              height: 60.0,
+                                              height: 60.0 * (height / standardDeviceHeight),
                                               width: width * 0.2,
                                               decoration: BoxDecoration(
                                                 color: Color.fromARGB(
@@ -395,7 +399,7 @@ class _friendsListState extends State<friendsList>
                                               ),
                                               child: Column(children: [
                                                 SizedBox(
-                                                  height: 20,
+                                                  height: 20 * (height / standardDeviceHeight),
                                                 ),
                                                 Text(
                                                   'D-day',
@@ -413,7 +417,7 @@ class _friendsListState extends State<friendsList>
                                           left: 135,
                                           child: Material(
                                             child: Container(
-                                              height: 60.0,
+                                              height: 60.0 * (height / standardDeviceHeight),
                                               width: width * 0.3,
                                               decoration: BoxDecoration(
                                                 color: Color(0xffFAFAFA),
@@ -422,7 +426,7 @@ class _friendsListState extends State<friendsList>
                                               ),
                                               child: Column(children: [
                                                 SizedBox(
-                                                  height: 10,
+                                                  height: 10 * (height / standardDeviceHeight),
                                                 ),
                                                 Text(
                                                   'Me',
@@ -450,7 +454,7 @@ class _friendsListState extends State<friendsList>
                             ),
                           ),
                           SizedBox(
-                            height: 30,
+                            height: 30 * (height / standardDeviceHeight),
                           ),
                           Text(
                             'Friends List',
@@ -461,7 +465,7 @@ class _friendsListState extends State<friendsList>
                             ),
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 5 * (height / standardDeviceHeight),
                           ),
                           //친구 리스트
                           Expanded(
@@ -469,7 +473,7 @@ class _friendsListState extends State<friendsList>
                               padding: const EdgeInsets.all(0.0),
                               children: [
                                 Container(
-                                  height: 50,
+                                  height: 50 * (height / standardDeviceHeight),
                                   child: Stack(
                                     children: [
                                       Positioned(
@@ -486,7 +490,7 @@ class _friendsListState extends State<friendsList>
                                                   fontFamily: 'PTSansRegular',
                                                 ),
                                               ),
-                                              height: 40.0,
+                                              height: 40.0 * (height / standardDeviceHeight),
                                               width: width * 0.91,
                                               decoration: BoxDecoration(
                                                   color: Color.fromARGB(
@@ -508,8 +512,8 @@ class _friendsListState extends State<friendsList>
                                       Container(
                                         margin: const EdgeInsets.only(
                                             left: 290.0, top: 10),
-                                        width: 50,
-                                        height: 30,
+                                        width: 50* (width / standardDeviceWidth),
+                                        height: 30* (height / standardDeviceHeight),
                                         child: ElevatedButton(
                                           style: ButtonStyle(
                                               padding: MaterialStateProperty
@@ -530,7 +534,7 @@ class _friendsListState extends State<friendsList>
                                   ),
                                 ),
                                 Container(
-                                  height: 50,
+                                  height: 50* (height / standardDeviceHeight),
                                   child: Stack(
                                     children: [
                                       Positioned(
@@ -547,7 +551,7 @@ class _friendsListState extends State<friendsList>
                                                   fontFamily: 'PTSansRegular',
                                                 ),
                                               ),
-                                              height: 40.0,
+                                              height: 40.0 * (height / standardDeviceHeight),
                                               width: width * 0.91,
                                               decoration: BoxDecoration(
                                                   color: Color.fromARGB(
@@ -569,8 +573,8 @@ class _friendsListState extends State<friendsList>
                                       Container(
                                         margin: const EdgeInsets.only(
                                             left: 290.0, top: 10),
-                                        width: 50,
-                                        height: 30,
+                                        width: 50 * (width / standardDeviceWidth),
+                                        height: 30 * (height / standardDeviceHeight),
                                         child: ElevatedButton(
                                           style: ButtonStyle(
                                               padding: MaterialStateProperty
@@ -591,7 +595,7 @@ class _friendsListState extends State<friendsList>
                                   ),
                                 ),
                                 Container(
-                                  height: 50,
+                                  height: 50 * (height / standardDeviceHeight),
                                   child: Stack(
                                     children: [
                                       Positioned(
@@ -608,7 +612,7 @@ class _friendsListState extends State<friendsList>
                                                   fontFamily: 'PTSansRegular',
                                                 ),
                                               ),
-                                              height: 40.0,
+                                              height: 40.0 * (height / standardDeviceHeight),
                                               width: width * 0.91,
                                               decoration: BoxDecoration(
                                                   color: Color.fromARGB(
@@ -630,8 +634,8 @@ class _friendsListState extends State<friendsList>
                                       Container(
                                         margin: const EdgeInsets.only(
                                             left: 290.0, top: 10),
-                                        width: 50,
-                                        height: 30,
+                                        width: 50 * (width / standardDeviceWidth),
+                                        height: 30 * (height / standardDeviceHeight),
                                         child: ElevatedButton(
                                           style: ButtonStyle(
                                               padding: MaterialStateProperty

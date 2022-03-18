@@ -25,6 +25,14 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
+    print(height);
+    print(width);
+
+    final standardDeviceWidth = 390;
+    final standardDeviceHeight = 844;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -34,20 +42,20 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
             children: [
               //appbar----------
               SizedBox(
-                width: 354,
+                width: 354 * (width / standardDeviceWidth),
                 child: Row(
                   children: [
-                    const SizedBox(
-                      width: 10.0,
+                     SizedBox(
+                      width: 10.0 * (width / standardDeviceWidth),
                     ),
-                    const Image(
-                      width: 53.0,
+                     Image(
+                      width: 53.0 * (width / standardDeviceWidth),
                       image: AssetImage(
                         'images/seaya_logo.png',
                       ),
                     ),
-                    const SizedBox(
-                      width: 10.0,
+                     SizedBox(
+                      width: 10.0 * (width / standardDeviceWidth),
                     ),
                     const Text("Seaya",
                         style: TextStyle(
@@ -56,8 +64,8 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                             letterSpacing: 2.5,
                             fontSize: 15.0),
                         textAlign: TextAlign.left),
-                    const SizedBox(
-                      width: 180.0,
+                     SizedBox(
+                      width: 180.0 * (width / standardDeviceWidth),
                     ),
                     IconButton(
                         icon: const Icon(
@@ -71,15 +79,15 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 30 * (height / standardDeviceHeight),
               ),
               //menu buttons-----------
               Center(
                 child: Column(children: [
                   //mypage button---
                   Container(
-                    width: 310.0,
-                    height: 50.0,
+                    width: 310.0 * (width / standardDeviceWidth),
+                    height: 50.0 * (height / standardDeviceHeight),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                       primary: const Color(0xffF3F5F9),
@@ -111,13 +119,13 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                     
                     ),
                   ),
-                  const SizedBox(
-                    height: 8,
+                  SizedBox(
+                    height: 8 * (height / standardDeviceHeight),
                   ),
                   //setting button---
                   Container(
-                    width: 310.0,
-                    height: 50.0,
+                    width: 310.0 * (width / standardDeviceWidth),
+                    height: 50.0 * (height / standardDeviceHeight),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                       primary: Color.fromARGB(255, 219, 231, 240),
@@ -146,12 +154,12 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                     ),
                   ),
                   SizedBox(
-                    height: 8,
+                    height: 8 * (height / standardDeviceHeight),
                   ),
                   //logout button---
                   Container(
-                    width: 310.0,
-                    height: 50.0,
+                    width: 310.0 * (width / standardDeviceWidth),
+                    height: 50.0 * (height / standardDeviceHeight),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                       primary: const Color(0xffF3F5F9),

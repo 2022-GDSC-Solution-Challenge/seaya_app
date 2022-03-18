@@ -18,13 +18,16 @@ class _addFriendsState extends State<addFriends>
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
+    final standardDeviceWidth = 390;
+    final standardDeviceHeight = 844;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
                         children: [
                           //검색 바
                           Container(
-                            height: 65,
+                            height: 70 * (height / standardDeviceHeight) ,
                             padding:
                                 const EdgeInsets.only(top: 20.0, bottom: 10),
                             child: TextField(
@@ -44,7 +47,7 @@ class _addFriendsState extends State<addFriends>
                             ),
                           ),
                           SizedBox(
-                            height: 10,
+                            height: 10 * (height / standardDeviceHeight) ,
                           ),
                           Text(
                             'Add List',
@@ -55,7 +58,7 @@ class _addFriendsState extends State<addFriends>
                             ),
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 5 * (height / standardDeviceHeight) ,
                           ),
                           //친구 리스트
                           Container(
@@ -64,7 +67,7 @@ class _addFriendsState extends State<addFriends>
                                 padding: const EdgeInsets.all(0.0),
                                 children: [
                                   Container(
-                                    height: 50,
+                                    height: 50 * (height / standardDeviceHeight) ,
                                     child: Stack(
                                       children: [
                                         Positioned(
@@ -81,7 +84,7 @@ class _addFriendsState extends State<addFriends>
                                                     fontFamily: 'PTSansRegular',
                                                   ),
                                                 ),
-                                                height: 40.0,
+                                                height: 40.0 * (height / standardDeviceHeight),
                                                 width: width * 0.91,
                                                 decoration: BoxDecoration(
                                                     color: Color.fromARGB(
@@ -103,8 +106,8 @@ class _addFriendsState extends State<addFriends>
                                         Container(
                                           margin: const EdgeInsets.only(
                                               left: 305.0, top: 10),
-                                          width: 35,
-                                          height: 30,
+                                          width: 35 * (width / standardDeviceWidth),
+                                          height: 30 * (height / standardDeviceHeight),
                                           child: ElevatedButton(
                                             style: ButtonStyle(
                                                 padding: MaterialStateProperty
@@ -125,11 +128,11 @@ class _addFriendsState extends State<addFriends>
                                     ),
                                   ),
                                   Container(
-                                    height: 50,
+                                    height: 50 * (height / standardDeviceHeight),
                                     child: Stack(
                                       children: [
                                         Positioned(
-                                            top: 5,
+                                            top: 5 * (height / standardDeviceHeight),
                                             child: Material(
                                               child: Container(
                                                 padding: const EdgeInsets.only(
@@ -142,7 +145,7 @@ class _addFriendsState extends State<addFriends>
                                                     fontFamily: 'PTSansRegular',
                                                   ),
                                                 ),
-                                                height: 40.0,
+                                                height: 40.0 * (height / standardDeviceHeight),
                                                 width: width * 0.91,
                                                 decoration: BoxDecoration(
                                                     color: Color.fromARGB(
@@ -164,8 +167,8 @@ class _addFriendsState extends State<addFriends>
                                         Container(
                                           margin: const EdgeInsets.only(
                                               left: 305.0, top: 10),
-                                          width: 35,
-                                          height: 30,
+                                          width: 35 * (width / standardDeviceWidth),
+                                          height: 30 * (height / standardDeviceHeight),
                                           child: ElevatedButton(
                                             style: ButtonStyle(
                                                 padding: MaterialStateProperty
@@ -186,7 +189,7 @@ class _addFriendsState extends State<addFriends>
                                     ),
                                   ),
                                   Container(
-                                    height: 50,
+                                    height: 50 * (height / standardDeviceHeight),
                                     child: Stack(
                                       children: [
                                         Positioned(
@@ -203,7 +206,7 @@ class _addFriendsState extends State<addFriends>
                                                     fontFamily: 'PTSansRegular',
                                                   ),
                                                 ),
-                                                height: 40.0,
+                                                height: 40.0 * (height / standardDeviceHeight),
                                                 width: width * 0.91,
                                                 decoration: BoxDecoration(
                                                     color: Color.fromARGB(
@@ -225,8 +228,8 @@ class _addFriendsState extends State<addFriends>
                                         Container(
                                           margin: const EdgeInsets.only(
                                               left: 305.0, top: 10),
-                                          width: 35,
-                                          height: 30,
+                                          width: 35 * (width / standardDeviceWidth),
+                                          height: 30 * (height / standardDeviceHeight),
                                           child: ElevatedButton(
                                             style: ButtonStyle(
                                                 padding: MaterialStateProperty
@@ -259,7 +262,7 @@ class _addFriendsState extends State<addFriends>
                             ),
                           ),
                           SizedBox(
-                            height: 5,
+                            height: 5 * (height / standardDeviceHeight),
                           ),
                           Container(
                             child: Expanded(
@@ -267,7 +270,7 @@ class _addFriendsState extends State<addFriends>
                                 padding: const EdgeInsets.all(0.0),
                                 children: [
                                   Container(
-                                    height: 50,
+                                    height: 50 * (height / standardDeviceHeight),
                                     child: Stack(
                                       children: [
                                         Positioned(
@@ -284,7 +287,7 @@ class _addFriendsState extends State<addFriends>
                                                     fontFamily: 'PTSansRegular',
                                                   ),
                                                 ),
-                                                height: 40.0,
+                                                height: 40.0 * (height / standardDeviceHeight),
                                                 width: width * 0.91,
                                                 decoration: BoxDecoration(
                                                     color: Color.fromARGB(
@@ -307,7 +310,7 @@ class _addFriendsState extends State<addFriends>
                                     ),
                                   ),
                                   Container(
-                                    height: 50,
+                                    height: 50 * (height / standardDeviceHeight),
                                     child: Stack(
                                       children: [
                                         Positioned(
@@ -324,7 +327,7 @@ class _addFriendsState extends State<addFriends>
                                                     fontFamily: 'PTSansRegular',
                                                   ),
                                                 ),
-                                                height: 40.0,
+                                                height: 40.0 * (height / standardDeviceHeight),
                                                 width: width * 0.91,
                                                 decoration: BoxDecoration(
                                                     color: Color.fromARGB(
@@ -347,7 +350,7 @@ class _addFriendsState extends State<addFriends>
                                     ),
                                   ),
                                   Container(
-                                    height: 50,
+                                    height: 50 * (height / standardDeviceHeight),
                                     child: Stack(
                                       children: [
                                         Positioned(
@@ -364,7 +367,7 @@ class _addFriendsState extends State<addFriends>
                                                     fontFamily: 'PTSansRegular',
                                                   ),
                                                 ),
-                                                height: 40.0,
+                                                height: 40.0 * (height / standardDeviceHeight),
                                                 width: width * 0.91,
                                                 decoration: BoxDecoration(
                                                     color: Color.fromARGB(

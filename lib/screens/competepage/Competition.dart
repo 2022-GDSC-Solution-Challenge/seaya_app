@@ -34,6 +34,10 @@ class _CompetitionState extends State<Competition>
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
+
+    final standardDeviceWidth = 390;
+    final standardDeviceHeight = 844;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -41,14 +45,13 @@ class _CompetitionState extends State<Competition>
           padding: const EdgeInsets.all(18.0),
           child: Column(
             children: [
-              
               appBar(),
-              const SizedBox(
-                height: 15,
+               SizedBox(
+                height: 15  * (height / standardDeviceHeight),
               ),
               Container(
-                height: 41,
-                width: 200,
+                height: 41  * (height / standardDeviceHeight),
+                width: 200 * (width / standardDeviceWidth),
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(

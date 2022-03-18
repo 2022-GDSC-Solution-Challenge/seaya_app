@@ -34,6 +34,10 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
+    
+    final standardDeviceWidth = 390;
+    final standardDeviceHeight = 844;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -43,12 +47,12 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
             children: [
               //appbar
              appBar(),
-              const SizedBox(
-                height: 15,
+               SizedBox(
+                height: 15 * (height / standardDeviceHeight),
               ),
               Container(
-                height: 41,
-                width: 270,
+                height: 41 * (height / standardDeviceHeight),
+                width: 270 * (width / standardDeviceWidth),
                 decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -100,13 +104,7 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   children: [
                     //메인화면 탭
                     Center(
-                      child: Text(
-                        'Sea',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontFamily: 'PTSansRegular',
-                        ),
-                      ),
+                      child: Sea(),
                     ),
                     //뉴스 탭
                     Center(
