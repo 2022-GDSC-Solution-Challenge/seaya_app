@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:seaya_app/screens/qandmpage/Quiz.dart';
+import 'package:seaya_app/widgets/naviwidget/Navigation.dart';
 
 class quizEnd extends StatefulWidget {
   const quizEnd({Key? key}) : super(key: key);
@@ -478,7 +479,13 @@ class _quizEndState extends State<quizEnd> with SingleTickerProviderStateMixin {
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   Color.fromARGB(255, 171, 195, 214))),
                           onPressed: () {
-                            Navigator.pop(context);
+                            setState(() {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => const Navigation(),
+                                  ),
+                                );
+                              });
                           },
                           child: const Text(
                             'Go Home',

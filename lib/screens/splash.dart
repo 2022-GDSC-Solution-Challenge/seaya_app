@@ -9,7 +9,6 @@ class Splash extends StatefulWidget {
   splash createState() => splash();
 }
 
-
 class splash extends State<Splash> {
   // 3초 후 로그인 화면으로 전환
   @override
@@ -27,44 +26,31 @@ class splash extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xffffffff),
-        body: SingleChildScrollView(
-          child: Center(
-              child: Column(children: const <Widget>[
+      backgroundColor: const Color(0xffffffff),
+      body: Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
             SizedBox(
-              height: 330.0,
+              height: 50,
             ),
-            Image(
-              width: 90.0,
-              image: AssetImage(
-                'images/seaya_logo.png',
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                      "images/splash_logo.png",
+                      
+                      ), fit: BoxFit.fitWidth
+                     
+                ),
               ),
             ),
-            SizedBox(
-              height: 12.0,
+             SizedBox(
+              height: 50,
             ),
-            Text(
-              'SeaYa',
-              style: TextStyle(
-                fontSize: 17,
-                color: Colors.black,
-                fontFamily: 'PTSansRegular',
-                letterSpacing: 3.0,
-              ),
-            ),
-            SizedBox(
-              height: 8.0,
-            ),
-            Text(
-              'view to the sea',
-              style: TextStyle(
-                fontSize: 13.0,
-                color: Color.fromARGB(255, 49, 96, 119),
-                fontFamily: 'PTSansRegular',
-                letterSpacing: 3.0,
-              ),
-            ),
-          ])),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 }

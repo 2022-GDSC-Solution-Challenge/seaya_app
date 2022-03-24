@@ -24,11 +24,7 @@ class _SeawavesState extends State<Seawaves>
     //we set animation duration, and repeat for infinity
 
     animation = Tween<double>(begin: -1000, end: 0).animate(_controller);
-    //we have set begin to -600 and end to 0, it will provide the value for
-    //left or right position for Positioned() widget to creat movement from left to right
-    // animation.addListener(() {
-    //   setState(() {}); //update UI on every animation value update
-    // });
+    
 
   }
 
@@ -56,22 +52,7 @@ class _SeawavesState extends State<Seawaves>
         //width: 340 * (width / standardDeviceWidth),
         child: Stack(//stack helps to overlaps widgets
             children: [
-          // Positioned(
-          //   //helps to position widget where ever we want
-          //   bottom: 0, //position at the bottom
-          //   right: animation.value, //value of right from animation controller
-          //   child: ClipPath(
-          //     clipper: MyWaveClipper(), //applying our custom clipper
-          //     child: Opacity(
-          //       opacity: 0.5,
-          //       child: Container(
-          //         color: Color.fromARGB(255, 193, 241, 243),
-          //         width: 2000,
-          //         height: 250 *sh,
-          //       ),
-          //     ),
-          //   ),
-          // ),
+         
           AnimatedWave(
             animation: animation,
             bottom: 0,
@@ -87,22 +68,7 @@ class _SeawavesState extends State<Seawaves>
             direction: 0,
           ),
 
-          // Positioned(
-          //   //helps to position widget where ever we want
-          //   bottom: 0, //position at the bottom
-          //   left: animation.value, //value of left from animation controller
-          //   child: ClipPath(
-          //     clipper: MyWaveClipper(), //applying our custom clipper
-          //     child: Opacity(
-          //       opacity: 0.5,
-          //       child: Container(
-          //         color: Color.fromARGB(255, 207, 228, 255),
-          //         width: 2000,
-          //         height: 250 *sh,
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          
         ]),
       
     );

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:seaya_app/widgets/menuwidget/Menu.dart';
 import 'package:seaya_app/screens/loginpage/login.dart';
 import 'package:seaya_app/utilities/Seawaves.dart';
+import 'package:seaya_app/utilities/Setdata.dart';
+import 'package:seaya_app/models/userModel.dart';
+
+import '../../providers/UserProvider.dart';
 
 class Sea extends StatefulWidget {
   const Sea({Key? key}) : super(key: key);
@@ -19,6 +24,7 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    
   }
 
   @override
@@ -32,11 +38,13 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
     final double width = MediaQuery.of(context).size.width;
     print(height);
     print(width);
+    //setUserData(context);
 
     final standardDeviceWidth = 390;
     final standardDeviceHeight = 844;
     final double sh = (height / standardDeviceHeight);
     final double sd = (width / standardDeviceWidth);
+    
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -76,15 +84,11 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
 Widget _seaCard(BuildContext context, double sh, double sw) {
   double h = sh;
   double w = sw;
+   
+    
   return Container(
-    //color: Colors.transparent,
     padding: new EdgeInsets.fromLTRB(15 * w, 20 * h, 15 * w, 20 * h),
-    //width: 340 * w,
-    //height: 680 * h,
-    // decoration: BoxDecoration(
-    //   borderRadius: BorderRadius.circular(10.0),
-    // ),
-
+    
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -106,7 +110,7 @@ Widget _seaCard(BuildContext context, double sh, double sw) {
               child: Row(children: [
                 //사용자 이름
                 Text(
-                  "YoonJin",
+                  '이름',
                   style: TextStyle(
                       fontSize: 16,
                       color: Color.fromARGB(255, 0, 0, 0),

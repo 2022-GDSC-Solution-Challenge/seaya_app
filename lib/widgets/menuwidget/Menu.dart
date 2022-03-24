@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:seaya_app/widgets/naviwidget/Navigation.dart';
 import 'package:seaya_app/screens/loginpage/logIn.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:seaya_app/screens/loginpage/signUp.dart';
+import 'package:seaya_app/utilities/Authservice.dart';
+
 
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
@@ -22,7 +26,7 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
     super.dispose();
   }
 
-
+  
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -32,6 +36,8 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
 
     final standardDeviceWidth = 390;
     final standardDeviceHeight = 844;
+
+    final Authservice _auth = Authservice();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -177,14 +183,16 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                           fontFamily: 'PTSansRegular',
                         ),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         setState(() {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => LogIn(),
                             ),
+                            
                           );
                         });
+                        await _auth.signOut();
                       },
                     ),
                   ),
@@ -195,5 +203,7 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
         ),
       ),
     );
+
+  
   }
 }
