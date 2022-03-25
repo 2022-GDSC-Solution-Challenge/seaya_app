@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:seaya_app/utilities/Setdata.dart';
+import 'package:seaya_app/models/campaignModel.dart';
 import 'package:seaya_app/widgets/menuwidget/Menu.dart';
 import 'package:seaya_app/screens/loginpage/login.dart';
 import 'package:seaya_app/screens/mainhomepage/Home.dart';
 
-class Campaign extends StatefulWidget {
-  const Campaign({Key? key}) : super(key: key);
+class CampaignPage extends StatefulWidget {
+  const CampaignPage({Key? key}) : super(key: key);
 
   @override
   _CampaignState createState() => _CampaignState();
 }
 
 // ignore: camel_case_types
-class _CampaignState extends State<Campaign>
+class _CampaignState extends State<CampaignPage>
     with SingleTickerProviderStateMixin {
+  late Future _getCampaign;
+  @override
+  void initState() {
+    super.initState();
+    _getCampaign = setCampaignData();
+  }
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -31,24 +40,38 @@ class _CampaignState extends State<Campaign>
             height: 10 * (height / standardDeviceHeight),
           ),
           Expanded(
-            child: GridView.builder(
-              itemCount: 8,
-              primary: false,
-              padding: const EdgeInsets.only(top: 10),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 2,
-              ),
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                  onTap: () {
-                    //클릭하면해당사이트로
-                  },
-                  child: camCard(context, sh, sd),
-                );
-              },
-            ),
+            child: FutureBuilder(
+                future: _getCampaign,
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                  if (!snapshot.hasData) {
+                    print("loading news data");
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.data == null || snapshot.hasError) {
+                    print('error from get news');
+                    return Text('loading news fail');
+                  }
+                  return GridView.builder(
+                    itemCount: snapshot.data.campaign.length,
+                    primary: false,
+                    padding: const EdgeInsets.only(top: 10),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      crossAxisCount: 2,
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          //클릭하면해당사이트로
+                          print('${snapshot.data.campaign[index].id} clicked');
+                        },
+                        child: camCard(
+                            context, sh, sd, snapshot.data.campaign[index]),
+                      );
+                    },
+                  );
+                }),
           ),
         ],
       ),
@@ -56,7 +79,7 @@ class _CampaignState extends State<Campaign>
   }
 }
 
-Widget camCard(BuildContext context, double sh, double sd) {
+Widget camCard(BuildContext context, double sh, double sd, Campaign campgn) {
   return Card(
     elevation: 8.0,
     shadowColor: Colors.grey.withOpacity(0.4),
@@ -81,7 +104,7 @@ Widget camCard(BuildContext context, double sh, double sd) {
           ),
           padding: const EdgeInsets.only(top: 10, left: 20),
           child: Text(
-            "Title",
+            campgn.title!, //"Title",
             style: TextStyle(
                 fontSize: 16,
                 color: const Color(0xff575757),

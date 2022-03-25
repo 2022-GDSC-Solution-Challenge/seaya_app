@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:seaya_app/models/campaignModel.dart';
 import 'package:seaya_app/models/newsModel.dart';
 import 'package:seaya_app/utilities/makeJson.dart';
 import 'package:http/http.dart' as http;
@@ -66,4 +67,17 @@ Future<mNews> setNewsData() async {
   final data = json.decode(response!);
   news = mNews.fromJson(data);
   return news;
+}
+
+Future<mCampaign> setCampaignData() async {
+  late mCampaign campaign;
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson get = makeJson();
+  String id = await _authInstance.currentUser!.getIdToken(true);
+  String link = "campaign";
+
+  final response = await get.getJson(id, link);
+  final data = json.decode(response!);
+  campaign = mCampaign.fromJson(data);
+  return campaign;
 }
