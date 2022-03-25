@@ -35,8 +35,10 @@ class _CompetitionState extends State<Competition>
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
-    final standardDeviceWidth = 390;
+     final standardDeviceWidth = 390;
     final standardDeviceHeight = 844;
+    final double sh = (height / standardDeviceHeight);
+    final double sd = (width / standardDeviceWidth);
 
     return Scaffold(
       backgroundColor: Colors.white,

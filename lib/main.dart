@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: quizEnd(), // child 하위에 모든 것들은 Provider에 접근
+      home: Navigation(), // child 하위에 모든 것들은 Provider에 접근
     );
   }
 }
