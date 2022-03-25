@@ -42,7 +42,9 @@ class _CampaignState extends State<Campaign>
               ),
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: () {print("tap");},
+                  onTap: () {
+                    //클릭하면해당사이트로
+                  },
                   child: camCard(context, sh, sd),
                 );
               },

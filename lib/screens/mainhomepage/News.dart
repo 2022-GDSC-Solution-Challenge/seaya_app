@@ -22,16 +22,6 @@ class _NewsState extends State<News> with SingleTickerProviderStateMixin {
     final double sh = (height / standardDeviceHeight);
     final double sd = (width / standardDeviceWidth);
 
-    // colors: [
-    //                           Color.fromARGB(255, 85, 150, 194),
-    //                           Color.fromARGB(255, 43, 145, 204),
-    //                         ],
-
-    // colors: [
-    //                           Color.fromARGB(255, 87, 124, 206),
-    //                           Color.fromARGB(255, 90, 133, 190),
-    //                         ],
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -45,9 +35,9 @@ class _NewsState extends State<News> with SingleTickerProviderStateMixin {
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
                   if (index % 2 == 0) {
-                    return newsone(context, sh, sd);
+                    return newsone(context, sh, sd, index);
                   } else
-                    return newstwo(context, sh, sd);
+                    return newstwo(context, sh, sd, index);
                 }),
           ),
         ],
@@ -56,170 +46,176 @@ class _NewsState extends State<News> with SingleTickerProviderStateMixin {
   }
 }
 
-Widget newsone(BuildContext context, double sh, double sd) {
-  return Container(
-    margin: const EdgeInsets.only(bottom: 10, top: 25),
-    height: 130 * sh,
-    padding: const EdgeInsets.only(left: 16, right: 16, bottom: 0),
-    child: Container(
-        decoration: BoxDecoration(
-            color: Color.fromARGB(255, 67, 101, 175),
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(65.0),
-              topRight: Radius.circular(10),
-            ),
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [
-                Color.fromARGB(255, 85, 150, 194),
-                Color.fromARGB(255, 43, 145, 204),
-              ],
-            ),
-            boxShadow: [
-              BoxShadow(
-                  color: Color.fromARGB(255, 124, 130, 180).withOpacity(0.3),
-                  offset: Offset(-8.0, 8.0),
-                  blurRadius: 8.0,
-                  spreadRadius: 4.0)
-            ]),
-        padding: const EdgeInsets.only(
-          left: 25,
-          top: 20.0,
-          bottom: 0,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  "Date",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontFamily: 'PTSansRegular',
-                  ),
+Widget newsone(BuildContext context, double sh, double sd, int index) {
+  return GestureDetector(
+      onTap: () {},
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 10, top: 25),
+        height: 130 * sh,
+        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 0),
+        child: Container(
+            decoration: BoxDecoration(
+                color: Color.fromARGB(255, 67, 101, 175),
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(65.0),
+                  topRight: Radius.circular(10),
                 ),
-                SizedBox(
-                  width: 10 * sd,
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Color.fromARGB(255, 85, 150, 194),
+                    Color.fromARGB(255, 43, 145, 204),
+                  ],
+                ),
+                boxShadow: [
+                  BoxShadow(
+                      color:
+                          Color.fromARGB(255, 124, 130, 180).withOpacity(0.3),
+                      offset: Offset(-8.0, 8.0),
+                      blurRadius: 8.0,
+                      spreadRadius: 4.0)
+                ]),
+            padding: const EdgeInsets.only(
+              left: 25,
+              top: 20.0,
+              bottom: 0,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      "Date",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontFamily: 'PTSansRegular',
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10 * sd,
+                    ),
+                    Container(
+                      width: 1.5 * sd,
+                      height: 11 * sh,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: 11.5 * sd,
+                    ),
+                    Text(
+                      "Publisher",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontFamily: 'PTSansRegular',
+                      ),
+                    ),
+                  ],
                 ),
                 Container(
-                  width: 1.5 * sd,
-                  height: 11 * sh,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 11.5 * sd,
-                ),
-                Text(
-                  "Publisher",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontFamily: 'PTSansRegular',
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              padding: const EdgeInsets.only(left: 10, top: 5, right: 20),
-              child: Column(children: [
-                Text(
-                  "Title ...",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontFamily: 'PTSansRegular',
-                  ),
+                  padding: const EdgeInsets.only(left: 10, top: 5, right: 20),
+                  child: Column(children: [
+                    Text(
+                      "Title ...",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontFamily: 'PTSansRegular',
+                      ),
+                    )
+                  ]),
                 )
-              ]),
-            )
-          ],
-        )),
-  );
+              ],
+            )),
+      ));
 }
 
-Widget newstwo(BuildContext context, double sh, double sd) {
-  return Container(
-    margin: const EdgeInsets.only(bottom: 10, top: 10),
-    height: 130 * sh,
-    padding: const EdgeInsets.only(left: 16, right: 16, bottom: 0),
+Widget newstwo(BuildContext context, double sh, double sd, int index) {
+  return GestureDetector(
+    onTap: () {},
     child: Container(
-        decoration: BoxDecoration(
-            color: Color.fromARGB(255, 86, 106, 150),
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(10.0),
-              topRight: Radius.circular(65.0),
-            ),
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [
-                Color.fromARGB(255, 87, 124, 206),
-                Color.fromARGB(255, 90, 133, 190),
-              ],
-            ),
-            boxShadow: [
-              BoxShadow(
-                  color: Color.fromARGB(255, 124, 130, 180).withOpacity(0.3),
-                  offset: Offset(-8.0, 8.0),
-                  blurRadius: 8.0,
-                  spreadRadius: 4.0)
-            ]),
-        padding: const EdgeInsets.only(
-          left: 25,
-          top: 20.0,
-          bottom: 0,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  "Date",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontFamily: 'PTSansRegular',
-                  ),
-                ),
-                SizedBox(
-                  width: 10 * sd,
-                ),
-                Container(
-                  width: 1.5 * sd,
-                  height: 11 * sh,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 11.5 * sd,
-                ),
-                Text(
-                  "Publisher",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontFamily: 'PTSansRegular',
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              padding: const EdgeInsets.only(left: 10, top: 5, right: 20),
-              child: Column(children: [
-                Text(
-                  "Title ...",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontFamily: 'PTSansRegular',
-                  ),
-                )
+      margin: const EdgeInsets.only(bottom: 10, top: 10),
+      height: 130 * sh,
+      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 0),
+      child: Container(
+          decoration: BoxDecoration(
+              color: Color.fromARGB(255, 86, 106, 150),
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(10.0),
+                topRight: Radius.circular(65.0),
+              ),
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Color.fromARGB(255, 87, 124, 206),
+                  Color.fromARGB(255, 90, 133, 190),
+                ],
+              ),
+              boxShadow: [
+                BoxShadow(
+                    color: Color.fromARGB(255, 124, 130, 180).withOpacity(0.3),
+                    offset: Offset(-8.0, 8.0),
+                    blurRadius: 8.0,
+                    spreadRadius: 4.0)
               ]),
-            )
-          ],
-        )),
+          padding: const EdgeInsets.only(
+            left: 25,
+            top: 20.0,
+            bottom: 0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "Date",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontFamily: 'PTSansRegular',
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10 * sd,
+                  ),
+                  Container(
+                    width: 1.5 * sd,
+                    height: 11 * sh,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 11.5 * sd,
+                  ),
+                  Text(
+                    "Publisher",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontFamily: 'PTSansRegular',
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 10, top: 5, right: 20),
+                child: Column(children: [
+                  Text(
+                    "Title ...",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontFamily: 'PTSansRegular',
+                    ),
+                  )
+                ]),
+              )
+            ],
+          )),
+    ),
   );
 }
