@@ -35,6 +35,6 @@ class Missions {
     info = json['info'];
     point = json['point'];
     createdAt = json['createdAt'];
-    isClear = json['isClear'] == '1' ? true : false;
+    isClear = json['isClear'] == 1 ? true : false;
   }
 }

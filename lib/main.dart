@@ -10,7 +10,6 @@ import 'package:seaya_app/widgets/naviwidget/Navigation.dart';
 import 'package:seaya_app/providers/UserProvider.dart';
 import 'package:seaya_app/screens/qandmpage/quizList.dart';
 
-
 //비동기 처리 위해 main async로 수행
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); //flutter코어엔진 초기화
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: quizEnd(), // child 하위에 모든 것들은 Provider에 접근
+      home: LogIn(), // child 하위에 모든 것들은 Provider에 접근
     );
   }
 }

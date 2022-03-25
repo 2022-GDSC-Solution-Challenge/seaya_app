@@ -41,7 +41,6 @@ Future<int?> loginUserData(token, String uid) async {
 
 //유저정보세팅
 Future<mUser> setUserData() async {
-
   late mUser user;
   final _authInstance = FirebaseAuth.instance;
   final makeJson get = makeJson();
@@ -69,6 +68,17 @@ Future<mNews> setNewsData() async {
   final data = json.decode(response!);
   news = mNews.fromJson(data);
   return news;
+}
+
+Future getSummNews(int newsId) async {
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson get = makeJson();
+  String id = await _authInstance.currentUser!.getIdToken(true);
+  String link = "news/${newsId}";
+
+  final response = await get.getJson(id, link);
+  final data = json.decode(response!);
+  return data;
 }
 
 Future<mCampaign> setCampaignData() async {
@@ -103,6 +113,23 @@ Future<bool> clearMission(int missionId) async {
   try {
     String id = await _authInstance.currentUser!.getIdToken(true);
     String link = 'mission/${missionId}/clear';
+    String json = '''{}''';
+
+    final response = await post.postJson(id, link, json);
+    return true;
+  } on Exception catch (e) {
+    print('error from clear mission');
+    print(e);
+    return false;
+  }
+}
+
+Future<bool> cancleMission(int missionId) async {
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson post = makeJson();
+  try {
+    String id = await _authInstance.currentUser!.getIdToken(true);
+    String link = 'mission/${missionId}/cancle';
     String json = '''{}''';
 
     final response = await post.postJson(id, link, json);
