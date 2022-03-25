@@ -109,7 +109,7 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     ),
                     //뉴스 탭
                     Center(
-                      child: News(),
+                      child: NewsPage(),
                     ),
                     //캠페인 탭
                     Center(
