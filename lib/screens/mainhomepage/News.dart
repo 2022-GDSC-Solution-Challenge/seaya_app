@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:seaya_app/models/newsModel.dart';
 import 'package:seaya_app/screens/mainhomepage/newsDialog.dart';
 import 'package:seaya_app/utilities/Setdata.dart';
+import 'package:seaya_app/utilities/makeJson.dart';
 import 'package:seaya_app/widgets/menuwidget/Menu.dart';
 import 'package:seaya_app/screens/loginpage/login.dart';
 import 'package:seaya_app/screens/mainhomepage/Home.dart';
@@ -165,7 +167,7 @@ Widget newsone(BuildContext context, double sh, double sd, News news) {
 
 Widget newstwo(BuildContext context, double sh, double sd, News news) {
   return GestureDetector(
-    onTap: () {
+    onTap: () async {
       showDialog(
           context: context, builder: (context) => newsDialog(news: news));
       print('${news.id!} clicked');

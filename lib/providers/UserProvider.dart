@@ -14,4 +14,22 @@ class UserProvider with ChangeNotifier {
     print(user);
     notifyListeners(); // data 가 수정되었다고 알려주기
   }
+
+  addMissionPoint(int point) {
+    print('add mission point');
+    user!.missionp += point;
+    notifyListeners();
+  }
+
+  subMissionPoint(int point) {
+    print('add mission point');
+    user!.missionp -= point;
+    notifyListeners();
+  }
+
+  addQuizPoint(int point) {
+    print('add quiz point');
+    user!.quizp += point;
+    notifyListeners();
+  }
 }

@@ -18,6 +18,7 @@ class Home extends StatefulWidget {
 // ignore: camel_case_types
 class HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late UserProvider _userProvider;
 
   @override
   void initState() {
@@ -33,6 +34,7 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
@@ -97,6 +99,11 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       text: 'Campaign',
                     ),
                   ],
+                  onTap: (int tab) {
+                    if (tab == 0) {
+                      _userProvider.fetchData();
+                    }
+                  },
                 ),
               ),
               Expanded(
