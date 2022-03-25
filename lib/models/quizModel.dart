@@ -17,15 +17,15 @@ class mQuiz {
 
 class mquiz {
   int? id;
-  String? quistion;
+  String? question;
   int? point;
   List<Answers>? answers;
 
-  mquiz({this.id, this.quistion, this.point, this.answers});
+  mquiz({this.id, this.question, this.point, this.answers});
 
   mquiz.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    quistion = json['quistion'];
+    question = json['question'];
     point = json['point'];
     if (json['Answers'] != null) {
       answers = <Answers>[];
