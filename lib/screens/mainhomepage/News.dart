@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:seaya_app/models/newsModel.dart';
+import 'package:seaya_app/utilities/Setdata.dart';
 import 'package:seaya_app/widgets/menuwidget/Menu.dart';
 import 'package:seaya_app/screens/loginpage/login.dart';
 import 'package:seaya_app/screens/mainhomepage/Home.dart';
 
-class News extends StatefulWidget {
-  const News({Key? key}) : super(key: key);
+class NewsPage extends StatefulWidget {
+  const NewsPage({Key? key}) : super(key: key);
 
   @override
   _NewsState createState() => _NewsState();
 }
 
 // ignore: camel_case_types
-class _NewsState extends State<News> with SingleTickerProviderStateMixin {
+class _NewsState extends State<NewsPage> with SingleTickerProviderStateMixin {
+  late Future _getNews;
+  @override
+  void initState() {
+    super.initState();
+    _getNews = setNewsData();
+  }
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -30,15 +39,30 @@ class _NewsState extends State<News> with SingleTickerProviderStateMixin {
             height: 5,
           ),
           Expanded(
-            child: ListView.builder(
-                itemCount: 5,
-                shrinkWrap: true,
-                itemBuilder: (BuildContext context, int index) {
-                  if (index % 2 == 0) {
-                    return newsone(context, sh, sd, index);
-                  } else
-                    return newstwo(context, sh, sd, index);
-                }),
+            child: FutureBuilder(
+              future: _getNews,
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (!snapshot.hasData) {
+                  print("loading news data");
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.data == null || snapshot.hasError) {
+                  print('error from get news');
+                  return Text('loading news fail');
+                }
+                print(snapshot.data.news);
+                return ListView.builder(
+                    itemCount: snapshot.data.news.length,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index % 2 == 0) {
+                        return newsone(
+                            context, sh, sd, snapshot.data.news[index]);
+                      } else
+                        return newstwo(
+                            context, sh, sd, snapshot.data.news[index]);
+                    });
+              },
+            ),
           ),
         ],
       ),
@@ -46,9 +70,12 @@ class _NewsState extends State<News> with SingleTickerProviderStateMixin {
   }
 }
 
-Widget newsone(BuildContext context, double sh, double sd, int index) {
+Widget newsone(BuildContext context, double sh, double sd, News news) {
   return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        //뉴스 요약본 get
+        print('${news.id!} clicked');
+      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 10, top: 25),
         height: 130 * sh,
@@ -87,7 +114,7 @@ Widget newsone(BuildContext context, double sh, double sd, int index) {
                 Row(
                   children: [
                     Text(
-                      "Date",
+                      news.date!, //"Date",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12,
@@ -106,7 +133,7 @@ Widget newsone(BuildContext context, double sh, double sd, int index) {
                       width: 11.5 * sd,
                     ),
                     Text(
-                      "Publisher",
+                      "Publisher", //news.publisher!,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12,
@@ -119,7 +146,7 @@ Widget newsone(BuildContext context, double sh, double sd, int index) {
                   padding: const EdgeInsets.only(left: 10, top: 5, right: 20),
                   child: Column(children: [
                     Text(
-                      "Title ...",
+                      news.title!, //"Title ...",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 22,
@@ -133,9 +160,11 @@ Widget newsone(BuildContext context, double sh, double sd, int index) {
       ));
 }
 
-Widget newstwo(BuildContext context, double sh, double sd, int index) {
+Widget newstwo(BuildContext context, double sh, double sd, News news) {
   return GestureDetector(
-    onTap: () {},
+    onTap: () {
+      print('${news.id!} clicked');
+    },
     child: Container(
       margin: const EdgeInsets.only(bottom: 10, top: 10),
       height: 130 * sh,
@@ -173,7 +202,7 @@ Widget newstwo(BuildContext context, double sh, double sd, int index) {
               Row(
                 children: [
                   Text(
-                    "Date",
+                    news.date!, //"Date",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
@@ -192,7 +221,7 @@ Widget newstwo(BuildContext context, double sh, double sd, int index) {
                     width: 11.5 * sd,
                   ),
                   Text(
-                    "Publisher",
+                    "Publisher", //news.publisher!
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
@@ -205,7 +234,7 @@ Widget newstwo(BuildContext context, double sh, double sd, int index) {
                 padding: const EdgeInsets.only(left: 10, top: 5, right: 20),
                 child: Column(children: [
                   Text(
-                    "Title ...",
+                    news.title!, //"Title ...",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:seaya_app/providers/UserProvider.dart';
 import 'package:seaya_app/widgets/naviwidget/Navigation.dart';
 import 'package:seaya_app/screens/loginpage/signUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,8 +20,8 @@ class LogIn extends StatefulWidget {
 class LogInState extends State<LogIn> {
   //final _authInstance = FirebaseAuth.instance;
   final _formkey = GlobalKey<FormState>();
-  late String _userEmail;
-  late String _userPassword;
+  String? _userEmail;
+  String? _userPassword;
   final Authservice _auth = Authservice();
   late FocusNode myFocusNode;
 
@@ -30,7 +32,6 @@ class LogInState extends State<LogIn> {
 
   @override
   void dispose() {
-    
     super.dispose();
   }
 
@@ -41,6 +42,7 @@ class LogInState extends State<LogIn> {
       await _auth.signIn(context, _userEmail, _userPassword);
     }
   }
+
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -97,11 +99,11 @@ class LogInState extends State<LogIn> {
                           children: <Widget>[
                             //이메일
                             CustomTextField(
-                              
                               ValueKey('email'),
                               TextInputType.emailAddress,
                               (value) {
-                                return (value!.isEmpty || !value.contains('@'))
+                                print('email val');
+                                return (value.isEmpty || !value.contains('@'))
                                     ? ('올바른 이메일 주소를 입력해주세요')
                                     : null;
                               },
@@ -116,7 +118,7 @@ class LogInState extends State<LogIn> {
                               ValueKey('pw'),
                               TextInputType.visiblePassword,
                               (value) {
-                                return (value!.isEmpty || value.length < 7)
+                                return (value.isEmpty || value.length < 7)
                                     ? '올바른 비밀번호를 입력해주세요'
                                     : null;
                               },
@@ -139,7 +141,8 @@ class LogInState extends State<LogIn> {
                                   child: customElevatedButton(
                                     () async {
                                       print('signin buttom pressed');
-                                      _tryValidation(context, _userEmail, _userPassword);
+                                      _tryValidation(
+                                          context, _userEmail, _userPassword);
                                     },
                                     'Login',
                                     context,
@@ -153,7 +156,7 @@ class LogInState extends State<LogIn> {
                                   width: 150.0,
                                   height: 50.0,
                                   child: customElevatedButton(
-                                    () {
+                                    () async {
                                       setState(() {
                                         Navigator.of(context).pushReplacement(
                                           MaterialPageRoute(

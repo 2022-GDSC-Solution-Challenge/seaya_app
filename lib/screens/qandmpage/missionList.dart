@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:seaya_app/models/missionModel.dart';
 
 import 'package:seaya_app/screens/qandmpage/Quiz.dart';
+import 'package:seaya_app/utilities/Setdata.dart';
 import 'package:seaya_app/widgets/menuwidget/appBar.dart';
 
 class missionList extends StatefulWidget {
@@ -12,13 +14,18 @@ class missionList extends StatefulWidget {
 
 class _missionListState extends State<missionList>
     with SingleTickerProviderStateMixin {
+  final standardDeviceWidth = 390;
+  final standardDeviceHeight = 844;
+  late Future _getMission;
+  @override
+  void initState() {
+    super.initState();
+    _getMission = setMission();
+  }
+
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
-
-    
-    final standardDeviceWidth = 390;
-    final standardDeviceHeight = 844;
 
     return Scaffold(
         backgroundColor: Colors.white,
@@ -64,241 +71,35 @@ class _missionListState extends State<missionList>
                                   fontFamily: 'PTSansRegular',
                                 ),
                               ),
-                              SizedBox(height: 12 * (height / standardDeviceHeight)),
+                              SizedBox(
+                                  height: 12 * (height / standardDeviceHeight)),
                               Expanded(
-                                child: ListView(
-                                  padding: const EdgeInsets.all(0.0),
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(top: 7),
-                                      padding: EdgeInsets.all(15),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border:
-                                            Border.all(color: Colors.black26),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "1. Test",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontFamily: 'PTSansRegular',
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 20 * (width / standardDeviceWidth),
-                                              height: 10 * (height / standardDeviceHeight),
-                                              child: Transform.scale(
-                                                scale: 1.2,
-                                                child: Checkbox(
-                                                    activeColor: Color.fromARGB(
-                                                        255, 61, 134, 194),
-                                                    shape: CircleBorder(),
-                                                    tristate: false,
-                                                    value: true,
-                                                    splashRadius: 30,
-                                                    onChanged: (Null) {}),
-                                              ),
-                                            ),
-                                          ]),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 7),
-                                      padding: EdgeInsets.all(15),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border:
-                                            Border.all(color: Colors.black26),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "2. Test",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontFamily: 'PTSansRegular',
-                                              ),
-                                            ),
-                                            Container(
-                                               width: 20 * (width / standardDeviceWidth),
-                                              height: 10 * (height / standardDeviceHeight),
-                                              child: Transform.scale(
-                                                scale: 1.2,
-                                                child: Checkbox(
-                                                    activeColor: Color.fromARGB(
-                                                        255, 61, 134, 194),
-                                                    shape: CircleBorder(),
-                                                    tristate: false,
-                                                    value: false,
-                                                    splashRadius: 30,
-                                                    onChanged: (Null) {}),
-                                              ),
-                                            ),
-                                          ]),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 7),
-                                      padding: EdgeInsets.all(15),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border:
-                                            Border.all(color: Colors.black26),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "3. Test",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontFamily: 'PTSansRegular',
-                                              ),
-                                            ),
-                                            Container(
-                                               width: 20 * (width / standardDeviceWidth),
-                                              height: 10 * (height / standardDeviceHeight),
-                                              child: Transform.scale(
-                                                scale: 1.2,
-                                                child: Checkbox(
-                                                    activeColor: Color.fromARGB(
-                                                        255, 61, 134, 194),
-                                                    shape: CircleBorder(),
-                                                    tristate: false,
-                                                    value: true,
-                                                    splashRadius: 30,
-                                                    onChanged: (Null) {}),
-                                              ),
-                                            ),
-                                          ]),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 7),
-                                      padding: EdgeInsets.all(15),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border:
-                                            Border.all(color: Colors.black26),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "4. Test",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontFamily: 'PTSansRegular',
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 20 * (width / standardDeviceWidth),
-                                              height: 10 * (height / standardDeviceHeight),
-                                              child: Transform.scale(
-                                                scale: 1.2,
-                                                child: Checkbox(
-                                                    activeColor: Color.fromARGB(
-                                                        255, 61, 134, 194),
-                                                    shape: CircleBorder(),
-                                                    tristate: false,
-                                                    value: false,
-                                                    splashRadius: 30,
-                                                    onChanged: (Null) {}),
-                                              ),
-                                            ),
-                                          ]),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 7),
-                                      padding: EdgeInsets.all(15),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border:
-                                            Border.all(color: Colors.black26),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "5. Test",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontFamily: 'PTSansRegular',
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 20 * (width / standardDeviceWidth),
-                                              height: 10 * (height / standardDeviceHeight),
-                                              child: Transform.scale(
-                                                scale: 1.2,
-                                                child: Checkbox(
-                                                    activeColor: Color.fromARGB(
-                                                        255, 61, 134, 194),
-                                                    shape: CircleBorder(),
-                                                    tristate: false,
-                                                    value: true,
-                                                    splashRadius: 30,
-                                                    onChanged: (Null) {}),
-                                              ),
-                                            ),
-                                          ]),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.only(top: 7),
-                                      padding: EdgeInsets.all(15),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border:
-                                            Border.all(color: Colors.black26),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "6. Test",
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontFamily: 'PTSansRegular',
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 20 * (width / standardDeviceWidth),
-                                              height: 10 * (height / standardDeviceHeight),
-                                              child: Transform.scale(
-                                                scale: 1.2,
-                                                child: Checkbox(
-                                                    activeColor: Color.fromARGB(
-                                                        255, 61, 134, 194),
-                                                    shape: CircleBorder(),
-                                                    tristate: false,
-                                                    value: false,
-                                                    splashRadius: 30,
-                                                    onChanged: (Null) {}),
-                                              ),
-                                            ),
-                                          ]),
-                                    ),
-                                  ],
-                                ),
+                                child: FutureBuilder(
+                                    future: _getMission,
+                                    builder: (BuildContext context,
+                                        AsyncSnapshot<dynamic> snapshot) {
+                                      if (!snapshot.hasData) {
+                                        print("loading news data");
+                                        return Center(
+                                            child: CircularProgressIndicator());
+                                      } else if (snapshot.data == null ||
+                                          snapshot.hasError) {
+                                        print('error from get missions');
+                                        return Text('loading mission fail');
+                                      }
+
+                                      return ListView.builder(
+                                        itemCount: 5,
+                                        padding: const EdgeInsets.all(0.0),
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          print(snapshot
+                                              .data.missions[index].isClear);
+                                          return missionTile(width, height,
+                                              snapshot.data.missions[index]);
+                                        },
+                                      );
+                                    }),
                               ),
                               Container(
                                 padding:
@@ -333,5 +134,46 @@ class _missionListState extends State<missionList>
                         ])))
           ],
         ));
+  }
+
+  Container missionTile(double width, double height, Missions mission) {
+    return Container(
+      margin: EdgeInsets.only(top: 7),
+      padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.black26),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Text(
+          '${mission.id}. Test',
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 15,
+            fontFamily: 'PTSansRegular',
+          ),
+        ),
+        Container(
+          width: 20 * (width / standardDeviceWidth),
+          height: 10 * (height / standardDeviceHeight),
+          child: Transform.scale(
+            scale: 1.2,
+            child: Checkbox(
+                activeColor: Color.fromARGB(255, 61, 134, 194),
+                shape: CircleBorder(),
+                tristate: mission.isClear!,
+                value: mission.isClear,
+                splashRadius: 30,
+                onChanged: (bool? check) async {
+                  print(check);
+                  if (await clearMission(mission.id!)) {
+                    setState(() {});
+                  }
+                }),
+          ),
+        ),
+      ]),
+    );
   }
 }

@@ -12,9 +12,9 @@ import 'package:seaya_app/providers/UserProvider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized(); //flutter코어엔진 초기화
   await Firebase.initializeApp(); //파베 초기화
-  runApp(
-    MyApp()
-    );
+  runApp(MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => UserProvider())],
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -23,10 +23,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        home:        
-         Navigation()// child 하위에 모든 것들은 Provider에 접근
-       );
+
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      home: LogIn(), // child 하위에 모든 것들은 Provider에 접근
+    );
+
   }
 }

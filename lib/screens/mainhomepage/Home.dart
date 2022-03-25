@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:seaya_app/providers/UserProvider.dart';
 import 'package:seaya_app/widgets/menuwidget/Menu.dart';
 import 'package:seaya_app/screens/loginpage/login.dart';
 import 'package:seaya_app/screens/mainhomepage/Sea.dart';
@@ -34,7 +36,6 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
-    
     final standardDeviceWidth = 390;
     final standardDeviceHeight = 844;
 
@@ -46,8 +47,8 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
           child: Column(
             children: [
               //appbar
-             appBar(),
-               SizedBox(
+              appBar(),
+              SizedBox(
                 height: 15 * (height / standardDeviceHeight),
               ),
               Container(
@@ -108,12 +109,12 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     ),
                     //뉴스 탭
                     Center(
-                      child: News(),
+                      child: NewsPage(),
                     ),
                     //캠페인 탭
                     Center(
-                        child: Campaign(),
-                        ),
+                      child: CampaignPage(),
+                    ),
                   ],
                 ),
               ),

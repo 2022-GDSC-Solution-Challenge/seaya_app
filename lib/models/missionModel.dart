@@ -19,7 +19,7 @@ class Missions {
   String? info;
   int? point;
   String? createdAt;
-  int? isClear;
+  bool? isClear;
 
   Missions(
       {this.id,
@@ -35,6 +35,6 @@ class Missions {
     info = json['info'];
     point = json['point'];
     createdAt = json['createdAt'];
-    isClear = json['isClear'];
+    isClear = json['isClear'] == '1' ? true : false;
   }
 }
