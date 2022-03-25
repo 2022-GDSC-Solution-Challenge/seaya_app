@@ -115,7 +115,7 @@ class _QuizState extends State<Quiz> with SingleTickerProviderStateMixin {
                               setState(() {
                                 Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                    builder: (context) => const quizList(),
+                                    builder: (context) => quizList(),
                                   ),
                                 );
                               });

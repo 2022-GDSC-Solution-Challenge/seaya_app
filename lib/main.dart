@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:seaya_app/screens/loginpage/logIn.dart';
+import 'package:seaya_app/screens/qandmpage/quizEnd.dart';
 import 'package:seaya_app/screens/splash.dart';
 import 'package:seaya_app/screens/mainhomepage/newsDialog.dart';
 import 'package:seaya_app/screens/mainhomepage/Campaign.dart';
 import 'package:seaya_app/widgets/naviwidget/Navigation.dart';
 import 'package:seaya_app/providers/UserProvider.dart';
+import 'package:seaya_app/screens/qandmpage/quizList.dart';
+
 
 //비동기 처리 위해 main async로 수행
 Future<void> main() async {
@@ -23,11 +26,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: LogIn(), // child 하위에 모든 것들은 Provider에 접근
+      home: quizEnd(), // child 하위에 모든 것들은 Provider에 접근
     );
-
   }
 }
