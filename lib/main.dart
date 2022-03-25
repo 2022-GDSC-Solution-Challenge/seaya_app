@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: 
         
-          LogIn()// child 하위에 모든 것들은 Provider에 접근
+         Navigation()// child 하위에 모든 것들은 Provider에 접근
        );
   }
 }

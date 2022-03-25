@@ -18,170 +18,73 @@ class _CampaignState extends State<Campaign>
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
-    
     final standardDeviceWidth = 390;
     final standardDeviceHeight = 844;
+    final double sh = (height / standardDeviceHeight);
+    final double sd = (width / standardDeviceWidth);
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
-           SizedBox(
+          SizedBox(
             height: 10 * (height / standardDeviceHeight),
           ),
           Expanded(
-            child: GridView.count(
+            child: GridView.builder(
+              itemCount: 8,
               primary: false,
               padding: const EdgeInsets.only(top: 10),
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 2,
-              children: <Widget>[
-                Positioned(
-                  top: 10,
-                  child: Card(
-                    elevation: 8.0,
-                    shadowColor: Colors.grey.withOpacity(0.4),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          image: const DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage(""),
-                          ),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 241, 241, 241),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          margin: const EdgeInsets.only(
-                            top: 125,
-                          ),
-                          padding: const EdgeInsets.only(top: 10, left: 20),
-                          child: Text(
-                            "Title",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: const Color(0xff575757),
-                                fontFamily: 'PTSansRegular'),
-                          ),
-                        )),
-                  ),
-                ),
-                Positioned(
-                  top: 10,
-                  child: Card(
-                    elevation: 8.0,
-                    shadowColor: Colors.grey.withOpacity(0.4),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          image: const DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage(""),
-                          ),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 241, 241, 241),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          margin: const EdgeInsets.only(
-                            top: 125,
-                          ),
-                          padding: const EdgeInsets.only(top: 10, left: 20),
-                          child: Text(
-                            "Title",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: const Color(0xff575757),
-                                fontFamily: 'PTSansRegular'),
-                          ),
-                        )),
-                  ),
-                ),
-                Positioned(
-                  top: 10,
-                  child: Card(
-                    elevation: 8.0,
-                    shadowColor: Colors.grey.withOpacity(0.4),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          image: const DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage(""),
-                          ),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 241, 241, 241),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          margin: const EdgeInsets.only(
-                            top: 125,
-                          ),
-                          padding: const EdgeInsets.only(top: 10, left: 20),
-                          child: Text(
-                            "Title",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: const Color(0xff575757),
-                                fontFamily: 'PTSansRegular'),
-                          ),
-                        )),
-                  ),
-                ),
-                Positioned(
-                  top: 10,
-                  child: Card(
-                    elevation: 8.0,
-                    shadowColor: Colors.grey.withOpacity(0.4),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          image: const DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage(""),
-                          ),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 241, 241, 241),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          margin: const EdgeInsets.only(
-                            top: 125,
-                          ),
-                          padding: const EdgeInsets.only(top: 10, left: 20),
-                          child: Text(
-                            "Title",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: const Color(0xff575757),
-                                fontFamily: 'PTSansRegular'),
-                          ),
-                        )),
-                  ),
-                ),
-              ],
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: 2,
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {print("tap");},
+                  child: camCard(context, sh, sd),
+                );
+              },
             ),
           ),
         ],
       ),
     );
   }
+}
+
+Widget camCard(BuildContext context, double sh, double sd) {
+  return Card(
+    elevation: 8.0,
+    shadowColor: Colors.grey.withOpacity(0.4),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15.0),
+    ),
+    child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          image: const DecorationImage(
+            fit: BoxFit.fill,
+            image: AssetImage('images/bubbles.png'),
+          ),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 241, 241, 241),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          margin: const EdgeInsets.only(
+            top: 125,
+          ),
+          padding: const EdgeInsets.only(top: 10, left: 20),
+          child: Text(
+            "Title",
+            style: TextStyle(
+                fontSize: 16,
+                color: const Color(0xff575757),
+                fontFamily: 'PTSansRegular'),
+          ),
+        )),
+  );
 }
