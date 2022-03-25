@@ -105,27 +105,26 @@ Widget _seaCard(BuildContext context, double sh, double sw, UserProvider usp) {
             ),
             child: Container(
               padding: EdgeInsets.fromLTRB(20 * w, 13 * h, 15 * w, 13 * h),
-              child: Row(children: [
-                //사용자 이름
-                Text(
-                  usp.user!.name, //'이름',
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontFamily: 'PTSansRegular'),
-                ),
-                SizedBox(
-                  width: 160 * w,
-                ),
-                //상위 몇 퍼센트 인지
-                Text(
-                  double.parse(usp.user!.percentile).round().toString() + "%",
-                  style: TextStyle(
-                      fontSize: 13,
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontFamily: 'PTSansRegular'),
-                ),
-              ]),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    //사용자 이름
+                    Text(
+                      usp.user!.name, //'이름',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontFamily: 'PTSansRegular'),
+                    ),
+                    //상위 몇 퍼센트 인지
+                    Text(
+                      'top ${double.parse(usp.user!.percentile).round()}%',
+                      style: TextStyle(
+                          fontSize: 13,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontFamily: 'PTSansRegular'),
+                    ),
+                  ]),
             ),
           ),
         ),
@@ -137,7 +136,7 @@ Widget _seaCard(BuildContext context, double sh, double sw, UserProvider usp) {
           padding: const EdgeInsets.only(top: 20),
           child: Column(children: [
             Text(
-              (usp.user!.totalp * 0.02).toString() + "%",
+              '${usp.user!.totalp * 0.02}%',
               style: TextStyle(
                   fontSize: 32,
                   color: Color(0xff0068C1),

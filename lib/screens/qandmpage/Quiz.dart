@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:seaya_app/models/quizModel.dart';
+import 'package:seaya_app/utilities/Setdata.dart';
 import 'package:seaya_app/utilities/makeJson.dart';
 import 'package:seaya_app/widgets/menuwidget/Menu.dart';
 import 'package:seaya_app/screens/loginpage/login.dart';
@@ -104,18 +105,28 @@ class _QuizState extends State<Quiz> with SingleTickerProviderStateMixin {
                     backgroundColor: MaterialStateProperty.all<Color>(
                         Color.fromARGB(255, 219, 231, 240))),
                 onPressed: () async {
-                  mQuiz quiz = await setQuiz();
-                  quiz.quiz!.forEach((element) {
-                    print(element.question);
-                    print(element.answers);
-                  });
-                  // if(quiz.state == 'fail') {} 오늘 퀴즈 푼거 예외처리 해서 접근 못하게
-                  setState(() {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => quizList(quizzes: quiz.quiz!),
-                      ),
-                    );
+                  mQuiz quiz;
+                  await setQuiz().then((quiz) {
+                    if (quiz == false) {
+                      //오늘 이미 한번 풀었다면
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                              'You have already solved it once today. Try again tomorrow!'),
+                          duration: Duration(seconds: 2)));
+                    } else {
+                      quiz.quiz!.forEach((element) {
+                        print(element.question);
+                        print(element.answers);
+                      });
+                      // if(quiz.state == 'fail') {} 오늘 퀴즈 푼거 예외처리 해서 접근 못하게
+                      setState(() {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => quizList(quizzes: quiz.quiz!),
+                          ),
+                        );
+                      });
+                    }
                   });
                 },
                 child: const Text('Go!'),
@@ -126,20 +137,4 @@ class _QuizState extends State<Quiz> with SingleTickerProviderStateMixin {
       ),
     );
   }
-}
-
-//setdata 파일이 겹칠 것 같아서 일단 이곳에 만듦.
-//makeJson에서 421코드 스낵바 처리 해줘야함
-//추후 옮기기
-Future<mQuiz> setQuiz() async {
-  late mQuiz quiz;
-  final _authInstance = FirebaseAuth.instance;
-  final makeJson get = makeJson();
-  String id = await _authInstance.currentUser!.getIdToken(true);
-  String link = "quiz/start";
-
-  final response = await get.getJson(id, link);
-  final data = json.decode(response!);
-  quiz = mQuiz.fromJson(data);
-  return quiz;
 }

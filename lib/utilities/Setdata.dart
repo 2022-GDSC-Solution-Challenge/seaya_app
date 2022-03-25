@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:seaya_app/models/campaignModel.dart';
 import 'package:seaya_app/models/newsModel.dart';
+import 'package:seaya_app/models/quizModel.dart';
 import 'package:seaya_app/utilities/makeJson.dart';
 import 'package:http/http.dart' as http;
 import 'package:seaya_app/models/userModel.dart';
@@ -142,6 +143,56 @@ Future<bool> cancleMission(int missionId) async {
   }
 }
 
+Future setQuiz() async {
+  late mQuiz quiz;
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson get = makeJson();
+  String id = await _authInstance.currentUser!.getIdToken(true);
+  String link = "quiz/start";
+
+  final response = await get.getJson(id, link);
+  if (response == 421) {
+    return false;
+  }
+  final data = json.decode(response!);
+  quiz = mQuiz.fromJson(data);
+  return quiz;
+}
+
+Future<bool> addQuizScore(List<int> result) async {
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson post = makeJson();
+  try {
+    String id = await _authInstance.currentUser!.getIdToken(true);
+    String link = 'quiz/end';
+    String json = '''{"quiz_result" : ${result}}''';
+
+    final response = await post.postJson(id, link, json);
+    return true;
+  } on Exception catch (e) {
+    print('error from update quiz score');
+    print(e);
+    return false;
+  }
+}
+
+Future<bool> addNewsPoint(int newsId) async {
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson post = makeJson();
+  try {
+    String id = await _authInstance.currentUser!.getIdToken(true);
+    String link = 'news/${newsId}';
+    String json = '''{}''';
+
+    final response = await post.postJson(id, link, json);
+    return true;
+  } on Exception catch (e) {
+    print('error from clear mission');
+    print(e);
+    return false;
+  }
+}
+
 //친구 수락 하기 전 승인리스트 / 전체 친구 정보
 Future<mFriend> getReceivename() async {
   late mFriend friends;
@@ -191,4 +242,3 @@ Future<int> competeFriend(int userId) async {
     return -1;
   }
 }
-

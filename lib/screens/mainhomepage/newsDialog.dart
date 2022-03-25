@@ -73,75 +73,79 @@ class _newsDialogState extends State<newsDialog> {
             ),
           ],
         ),
-        content: Container(
-          child: Column(
-            children: [
-              Card(
-                elevation: 3.0,
-                shadowColor: Colors.grey.withOpacity(0.8),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Container(
-                  padding: const EdgeInsets.all(10),
-                  height: 350,
-                  width: 300,
-                  decoration: BoxDecoration(
-                      color: Colors.white54,
-                      borderRadius: BorderRadius.circular((10))),
-                  child: FutureBuilder(
-                      future: _getContent,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<dynamic> snapshot) {
-                        if (!snapshot.hasData) {
-                          print("loading news data");
-                          return Center(child: CircularProgressIndicator());
-                        } else if (snapshot.data == null || snapshot.hasError) {
-                          print('error from get news');
-                          return Text('loading news fail');
-                        }
+        content: Wrap(
+          children: [
+            Column(
+              children: [
+                Card(
+                  elevation: 3.0,
+                  shadowColor: Colors.grey.withOpacity(0.8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.all(10),
+                    height: 350,
+                    width: 300,
+                    decoration: BoxDecoration(
+                        color: Colors.white54,
+                        borderRadius: BorderRadius.circular((10))),
+                    child: FutureBuilder(
+                        future: _getContent,
+                        builder: (BuildContext context,
+                            AsyncSnapshot<dynamic> snapshot) {
+                          if (!snapshot.hasData) {
+                            print("loading news data");
+                            return Center(child: CircularProgressIndicator());
+                          } else if (snapshot.data == null ||
+                              snapshot.hasError) {
+                            print('error from get news');
+                            return Text('loading news fail');
+                          }
 
-                        url = snapshot.data['url'];
-                        return Text(
-                          snapshot.data['summarized_text'], //'Contents',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontFamily: 'PTSansRegular',
-                          ),
-                        );
-                      }),
+                          addNewsPoint(widget.news.id!);
+                          url = snapshot.data['url'];
+                          return Text(
+                            snapshot.data['summarized_text'], //'Contents',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontFamily: 'PTSansRegular',
+                            ),
+                          );
+                        }),
+                  ),
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(top: 10, bottom: 0),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      padding: MaterialStateProperty.all<EdgeInsets>(
-                          const EdgeInsets.only(
-                        left: 70,
-                        right: 70,
-                        top: 10,
-                        bottom: 10,
-                      )),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromARGB(255, 201, 218, 231))),
-                  onPressed: () {
-                    //누르면 뉴스 홈페이지로 이동
-                    //url변수에 링크 담겨있음(요약된 본문과 같이 넘어와서 공백일경우 처리 따로 해줘야함)
-                  },
-                  child: const Text(
-                    'News Site',
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 14,
-                      fontFamily: 'PTSansRegular',
+                Container(
+                  padding: const EdgeInsets.only(top: 10, bottom: 0),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsets>(
+                            const EdgeInsets.only(
+                          left: 70,
+                          right: 70,
+                          top: 10,
+                          bottom: 10,
+                        )),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromARGB(255, 201, 218, 231))),
+                    onPressed: () {
+                      //누르면 뉴스 홈페이지로 이동
+                      //url변수에 링크 담겨있음(요약된 본문과 같이 넘어와서 공백일경우 처리 따로 해줘야함)
+                    },
+                    child: const Text(
+                      'News Site',
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 14,
+                        fontFamily: 'PTSansRegular',
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ));
   }
 }

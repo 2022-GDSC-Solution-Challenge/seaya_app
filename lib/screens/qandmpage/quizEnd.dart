@@ -5,6 +5,7 @@ import 'package:seaya_app/models/quizModel.dart';
 import 'package:seaya_app/providers/UserProvider.dart';
 
 import 'package:seaya_app/screens/qandmpage/Quiz.dart';
+import 'package:seaya_app/utilities/Setdata.dart';
 import 'package:seaya_app/utilities/makeJson.dart';
 import 'package:seaya_app/widgets/naviwidget/Navigation.dart';
 
@@ -30,7 +31,6 @@ class _quizEndState extends State<quizEnd> with SingleTickerProviderStateMixin {
 
     _printResult = Future.delayed(Duration.zero, () async {
       if (correctQuizId.length == 0) {
-        print('00000');
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('That\'s too bad! Try again tomorrow.'),
             duration: Duration(seconds: 2)));
@@ -60,7 +60,6 @@ class _quizEndState extends State<quizEnd> with SingleTickerProviderStateMixin {
       }
     }
     _printResult;
-    print(correctQuizId);
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
@@ -271,22 +270,5 @@ class _quizEndState extends State<quizEnd> with SingleTickerProviderStateMixin {
         ),
       ],
     );
-  }
-}
-
-Future<bool> addQuizScore(List<int> result) async {
-  final _authInstance = FirebaseAuth.instance;
-  final makeJson post = makeJson();
-  try {
-    String id = await _authInstance.currentUser!.getIdToken(true);
-    String link = 'quiz/end';
-    String json = '''{"quiz_result" : ${result}}''';
-
-    final response = await post.postJson(id, link, json);
-    return true;
-  } on Exception catch (e) {
-    print('error from update quiz score');
-    print(e);
-    return false;
   }
 }

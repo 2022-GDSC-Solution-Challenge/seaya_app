@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:seaya_app/providers/UserProvider.dart';
 import 'package:seaya_app/screens/competepage/Competition.dart';
 import 'package:seaya_app/screens/qandmpage/Q&M.dart';
 import 'package:seaya_app/screens/mainhomepage/Home.dart';
@@ -12,6 +14,7 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
+  late UserProvider _userProvider;
 
   final List<Widget> _widgetOptions = <Widget>[
     Home(),
@@ -23,11 +26,15 @@ class _NavigationState extends State<Navigation> {
     setState(() {
       _selectedIndex = index;
     });
+    if (index == 0) {
+      _userProvider.fetchData();
+    }
   }
   //widget 체크 포인트 -> home icon , q&m icon 변경여부
 
   @override
   Widget build(BuildContext context) {
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
     return Scaffold(
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
