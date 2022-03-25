@@ -162,14 +162,20 @@ class _missionListState extends State<missionList>
             child: Checkbox(
                 activeColor: Color.fromARGB(255, 61, 134, 194),
                 shape: CircleBorder(),
-                tristate: mission.isClear!,
                 value: mission.isClear,
                 splashRadius: 30,
-                onChanged: (bool? check) async {
+                onChanged: (bool? check) {
                   print(check);
-                  if (await clearMission(mission.id!)) {
-                    setState(() {});
-                  }
+                  setState(() {
+                    mission.isClear = check;
+                    if (check!) {
+                      clearMission(mission.id!).then(
+                          (value) => mission.isClear = value ? true : false);
+                    } else {
+                      cancleMission(mission.id!).then(
+                          (value) => mission.isClear = value ? false : true);
+                    }
+                  });
                 }),
           ),
         ),
@@ -177,7 +183,6 @@ class _missionListState extends State<missionList>
     );
   }
 }
-
 // class _missionListState extends State<missionList>
 //     with SingleTickerProviderStateMixin {
 //   final standardDeviceWidth = 390;
