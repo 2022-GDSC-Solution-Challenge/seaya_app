@@ -6,6 +6,7 @@ import 'package:seaya_app/models/newsModel.dart';
 import 'package:seaya_app/utilities/makeJson.dart';
 import 'package:http/http.dart' as http;
 import 'package:seaya_app/models/userModel.dart';
+import 'package:seaya_app/models/missionModel.dart';
 
 //정보 가져오는 함수들 모아놓는 자리에용
 
@@ -80,4 +81,34 @@ Future<mCampaign> setCampaignData() async {
   final data = json.decode(response!);
   campaign = mCampaign.fromJson(data);
   return campaign;
+}
+
+Future<mMission> setMission() async {
+  late mMission missions;
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson get = makeJson();
+  String id = await _authInstance.currentUser!.getIdToken(true);
+  String link = "mission";
+
+  final response = await get.getJson(id, link);
+  final data = json.decode(response!);
+  missions = mMission.fromJson(data);
+  return missions;
+}
+
+Future<bool> clearMission(int missionId) async {
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson post = makeJson();
+  try {
+    String id = await _authInstance.currentUser!.getIdToken(true);
+    String link = 'mission/${missionId}/clear';
+    String json = '''{}''';
+
+    final response = await post.postJson(id, link, json);
+    return true;
+  } on Exception catch (e) {
+    print('error from clear mission');
+    print(e);
+    return false;
+  }
 }
