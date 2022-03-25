@@ -25,8 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        home: 
-        
+        home:        
          Navigation()// child 하위에 모든 것들은 Provider에 접근
        );
   }

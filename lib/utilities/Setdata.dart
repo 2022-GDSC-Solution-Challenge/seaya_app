@@ -38,7 +38,7 @@ Future<int?> loginUserData(token, String uid) async{
 }
 
 //유저정보세팅
-Future <mUser> setUserData(context) async {
+Future <mUser> setUserData() async {
   late mUser user;
   final _authInstance = FirebaseAuth.instance;
   final makeJson get = makeJson();
