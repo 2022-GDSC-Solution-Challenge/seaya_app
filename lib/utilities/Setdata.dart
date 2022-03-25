@@ -7,6 +7,7 @@ import 'package:seaya_app/utilities/makeJson.dart';
 import 'package:http/http.dart' as http;
 import 'package:seaya_app/models/userModel.dart';
 import 'package:seaya_app/models/missionModel.dart';
+import 'package:seaya_app/models/friendModel.dart';
 
 //정보 가져오는 함수들 모아놓는 자리에용
 
@@ -140,3 +141,54 @@ Future<bool> cancleMission(int missionId) async {
     return false;
   }
 }
+
+//친구 수락 하기 전 승인리스트 / 전체 친구 정보
+Future<mFriend> getReceivename() async {
+  late mFriend friends;
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson get = makeJson();
+  String id = await _authInstance.currentUser!.getIdToken(true);
+  String link = "friend";
+
+  final response = await get.getJson(id, link);
+  final data = json.decode(response!);
+  friends = mFriend.fromJson(data);
+  return friends;
+}
+
+//친구 수락
+Future<bool> acceptFriend(int userId) async {
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson post = makeJson();
+  try {
+    String id = await _authInstance.currentUser!.getIdToken(true);
+    String link = 'friend/${userId}/request';
+    String json = '''{}''';
+
+    final response = await post.postJson(id, link, json);
+    return true;
+  } on Exception catch (e) {
+    print('error from post -accept friend-');
+    print(e);
+    return false;
+  }
+}
+
+//겨루기 신청
+Future<int> competeFriend(int userId) async {
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson post = makeJson();
+  try {
+    String id = await _authInstance.currentUser!.getIdToken(true);
+    String link = 'cpt/${userId}/request';
+    String json = '''{}''';
+
+    final response = await post.postJson(id, link, json);
+    return response;
+  } on Exception catch (e) {
+    print('error from post -compete request to friend-');
+    print(e);
+    return -1;
+  }
+}
+

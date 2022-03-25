@@ -47,6 +47,7 @@ class LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       key: _scaffoldKey,
       backgroundColor: const Color(0xffffffff),
       body: SafeArea(

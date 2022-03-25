@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:seaya_app/models/friendModel.dart';
+import 'package:seaya_app/utilities/Setdata.dart';
 import 'package:seaya_app/widgets/menuwidget/Menu.dart';
 import 'package:seaya_app/screens/loginpage/login.dart';
 import 'package:seaya_app/screens/mainhomepage/Sea.dart';
@@ -13,6 +15,13 @@ class friendsList extends StatefulWidget {
 // ignore: camel_case_types
 class _friendsListState extends State<friendsList>
     with SingleTickerProviderStateMixin {
+  late Future _getFriends;
+  @override
+  void initState() {
+    super.initState();
+    _getFriends = getReceivename();
+  }
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -24,7 +33,7 @@ class _friendsListState extends State<friendsList>
     final double sd = (width / standardDeviceWidth);
 
     return Scaffold(
-      resizeToAvoidBottomInset : false,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Column(
         children: [
@@ -71,11 +80,26 @@ class _friendsListState extends State<friendsList>
           ),
           //친구 리스트
           Expanded(
-            child: ListView.builder(
-              itemCount: 4,
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                return competeReq(context, sh, sd);
+            child: FutureBuilder(
+              future: _getFriends,
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (!snapshot.hasData) {
+                  print("loading friends data");
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.data == null || snapshot.hasError) {
+                  print('error from get friends receive');
+                  return Text('No data exists');
+                }
+                print(snapshot.data.friends);
+                print(snapshot.data.friends.length);
+                return ListView.builder(
+                  itemCount: snapshot.data.friends.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return competeReq(
+                        context, sh, sd, snapshot.data.friends[index]);
+                  },
+                );
               },
             ),
           ),
@@ -90,8 +114,14 @@ Widget searchFriends(BuildContext context, double sh, double sd) {
   return Container(
     height: 70 * sh,
     padding: const EdgeInsets.only(top: 20.0, bottom: 10),
-    child: TextField(
+    child: Row(children: [
+              Expanded(
+                flex: 7,
+                child: 
+    TextField(
+      keyboardType: TextInputType.text,
       onChanged: (text) {
+        //이부분 수정 필요
         print(text);
       },
       //controller: _nameTextEditController,
@@ -100,9 +130,24 @@ Widget searchFriends(BuildContext context, double sh, double sd) {
           fillColor: Color(0xff607463),
           focusColor: Color(0xff607463),
           hoverColor: Color(0xff607463),
-          prefixIcon: Icon(Icons.search),
+          //prefixIcon: Icon(Icons.search),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)))),
+    ),
+              ),
+              Expanded(
+                flex: 1,
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.search,
+                    size: 20,
+                    ),
+                  onPressed: () {
+                    
+                  },
+                ),
+              ),
+    ],
     ),
   );
 }
@@ -219,12 +264,13 @@ Widget competeFriends(BuildContext context, double sh, double sd) {
 }
 
 //겨루기 신청창
-Widget competeReq(BuildContext context, double sh, double sd) {
+Widget competeReq(BuildContext context, double sh, double sd, Friends friends) {
+  final id = friends.id!;
   return Container(
-    margin: EdgeInsets.fromLTRB(3, 3, 3, 3),
-    padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+      margin: EdgeInsets.fromLTRB(3, 3, 3, 3),
+      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
       height: 50.0 * sh,
-      width : 350 * sd,
+      width: 350 * sd,
       decoration: BoxDecoration(
           color: Color.fromARGB(255, 236, 239, 243),
           borderRadius: BorderRadius.circular(10.0),
@@ -238,9 +284,9 @@ Widget competeReq(BuildContext context, double sh, double sd) {
       child: Row(
         children: [
           Container(
-            padding:  EdgeInsets.only(left: 20 * sd),
+            padding: EdgeInsets.only(left: 20 * sd),
             child: Text(
-              'Friend 1',
+              friends.name!,
               style: TextStyle(
                 fontSize: 18.0,
                 color: Color(0xff2B2B2B),
@@ -260,8 +306,21 @@ Widget competeReq(BuildContext context, double sh, double sd) {
                   backgroundColor: MaterialStateProperty.all<Color>(
                     Color.fromARGB(255, 202, 210, 224),
                   )),
-              onPressed: null,
-              child: const Text('start'),
+              onPressed: () async {
+                final state = await competeFriend(id);
+                if (state == 0) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Already requested')),
+                  );
+                }
+              },
+              child: const Text(
+                'start',
+                style: TextStyle(
+                  color: Color(0xff2B2B2B),
+                  fontFamily: 'PTSansRegular',
+                ),
+              ),
             ),
           ),
         ],
