@@ -166,6 +166,8 @@ Widget newsone(BuildContext context, double sh, double sd, News news) {
 Widget newstwo(BuildContext context, double sh, double sd, News news) {
   return GestureDetector(
     onTap: () {
+      showDialog(
+          context: context, builder: (context) => newsDialog(news: news));
       print('${news.id!} clicked');
     },
     child: Container(
