@@ -1,12 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:seaya_app/providers/UserProvider.dart';
 import 'package:seaya_app/widgets/naviwidget/Navigation.dart';
 import 'package:seaya_app/screens/loginpage/login.dart';
 import 'package:seaya_app/utilities/Setdata.dart';
 
 class Authservice {
   final _authInstance = FirebaseAuth.instance;
-
+  late UserProvider _userProvider;
   String? token;
   //sign in with email & password
   Future signIn(context, String _userEmail, String _userPassword) async {
@@ -25,6 +27,10 @@ class Authservice {
         //setUserData(token);
         final point = await loginUserData(token, uid);
         if (point! == 1) {
+          _userProvider = Provider.of<UserProvider>(context, listen: false);
+          print('start fetch data');
+          await _userProvider.fetchData();
+          print(_userProvider.user!.name);
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -47,7 +53,7 @@ class Authservice {
   Future signUp(context, String _userEmail, String _userPassword,
       String _userName) async {
     try {
-      print(_userEmail);
+      print(_userEmail.trim());
       final newUser = await _authInstance.createUserWithEmailAndPassword(
         email: _userEmail.trim(), //이메일 형식 에러가 나서 trim으로 문자열 정리
         password: _userPassword,
@@ -66,9 +72,10 @@ class Authservice {
             builder: (context) => const LogIn(),
           ),
         );
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('회원가입 성공!')),
-        );
+        //스낵바 에러가 나서 삭제 아마 pushReplacement로 인한 context문제?
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(content: Text('회원가입 성공!')),
+        // );
       }
     } catch (e) {
       print('error: ${e}');

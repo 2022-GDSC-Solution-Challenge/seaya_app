@@ -7,7 +7,7 @@ import 'package:seaya_app/models/userModel.dart';
 
 //정보 가져오는 함수들 모아놓는 자리에용
 
-//유저회원가입시db생성 
+//유저회원가입시db생성
 createUserData(token, String userName) {
   final makeJson post = makeJson();
   String id = token;
@@ -22,13 +22,12 @@ createUserData(token, String userName) {
 }
 
 //로그인시db테스트
-Future<int?> loginUserData(token, String uid) async{
+Future<int?> loginUserData(token, String uid) async {
   final makeJson post = makeJson();
   String id = token;
   String link = "auth/login";
   String json = '''
 {
-  "uid": "$uid"
 }
 ''';
 
@@ -38,7 +37,7 @@ Future<int?> loginUserData(token, String uid) async{
 }
 
 //유저정보세팅
-Future <mUser> setUserData(context) async {
+Future<mUser> setUserData() async {
   late mUser user;
   final _authInstance = FirebaseAuth.instance;
   final makeJson get = makeJson();
@@ -47,6 +46,7 @@ Future <mUser> setUserData(context) async {
 
 //await써주니 future 형태가 본 모습으로 바뀜 (물음표는 느낌표로 방어해주기)
   final response = await get.getJson(id, link);
+  print(response);
   final data = json.decode(response!);
 
   print(data);

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -18,13 +20,13 @@ class Sea extends StatefulWidget {
 
 // ignore: camel_case_types
 class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
+  late UserProvider _userProvider;
   //use "with SingleThickerProviderStateMixin" at last of class declaration
   //where you have to pass "vsync" argument, add this
 
   @override
   void initState() {
     super.initState();
-    
   }
 
   @override
@@ -34,17 +36,15 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    _userProvider = Provider.of<UserProvider>(context);
+
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
-    print(height);
-    print(width);
-    //setUserData(context);
 
     final standardDeviceWidth = 390;
     final standardDeviceHeight = 844;
     final double sh = (height / standardDeviceHeight);
     final double sd = (width / standardDeviceWidth);
-    
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -57,7 +57,7 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
               height: 10 * (height / standardDeviceHeight),
             ),
             Card(
-              //카드 둥글게 처리해주는거 살리는 코드
+                //카드 둥글게 처리해주는거 살리는 코드
                 clipBehavior: Clip.antiAlias,
                 elevation: 5.0,
                 margin: EdgeInsets.fromLTRB(10 * sd, 10 * sh, 10 * sd, 10 * sh),
@@ -69,7 +69,7 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
                   Positioned.fill(
                     child: Seawaves(),
                   ),
-                  _seaCard(context, sh, sd),
+                  _seaCard(context, sh, sd, _userProvider),
                 ])),
             SizedBox(
               height: 10 * (height / standardDeviceHeight),
@@ -81,14 +81,12 @@ class _SeaState extends State<Sea> with SingleTickerProviderStateMixin {
   }
 }
 
-Widget _seaCard(BuildContext context, double sh, double sw) {
+Widget _seaCard(BuildContext context, double sh, double sw, UserProvider usp) {
   double h = sh;
   double w = sw;
-   
-    
+
   return Container(
     padding: new EdgeInsets.fromLTRB(15 * w, 20 * h, 15 * w, 20 * h),
-    
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -110,7 +108,7 @@ Widget _seaCard(BuildContext context, double sh, double sw) {
               child: Row(children: [
                 //사용자 이름
                 Text(
-                  '이름',
+                  usp.user!.name, //'이름',
                   style: TextStyle(
                       fontSize: 16,
                       color: Color.fromARGB(255, 0, 0, 0),
@@ -121,7 +119,7 @@ Widget _seaCard(BuildContext context, double sh, double sw) {
                 ),
                 //상위 몇 퍼센트 인지
                 Text(
-                  "Top 30%",
+                  double.parse(usp.user!.percentile).round().toString() + "%",
                   style: TextStyle(
                       fontSize: 13,
                       color: Color.fromARGB(255, 0, 0, 0),
@@ -139,7 +137,7 @@ Widget _seaCard(BuildContext context, double sh, double sw) {
           padding: const EdgeInsets.only(top: 20),
           child: Column(children: [
             Text(
-              "1.4 %",
+              (usp.user!.totalp * 0.02).toString() + "%",
               style: TextStyle(
                   fontSize: 32,
                   color: Color(0xff0068C1),
@@ -212,7 +210,7 @@ Widget _seaCard(BuildContext context, double sh, double sw) {
                       height: 3 * h,
                     ),
                     Text(
-                      "72",
+                      usp.user!.totalp.toString(), //"72",
                       style: TextStyle(
                           fontSize: 32,
                           color: Color.fromARGB(255, 255, 255, 255),
@@ -258,7 +256,7 @@ Widget _seaCard(BuildContext context, double sh, double sw) {
                             fontFamily: 'PTSansRegular'),
                       ),
                       Text(
-                        "12",
+                        usp.user!.quizp.toString(), //"12",
                         style: TextStyle(
                             fontSize: 28,
                             color: Color.fromARGB(255, 0, 0, 0),
@@ -294,7 +292,8 @@ Widget _seaCard(BuildContext context, double sh, double sw) {
                             fontFamily: 'PTSansRegular'),
                       ),
                       Text(
-                        "27",
+                        (usp.user!.newsp + usp.user!.campaignp)
+                            .toString(), //"27",
                         style: TextStyle(
                             fontSize: 28,
                             color: Color.fromARGB(255, 0, 0, 0),
@@ -329,7 +328,7 @@ Widget _seaCard(BuildContext context, double sh, double sw) {
                             fontFamily: 'PTSansRegular'),
                       ),
                       Text(
-                        "33",
+                        usp.user!.missionp.toString(), //"33",
                         style: TextStyle(
                             fontSize: 28,
                             color: Color.fromARGB(255, 0, 0, 0),
