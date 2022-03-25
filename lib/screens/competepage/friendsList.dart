@@ -114,40 +114,20 @@ Widget searchFriends(BuildContext context, double sh, double sd) {
   return Container(
     height: 70 * sh,
     padding: const EdgeInsets.only(top: 20.0, bottom: 10),
-    child: Row(children: [
-              Expanded(
-                flex: 7,
-                child: 
-    TextField(
+    child: TextField(
       keyboardType: TextInputType.text,
       onChanged: (text) {
-        //이부분 수정 필요
         print(text);
       },
       //controller: _nameTextEditController,
       decoration: InputDecoration(
-          labelText: "Friends Search",
+          labelText: "ID Search",
           fillColor: Color(0xff607463),
           focusColor: Color(0xff607463),
           hoverColor: Color(0xff607463),
-          //prefixIcon: Icon(Icons.search),
+          prefixIcon: Icon(Icons.search),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)))),
-    ),
-              ),
-              Expanded(
-                flex: 1,
-                child: IconButton(
-                  icon: const Icon(
-                    Icons.search,
-                    size: 20,
-                    ),
-                  onPressed: () {
-                    
-                  },
-                ),
-              ),
-    ],
     ),
   );
 }
@@ -294,7 +274,7 @@ Widget competeReq(BuildContext context, double sh, double sd, Friends friends) {
               ),
             ),
           ),
-          SizedBox(width: 180),
+          SizedBox(width: 200 * sd),
           Container(
             width: 70 * sd,
             height: 40 * sh,

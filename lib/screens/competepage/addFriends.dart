@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seaya_app/screens/competepage/SearchFriend.dart';
 import 'package:seaya_app/widgets/menuwidget/Menu.dart';
 import 'package:seaya_app/screens/loginpage/login.dart';
 import 'package:seaya_app/screens/mainhomepage/Sea.dart';
@@ -91,14 +92,14 @@ class _addFriendsState extends State<addFriends>
                   print('error from get friends receive');
                   return Text('No data exists');
                 }
-                 print(snapshot.data.acceptWaiting);
-                 print(snapshot.data.acceptWaiting.length);
+                print(snapshot.data.acceptWaiting);
+                print(snapshot.data.acceptWaiting.length);
                 return ListView.builder(
                   itemCount: snapshot.data.acceptWaiting.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return friendRec(context, sh, sd,
-                        snapshot.data.acceptWaiting[index]);
+                    return friendRec(
+                        context, sh, sd, snapshot.data.acceptWaiting[index]);
                   },
                 );
               },
@@ -112,23 +113,38 @@ class _addFriendsState extends State<addFriends>
 
 //친구 이름 찾기 검색 창
 Widget searchFriends(BuildContext context, double sh, double sd) {
-  return Container(
-    height: 70 * sh,
-    padding: const EdgeInsets.only(top: 20.0, bottom: 10),
-    child: TextField(
-      keyboardType: TextInputType.text,
-      onChanged: (text) {
-        print(text);
-      },
-      //controller: _nameTextEditController,
-      decoration: InputDecoration(
-          labelText: "ID Search",
-          fillColor: Color(0xff607463),
-          focusColor: Color(0xff607463),
-          hoverColor: Color(0xff607463),
-          prefixIcon: Icon(Icons.search),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)))),
+  return GestureDetector(
+    onTap: () {
+      Navigator.push(
+context,
+MaterialPageRoute(builder: (context) => SearchFriendBar()),
+);
+    },
+    child: Container(
+      margin: EdgeInsets.only(top: 20 * sh, bottom: 10 * sh),
+      padding: EdgeInsets.fromLTRB(10 * sd, 4 * sh, 10 * sd, 4 * sh),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Color.fromARGB(255, 132, 136, 132)),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Icon(
+            Icons.search,
+            color: Color.fromARGB(255, 120, 129, 121),
+          ),
+          Text(
+            'Name Search',
+            style: TextStyle(
+              color: Color(0xff607463),
+              fontSize: 15,
+              fontFamily: 'PTSansRegular',
+            ),
+          ),
+        ],
+      ),
     ),
   );
 }
@@ -186,7 +202,7 @@ Widget competeAccept(BuildContext context, double sh, double sd) {
 //친구 신청 승인
 Widget friendRec(BuildContext context, double sh, double sd, Friends friends) {
   final id = friends.id!;
-  
+
   return Container(
       margin: EdgeInsets.fromLTRB(3, 3, 3, 3),
       padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
@@ -227,13 +243,16 @@ Widget friendRec(BuildContext context, double sh, double sd, Friends friends) {
                   backgroundColor: MaterialStateProperty.all<Color>(
                     Color.fromARGB(255, 202, 210, 224),
                   )),
-              onPressed: (){
+              onPressed: () {
                 acceptFriend(id);
               },
-              child: const Text('accept',
-              style: TextStyle(
-                color: Color(0xff2B2B2B),
-                fontFamily: 'PTSansRegular',),),
+              child: const Text(
+                'accept',
+                style: TextStyle(
+                  color: Color(0xff2B2B2B),
+                  fontFamily: 'PTSansRegular',
+                ),
+              ),
             ),
           ),
         ],
