@@ -90,7 +90,7 @@ class _missionListState extends State<missionList> {
                               }
 
                               return ListView.builder(
-                                itemCount: 5,
+                                itemCount: snapshot.data.missions.length,
                                 padding: const EdgeInsets.all(0.0),
                                 itemBuilder: (BuildContext context, int index) {
                                   print(snapshot.data.missions[index].isClear);
@@ -122,7 +122,8 @@ class _missionListState extends State<missionList> {
       },
       child: Container(
         margin: EdgeInsets.only(top: 7),
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.fromLTRB(15, 18, 15, 18),
+        // padding: EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(color: Colors.black26),
@@ -139,15 +140,20 @@ class _missionListState extends State<missionList> {
                 fontFamily: 'PTSansRegular',
               ),
             ),
-            Text(
-              '${mission.title}ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-                fontFamily: 'PTSansRegular',
+            SizedBox(width: 5),
+            Expanded(
+              child: Text(
+                '${mission.title}',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontFamily: 'PTSansRegular',
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
               ),
-              overflow: TextOverflow.clip,
             ),
+            SizedBox(width: 3),
             Container(
               width: 20 * (width / standardDeviceWidth),
               height: 10 * (height / standardDeviceHeight),

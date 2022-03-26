@@ -156,18 +156,20 @@ Widget newsone(BuildContext context, double sh, double sd, News news) {
                     ),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.only(left: 10, top: 5, right: 20),
-                  child: Column(children: [
-                    Text(
+                Flexible(
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 10, top: 5, right: 20),
+                    child: Text(
                       news.title!, //"Title ...",
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 22,
+                        fontSize: 17,
                         fontFamily: 'PTSansRegular',
                       ),
-                    )
-                  ]),
+                    ),
+                  ),
                 )
               ],
             )),
@@ -252,18 +254,20 @@ Widget newstwo(BuildContext context, double sh, double sd, News news) {
                   ),
                 ],
               ),
-              Container(
-                padding: const EdgeInsets.only(left: 10, top: 5, right: 20),
-                child: Column(children: [
-                  Text(
+              Flexible(
+                child: Container(
+                  padding: const EdgeInsets.only(left: 10, top: 5, right: 20),
+                  child: Text(
                     news.title!, //"Title ...",
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 22,
+                      fontSize: 17,
                       fontFamily: 'PTSansRegular',
                     ),
-                  )
-                ]),
+                  ),
+                ),
               )
             ],
           )),

@@ -24,18 +24,25 @@ class _newsDialogState extends State<newsDialog> {
     _getContent = getSummNews(widget.news.id!);
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   // with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return AlertDialog(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              widget.news.title!, //'Title',
-              style: TextStyle(
-                color: Color.fromARGB(133, 0, 35, 100),
-                fontSize: 22,
-                fontFamily: 'PTSansBold',
+            SingleChildScrollView(
+              child: Text(
+                widget.news.title!, //'Title',
+                style: TextStyle(
+                  color: Color.fromARGB(133, 0, 35, 100),
+                  fontSize: 20,
+                  fontFamily: 'PTSansBold',
+                ),
               ),
             ),
             SizedBox(
@@ -108,12 +115,14 @@ class _newsDialogState extends State<newsDialog> {
                             addNewsPoint(widget.news.id!);
 
                           url = snapshot.data['url'];
-                          return Text(
-                            snapshot.data['summarized_text'], //'Contents',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontFamily: 'PTSansRegular',
+                          return SingleChildScrollView(
+                            child: Text(
+                              snapshot.data['summarized_text'], //'Contents',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontFamily: 'PTSansRegular',
+                              ),
                             ),
                           );
                         }),

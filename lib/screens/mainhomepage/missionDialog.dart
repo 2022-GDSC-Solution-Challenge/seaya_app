@@ -23,17 +23,16 @@ class _missionDialogState extends State<missionDialog> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              widget.mission.title!, //'Title',
-              style: TextStyle(
-                color: Color.fromARGB(133, 0, 35, 100),
-                fontSize: 22,
-                fontFamily: 'PTSansBold',
+            SingleChildScrollView(
+              child: Text(
+                widget.mission.title!, //'Title',
+                style: TextStyle(
+                  color: Color.fromARGB(133, 0, 35, 100),
+                  fontSize: 22,
+                  fontFamily: 'PTSansBold',
+                ),
+                overflow: TextOverflow.clip,
               ),
-              overflow: TextOverflow.clip,
-            ),
-            SizedBox(
-              height: 10,
             ),
           ],
         ),

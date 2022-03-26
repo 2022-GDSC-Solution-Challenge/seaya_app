@@ -103,21 +103,26 @@ class _quizListState extends State<quizList> {
     return Column(
       children: [
         //quiz content
-        Text(
-          quiz.question!, //"세계환경의 날은 언제일까요?",
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 16,
-            fontFamily: 'PTSansRegular',
+        SingleChildScrollView(
+          child: Text(
+            quiz.question!,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontFamily: 'PTSansRegular',
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         SizedBox(height: 70 * sh),
         Column(
           children: _buildCandidates(sd, sh, context, quiz),
         ),
-
+        SizedBox(height: 10),
         //다음, 결과보기 버튼 (크기조정 필요)
         Container(
+          width: double.infinity,
           padding: const EdgeInsets.only(top: 10, bottom: 0),
           child: ElevatedButton(
             style: ButtonStyle(
@@ -136,7 +141,7 @@ class _quizListState extends State<quizList> {
                   : 'next quiz',
               style: TextStyle(
                 color: Colors.black54,
-                fontSize: 14,
+                fontSize: 20,
                 fontFamily: 'PTSansRegular',
               ),
             ),
@@ -170,64 +175,34 @@ class _quizListState extends State<quizList> {
       double sd, double sh, BuildContext context, mquiz quiz) {
     List<Widget> _children = [];
     for (int i = 0; i < quiz.answers!.length; i++) {
-      _children.add(CandWidget(
-        sd: sd,
-        sh: sh,
-        superContext: context,
-        ans: quiz.answers![i],
-        index: i,
-        answerCheck: _ansCheck[i],
-        tap: () {
-          setState(() {
-            for (int j = 0; j < quiz.answers!.length; j++) {
-              if (j == i) {
-                _ansCheck[j] = true;
-                _ans[_currentIndex] = j;
-              } else {
-                _ansCheck[j] = false;
-              }
-            }
-          });
-        },
-      )); //answerBtn(sd, sh, context, quiz.answers![i]));
+      _children.add(
+        CandWidget(
+          sd: sd,
+          sh: sh,
+          superContext: context,
+          ans: quiz.answers![i],
+          index: i,
+          answerCheck: _ansCheck[i],
+          tap: () {
+            setState(
+              () {
+                for (int j = 0; j < quiz.answers!.length; j++) {
+                  if (j == i) {
+                    _ansCheck[j] = true;
+                    _ans[_currentIndex] = j;
+                  } else {
+                    _ansCheck[j] = false;
+                  }
+                }
+              },
+            );
+          },
+        ),
+      );
       _children.add(SizedBox(height: 10 * sh));
     }
     return _children;
   }
-
-  // ElevatedButton answerBtn(
-  //     double sd, double sh, BuildContext context, Answers ans) {
-  //   return ElevatedButton(
-  //     style: ElevatedButton.styleFrom(
-  //         primary: Color.fromARGB(255, 255, 255, 255),
-  //         side: BorderSide(width: 1, color: Color.fromARGB(255, 185, 203, 218)),
-  //         elevation: 3,
-  //         shape:
-  //             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-  //         padding: EdgeInsets.fromLTRB(100 * sd, 17 * sh, 100 * sd, 17 * sh)
-  //         //content padding inside button
-  //         ),
-  //     onPressed: () {
-  //       setState(() {
-  //         // Navigator.of(context).pushReplacement(
-  //         //   MaterialPageRoute(
-  //         //     builder: (context) => quizList(
-  //         //       quizzes: widget.quizzes,
-  //         //     ),
-  //         //   ),
-  //         // );
-  //       });
-  //     },
-  //     child: Text(
-  //       ans.content!, //'1. Test',
-  //       style: TextStyle(
-  //         color: Colors.black,
-  //         fontSize: 15,
-  //         fontFamily: 'PTSansRegular',
-  //       ),
-  //     ),
-  //   );
-  // }
 }
 
 class CandWidget extends StatefulWidget {
@@ -253,31 +228,33 @@ class CandWidget extends StatefulWidget {
 class _CandWidgetState extends State<CandWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // width: widget.width * 0.8,
-      // height: widget.width * 0.1,
-      padding: EdgeInsets.fromLTRB(
-          100 * widget.sd, 17 * widget.sh, 100 * widget.sd, 17 * widget.sh),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: Color.fromARGB(255, 185, 203, 218)),
-        color: widget.answerCheck ? Colors.blue : Colors.white,
-      ),
-      child: InkWell(
-        child: Text(
-          widget.ans.content!,
-          style: TextStyle(
-            fontSize: 15,
-            color: widget.answerCheck ? Colors.white : Colors.black,
+    return GestureDetector(
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.fromLTRB(
+            20 * widget.sd, 17 * widget.sh, 20 * widget.sd, 17 * widget.sh),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(color: Color.fromARGB(255, 185, 203, 218)),
+          color: widget.answerCheck ? Colors.blue : Colors.white,
+        ),
+        child: InkWell(
+          child: Text(
+            widget.ans.content!,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 15,
+              color: widget.answerCheck ? Colors.white : Colors.black,
+            ),
           ),
         ),
-        onTap: () {
-          setState(() {
-            widget.tap();
-            widget.answerCheck = !widget.answerCheck;
-          });
-        },
       ),
+      onTap: () {
+        setState(() {
+          widget.tap();
+          widget.answerCheck = !widget.answerCheck;
+        });
+      },
     );
   }
 }
