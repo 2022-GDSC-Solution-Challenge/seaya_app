@@ -5,14 +5,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:seaya_app/screens/loginpage/signUp.dart';
 import 'package:seaya_app/utilities/Authservice.dart';
 
-
 class Menu extends StatefulWidget {
   const Menu({Key? key}) : super(key: key);
 
   @override
   _MenuState createState() => _MenuState();
 }
-
 
 //메뉴 상세 화면------
 class _MenuState extends State<Menu> with TickerProviderStateMixin {
@@ -26,7 +24,6 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
@@ -51,16 +48,16 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                 width: 354 * (width / standardDeviceWidth),
                 child: Row(
                   children: [
-                     SizedBox(
+                    SizedBox(
                       width: 10.0 * (width / standardDeviceWidth),
                     ),
-                     Image(
+                    Image(
                       width: 53.0 * (width / standardDeviceWidth),
                       image: AssetImage(
                         'images/seaya_logo.png',
                       ),
                     ),
-                     SizedBox(
+                    SizedBox(
                       width: 10.0 * (width / standardDeviceWidth),
                     ),
                     const Text("Seaya",
@@ -70,7 +67,7 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                             letterSpacing: 2.5,
                             fontSize: 15.0),
                         textAlign: TextAlign.left),
-                     SizedBox(
+                    SizedBox(
                       width: 180.0 * (width / standardDeviceWidth),
                     ),
                     IconButton(
@@ -96,13 +93,14 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                     height: 50.0 * (height / standardDeviceHeight),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                      primary: const Color(0xffF3F5F9),
-                      shape: RoundedRectangleBorder(
-                      side: const BorderSide(
-                        color: Color.fromARGB(134, 236, 236, 236),
+                        primary: Color.fromARGB(255, 219, 231, 240),
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                            color: Color.fromARGB(134, 236, 236, 236),
+                          ),
+                          borderRadius: BorderRadius.circular(7),
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(7),
-                      ),),
                       child: const Text(
                         'My page',
                         style: TextStyle(
@@ -113,54 +111,51 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                       ),
                       onPressed: () {
                         setState(() {
-                          /*
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) => BasicPage(),
-                                    ),
-                                  );
-                                  */
-                        });
-                      },
-                    
-                    ),
-                  ),
-                  SizedBox(
-                    height: 8 * (height / standardDeviceHeight),
-                  ),
-                  //setting button---
-                  Container(
-                    width: 310.0 * (width / standardDeviceWidth),
-                    height: 50.0 * (height / standardDeviceHeight),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 219, 231, 240),
-                      shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(7),
-                      )),
-                      child: const Text(
-                        'Setting',
-                        style: TextStyle(
-                          fontSize: 12.0,
-                          color: Color(0xff2B2B2B),
-                          fontFamily: 'PTSansRegular',
-                        ),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          /*
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) => BasicPage(),
-                                    ),
-                                  );
-                                  */
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => LogIn(),
+                            ),
+                          );
                         });
                       },
                     ),
                   ),
+                  // SizedBox(
+                  //   height: 8 * (height / standardDeviceHeight),
+                  // ),
+                  // //setting button---
+                  // Container(
+                  //   width: 310.0 * (width / standardDeviceWidth),
+                  //   height: 50.0 * (height / standardDeviceHeight),
+                  //   child: ElevatedButton(
+                  //     style: ElevatedButton.styleFrom(
+                  //         primary: Color.fromARGB(255, 219, 231, 240),
+                  //         shape: RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(7),
+                  //         )),
+                  //     child: const Text(
+                  //       'Setting',
+                  //       style: TextStyle(
+                  //         fontSize: 12.0,
+                  //         color: Color(0xff2B2B2B),
+                  //         fontFamily: 'PTSansRegular',
+                  //       ),
+                  //     ),
+                  //     onPressed: () {
+                  //       setState(() {
+                  //         /*
+                  //                 Navigator.of(context).pushReplacement(
+                  //                   MaterialPageRoute(
+                  //                     builder: (context) => BasicPage(),
+                  //                   ),
+                  //                 );
+                  //                 */
+                  //       });
+                  //     },
+                  //   ),
+                  // ),
                   SizedBox(
-                    height: 8 * (height / standardDeviceHeight),
+                    height: 10 * (height / standardDeviceHeight),
                   ),
                   //logout button---
                   Container(
@@ -168,13 +163,14 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                     height: 50.0 * (height / standardDeviceHeight),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                      primary: const Color(0xffF3F5F9),
-                      shape: RoundedRectangleBorder(
-                      side: const BorderSide(
-                        color: Color.fromARGB(134, 236, 236, 236),
+                        primary: const Color(0xffF3F5F9),
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(
+                            color: Color.fromARGB(134, 236, 236, 236),
+                          ),
+                          borderRadius: BorderRadius.circular(7),
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(7),
-                    ),),
                       child: const Text(
                         'Logout',
                         style: TextStyle(
@@ -189,7 +185,6 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
                             MaterialPageRoute(
                               builder: (context) => LogIn(),
                             ),
-                            
                           );
                         });
                         await _auth.signOut();
@@ -203,7 +198,5 @@ class _MenuState extends State<Menu> with TickerProviderStateMixin {
         ),
       ),
     );
-
-  
   }
 }

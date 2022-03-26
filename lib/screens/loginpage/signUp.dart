@@ -142,7 +142,7 @@ class SignUpState extends State<SignUp> {
                             TextInputType.phone,
                             (value) {
                               return (value.length < 10)
-                                  ? '이메일 주소를 입력해주세요'
+                                  ? '번호를 입력해주세요'
                                   : null;
                             },
                             (value) {

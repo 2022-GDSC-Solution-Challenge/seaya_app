@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:seaya_app/models/competitionModel.dart';
 import 'package:seaya_app/models/friendModel.dart';
+import 'package:seaya_app/providers/UserProvider.dart';
 import 'package:seaya_app/utilities/Setdata.dart';
 import 'package:seaya_app/widgets/menuwidget/Menu.dart';
 import 'package:seaya_app/screens/loginpage/login.dart';
@@ -22,6 +25,7 @@ class _friendsListState extends State<friendsList>
   void initState() {
     super.initState();
     _getCompetereq = getCompetitionname();
+    
   }
 
   @override
@@ -68,13 +72,15 @@ class _friendsListState extends State<friendsList>
               }
               print(snapshot.data!.acceptWaiting);
               print(snapshot.data!.acceptWaiting.length);
+              print(snapshot.data!.competitors);
+              print(snapshot.data!.competitors.length);
 
               return Column(children: [
                 ListView.builder(
-                  itemCount: 3,
+                  itemCount: snapshot.data!.competitors.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return competeFriends(context, sh, sd);
+                    return competeFriends(context, sh, sd, snapshot.data.competitors[index]);
                   },
                 ),
                 SizedBox(
@@ -108,7 +114,29 @@ class _friendsListState extends State<friendsList>
 
 
 //겨루기 진행창
-Widget competeFriends(BuildContext context, double sh, double sd) {
+Widget competeFriends(BuildContext context, double sh, double sd, Competitors compete) {
+  
+  UserProvider _userProvider = Provider.of<UserProvider>(context, listen: true);
+  final id = compete.id!;
+  final int? mypoint;
+  final int? yourpoint;
+  String? datestr = compete.competition!.startAt!;
+  final DateTime today = DateTime.now();
+  datestr = datestr.substring(0,10);
+  var date = DateFormat('yyyy-MM-dd').parse(datestr);
+  int difference = int.parse(
+        today.difference(date).inDays.toString());
+
+  if(id == compete.competition!.acceptId!){
+    yourpoint = compete.competition!.auPoint!;
+    mypoint = compete.competition!.ruPoint!;
+  }
+  else{
+    yourpoint = compete.competition!.ruPoint!;
+    mypoint = compete.competition!.auPoint!;
+  }
+
+
   return Container(
     margin: EdgeInsets.fromLTRB(3, 5, 3, 5),
     padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
@@ -141,7 +169,7 @@ Widget competeFriends(BuildContext context, double sh, double sd) {
             ),
             //친구 유저 이름
             Text(
-              'Friend 1',
+              compete.name!,
               style: TextStyle(
                 fontSize: 10.0,
                 color: Color(0xff2B2B2B),
@@ -150,7 +178,7 @@ Widget competeFriends(BuildContext context, double sh, double sd) {
             ),
             //친구 유저 포인트
             Text(
-              '850 points',
+              '${yourpoint}',
               style: TextStyle(
                 fontSize: 18.0,
                 color: Color(0xff2B2B2B),
@@ -173,7 +201,7 @@ Widget competeFriends(BuildContext context, double sh, double sd) {
             ),
             //본인
             Text(
-              'Me',
+              _userProvider.user!.name,
               style: TextStyle(
                 fontSize: 10.0,
                 color: Color(0xff2B2B2B),
@@ -182,7 +210,7 @@ Widget competeFriends(BuildContext context, double sh, double sd) {
             ),
             //본인 포인트
             Text(
-              '1,100 points',
+              '${mypoint}',
               style: TextStyle(
                 fontSize: 18.0,
                 color: Color(0xff2B2B2B),
@@ -204,7 +232,7 @@ Widget competeFriends(BuildContext context, double sh, double sd) {
               height: 20 * sh,
             ),
             Text(
-              'D-day',
+              'D-${difference}',
               style: TextStyle(
                 fontSize: 12.0,
                 color: Color(0xff2B2B2B),

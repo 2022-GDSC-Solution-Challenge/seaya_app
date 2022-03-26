@@ -48,16 +48,18 @@ class Competitors {
 
 class Competition {
   int? id;
+  //String? name;
   bool? state;
   int? ruPoint;
   int? auPoint;
-  Null? startAt;
-  Null? endAt;
+  String? startAt;
+  String? endAt;
   int? requestId;
   int? acceptId;
 
   Competition(
       {this.id,
+      //this.name,
       this.state,
       this.ruPoint,
       this.auPoint,
@@ -68,6 +70,7 @@ class Competition {
 
   Competition.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    //name = json['name'];
     state = json['state'];
     ruPoint = json['ruPoint'];
     auPoint = json['auPoint'];

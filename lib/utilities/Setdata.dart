@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:seaya_app/models/campaignModel.dart';
 import 'package:seaya_app/models/competitionModel.dart';
+import 'package:seaya_app/models/finduserModel.dart';
 import 'package:seaya_app/models/newsModel.dart';
 import 'package:seaya_app/models/quizModel.dart';
 import 'package:seaya_app/utilities/makeJson.dart';
@@ -224,6 +225,37 @@ Future<mFriend> getReceivename() async {
   final data = json.decode(response!);
   friends = mFriend.fromJson(data);
   return friends;
+}
+
+//친구 검색(유저 검색)
+Future<mFinduser> getUsername(String name) async {
+  late mFinduser user;
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson get = makeJson();
+  String id = await _authInstance.currentUser!.getIdToken(true);
+  String link = "friend/${name}";
+
+  final response = await get.getJson(id, link);
+  final data = json.decode(response!);
+  user = mFinduser.fromJson(data);
+  return  user;
+}
+//친구 신청
+Future<int> reqFriend(int userId) async {
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson post = makeJson();
+  try {
+    String id = await _authInstance.currentUser!.getIdToken(true);
+    String link = 'friend/${userId}/request';
+    String json = '''{}''';
+
+    final response = await post.postJson(id, link, json);
+    return response;
+  } on Exception catch (e) {
+    print('error from post -compete request to friend-');
+    print(e);
+    return -1;
+  }
 }
 
 //친구 수락
