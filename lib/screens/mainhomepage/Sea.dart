@@ -136,7 +136,7 @@ Widget _seaCard(BuildContext context, double sh, double sw, UserProvider usp) {
           padding: const EdgeInsets.only(top: 20),
           child: Column(children: [
             Text(
-              '${usp.user!.totalp * 0.02}%',
+              '${(usp.user!.totalp * 0.02).toStringAsFixed(2)}%',
               style: TextStyle(
                   fontSize: 32,
                   color: Color(0xff0068C1),

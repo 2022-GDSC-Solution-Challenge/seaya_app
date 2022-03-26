@@ -31,7 +31,7 @@ class Authservice {
           print('start fetch data');
           await _userProvider.fetchData();
           print(_userProvider.user!.name);
-          Navigator.push(
+          await Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => Navigation(key: UniqueKey())));
