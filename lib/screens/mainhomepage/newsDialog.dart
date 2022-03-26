@@ -17,7 +17,7 @@ class newsDialog extends StatefulWidget {
 // ignore: camel_case_types
 class _newsDialogState extends State<newsDialog> {
   late Future _getContent;
-  String? url;
+  String url = '';
   @override
   void initState() {
     super.initState();
@@ -135,8 +135,14 @@ class _newsDialogState extends State<newsDialog> {
                     onPressed: () async {
                       //누르면 뉴스 홈페이지로 이동
                       //url변수에 링크 담겨있음(요약된 본문과 같이 넘어와서 공백일경우 처리 따로 해줘야함)
-                      await launch(url!,
-                          forceWebView: false, forceSafariVC: false);
+                      if (url == '') {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('Please wait a moment'),
+                            duration: Duration(seconds: 1)));
+                      } else {
+                        await launch(url,
+                            forceWebView: false, forceSafariVC: false);
+                      }
                     },
                     child: const Text(
                       'News Site',
