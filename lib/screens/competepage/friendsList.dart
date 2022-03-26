@@ -247,8 +247,8 @@ Widget competeFriends(BuildContext context, double sh, double sd) {
 Widget competeReq(BuildContext context, double sh, double sd, Friends friends) {
   final id = friends.id!;
   return Container(
-      margin: EdgeInsets.fromLTRB(3, 3, 3, 3),
-      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+      margin: EdgeInsets.fromLTRB(3*sd, 3*sh, 3*sd, 3*sh),
+      padding: EdgeInsets.fromLTRB(5*sd, 5*sh, 5*sd, 5*sh),
       height: 50.0 * sh,
       width: 350 * sd,
       decoration: BoxDecoration(
@@ -263,7 +263,9 @@ Widget competeReq(BuildContext context, double sh, double sd, Friends friends) {
           ]),
       child: Row(
         children: [
-          Container(
+          Expanded(
+            flex : 3,
+          child: Container(
             padding: EdgeInsets.only(left: 20 * sd),
             child: Text(
               friends.name!,
@@ -273,15 +275,19 @@ Widget competeReq(BuildContext context, double sh, double sd, Friends friends) {
                 fontFamily: 'PTSansRegular',
               ),
             ),
-          ),
-          SizedBox(width: 200 * sd),
-          Container(
+          ),),
+          //SizedBox(width: 180 * sd),
+          Expanded(
+            flex: 1,
+          child: Container(
+            margin: EdgeInsets.fromLTRB(3*sd, 3*sh, 20*sd, 3*sh),
+            //padding: EdgeInsets.fromLTRB(10*sd, 3*sh, 10*sd, 3*sh),
             width: 70 * sd,
             height: 40 * sh,
             child: ElevatedButton(
               style: ButtonStyle(
                   padding: MaterialStateProperty.all<EdgeInsets>(
-                    const EdgeInsets.only(),
+                    const EdgeInsets.only(left: 5, right: 5),
                   ),
                   backgroundColor: MaterialStateProperty.all<Color>(
                     Color.fromARGB(255, 202, 210, 224),
@@ -302,6 +308,7 @@ Widget competeReq(BuildContext context, double sh, double sd, Friends friends) {
                 ),
               ),
             ),
+          ),
           ),
         ],
       ));

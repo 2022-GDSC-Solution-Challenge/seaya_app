@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:seaya_app/models/campaignModel.dart';
+import 'package:seaya_app/models/competitionModel.dart';
 import 'package:seaya_app/models/newsModel.dart';
 import 'package:seaya_app/models/quizModel.dart';
 import 'package:seaya_app/utilities/makeJson.dart';
@@ -225,6 +226,19 @@ Future<bool> acceptFriend(int userId) async {
     return false;
   }
 }
+//겨루기 전체 리스트 / 겨루기 승인요청 및 겨루기 중인 리스트
+Future<mCompetition> getCompetitionname() async {
+  late mCompetition competitor;
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson get = makeJson();
+  String id = await _authInstance.currentUser!.getIdToken(true);
+  String link = "cpt";
+
+  final response = await get.getJson(id, link);
+  final data = json.decode(response!);
+  competitor = mCompetition.fromJson(data);
+  return competitor;
+}
 
 //겨루기 신청
 Future<int> competeFriend(int userId) async {
@@ -241,5 +255,23 @@ Future<int> competeFriend(int userId) async {
     print('error from post -compete request to friend-');
     print(e);
     return -1;
+  }
+}
+
+//겨루기 승인
+Future<bool> acceptCompete(int userId) async {
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson post = makeJson();
+  try {
+    String id = await _authInstance.currentUser!.getIdToken(true);
+    String link = 'cpt/${userId}/accept';
+    String json = '''{}''';
+
+    final response = await post.postJson(id, link, json);
+    return true;
+  } on Exception catch (e) {
+    print('error from post -accept friend-');
+    print(e);
+    return false;
   }
 }
