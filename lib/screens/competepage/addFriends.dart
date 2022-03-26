@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seaya_app/models/competitionModel.dart';
 import 'package:seaya_app/screens/competepage/SearchFriend.dart';
 import 'package:seaya_app/widgets/menuwidget/Menu.dart';
 import 'package:seaya_app/screens/loginpage/login.dart';
@@ -17,11 +18,19 @@ class addFriends extends StatefulWidget {
 // ignore: camel_case_types
 class _addFriendsState extends State<addFriends>
     with SingleTickerProviderStateMixin {
-  late Future _getFriends;
+      Future? _future;
+
+  Future<dynamic> sendData() async{
+    final _getFriend = await  getReceivename();
+    final _getCompetereq = await getCompetitionname();
+    return [_getFriend,_getCompetereq];
+  }
+
+  
   @override
   void initState() {
+    _future = sendData();
     super.initState();
-    _getFriends = getReceivename();
   }
 
   @override
@@ -57,15 +66,33 @@ class _addFriendsState extends State<addFriends>
             height: 5 * (height / standardDeviceHeight),
           ),
 
-          Expanded(
-            child: ListView.builder(
-              itemCount: 3,
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-                return competeAccept(context, sh, sd);
+         FutureBuilder (
+              future: _future,
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (!snapshot.hasData) {
+                  print("loading  data");
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.data == null || snapshot.hasError) {
+                  print('error from get data accept');
+                  return Text('No data exists');
+                }
+                print(snapshot.data![0].acceptWaiting);
+                print(snapshot.data![0].acceptWaiting.length);
+                print(snapshot.data![1].acceptWaiting);
+                print(snapshot.data![1].acceptWaiting.length);
+                final data0 = snapshot.data[0].acceptWaiting;
+                final data1 = snapshot.data[1].acceptWaiting;
+                return ListView.builder(
+                  itemCount: snapshot.data[0].acceptWaiting.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return competeAccept(
+                        context, sh, sd, snapshot.data![0].acceptWaiting[index]);
+                  },
+                );
               },
             ),
-          ),
+          
           SizedBox(
             height: 30 * sh,
           ),
@@ -81,9 +108,8 @@ class _addFriendsState extends State<addFriends>
             height: 5 * (height / standardDeviceHeight),
           ),
           //친구 리스트
-          Expanded(
-            child: FutureBuilder(
-              future: _getFriends,
+         FutureBuilder(
+              future: _future,
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (!snapshot.hasData) {
                   print("loading friends data");
@@ -92,19 +118,19 @@ class _addFriendsState extends State<addFriends>
                   print('error from get friends receive');
                   return Text('No data exists');
                 }
-                print(snapshot.data.acceptWaiting);
-                print(snapshot.data.acceptWaiting.length);
+                print(snapshot.data[1].acceptWaiting);
+                print(snapshot.data[1].acceptWaiting.length);
                 return ListView.builder(
-                  itemCount: snapshot.data.acceptWaiting.length,
+                  itemCount: snapshot.data[1].acceptWaiting.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     return friendRec(
-                        context, sh, sd, snapshot.data.acceptWaiting[index]);
+                        context, sh, sd, snapshot.data[1].acceptWaiting[index]);
                   },
                 );
               },
             ),
-          ),
+          
         ],
       ),
     );
@@ -150,8 +176,10 @@ MaterialPageRoute(builder: (context) => SearchFriendBar()),
 }
 
 //친구 겨루기 승인
-Widget competeAccept(BuildContext context, double sh, double sd) {
-  return Container(
+Widget competeAccept(BuildContext context, double sh, double sd, Competitors competitor) {
+  final id = competitor.id!;
+  return  Expanded(
+    child: Container(
       margin: EdgeInsets.fromLTRB(3*sd, 3*sh, 3*sd, 3*sh),
       padding: EdgeInsets.fromLTRB(5*sd, 5*sh, 5*sd, 5*sh),
       height: 50.0 * sh,
@@ -174,7 +202,7 @@ Widget competeAccept(BuildContext context, double sh, double sd) {
           Container(
             padding: EdgeInsets.only(left: 20 * sd),
             child: Text(
-              'Friend 1',
+              competitor.name!,
               style: TextStyle(
                 fontSize: 18.0,
                 color: Color(0xff2B2B2B),
@@ -198,12 +226,14 @@ Widget competeAccept(BuildContext context, double sh, double sd) {
                   backgroundColor: MaterialStateProperty.all<Color>(
                     Color.fromARGB(255, 202, 210, 224),
                   )),
-              onPressed: null,
+              onPressed: () {
+                acceptFriend(id);
+              },
               child: Icon(Icons.check),
             ),
           ),),
         ],
-      ));
+      ),),);
 }
 
 //친구 신청 승인
@@ -258,7 +288,7 @@ Widget friendRec(BuildContext context, double sh, double sd, Friends friends) {
                     Color.fromARGB(255, 202, 210, 224),
                   )),
               onPressed: () {
-                acceptFriend(id);
+                acceptCompete(id);
               },
               child: const Text(
                 'accept',

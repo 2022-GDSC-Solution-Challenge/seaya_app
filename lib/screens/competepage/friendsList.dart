@@ -42,7 +42,7 @@ class _friendsListState extends State<friendsList>
           SizedBox(
             height: 10 * (height / standardDeviceHeight),
           ),
-          //겨루기 리스트
+          //겨루기 리스트 -> 친구랑 내 정보,
           Text(
             'Competition List',
             style: TextStyle(
