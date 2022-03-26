@@ -25,7 +25,6 @@ class _friendsListState extends State<friendsList>
   void initState() {
     super.initState();
     _getCompetereq = getCompetitionname();
-    
   }
 
   @override
@@ -74,13 +73,27 @@ class _friendsListState extends State<friendsList>
               print(snapshot.data!.acceptWaiting.length);
               print(snapshot.data!.competitors);
               print(snapshot.data!.competitors.length);
-
+              if (snapshot.data!.acceptWaiting.length == 0) {
+                return Center(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20),
+                      Text(
+                        'No competitors. \nAsk your friends to compete!',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  ),
+                );
+              }
               return Column(children: [
                 ListView.builder(
                   itemCount: snapshot.data!.competitors.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return competeFriends(context, sh, sd, snapshot.data.competitors[index]);
+                    return competeFriends(
+                        context, sh, sd, snapshot.data.competitors[index]);
                   },
                 ),
                 SizedBox(
@@ -111,31 +124,26 @@ class _friendsListState extends State<friendsList>
   }
 }
 
-
-
 //겨루기 진행창
-Widget competeFriends(BuildContext context, double sh, double sd, Competitors compete) {
-  
+Widget competeFriends(
+    BuildContext context, double sh, double sd, Competitors compete) {
   UserProvider _userProvider = Provider.of<UserProvider>(context, listen: true);
   final id = compete.id!;
   final int? mypoint;
   final int? yourpoint;
   String? datestr = compete.competition!.startAt!;
   final DateTime today = DateTime.now();
-  datestr = datestr.substring(0,10);
+  datestr = datestr.substring(0, 10);
   var date = DateFormat('yyyy-MM-dd').parse(datestr);
-  int difference = int.parse(
-        today.difference(date).inDays.toString());
+  int difference = int.parse(today.difference(date).inDays.toString());
 
-  if(id == compete.competition!.acceptId!){
+  if (id == compete.competition!.acceptId!) {
     yourpoint = compete.competition!.auPoint!;
     mypoint = compete.competition!.ruPoint!;
-  }
-  else{
+  } else {
     yourpoint = compete.competition!.ruPoint!;
     mypoint = compete.competition!.auPoint!;
   }
-
 
   return Container(
     margin: EdgeInsets.fromLTRB(3, 5, 3, 5),

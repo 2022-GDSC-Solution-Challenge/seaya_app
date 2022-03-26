@@ -80,7 +80,21 @@ class _addFriendsState extends State<addFriends>
               print(snapshot.data.acceptWaiting.length);
               print(snapshot.data.friends);
               print(snapshot.data.friends.length);
-              
+
+              if (snapshot.data.acceptWaiting.length == 0) {
+                return Center(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20),
+                      Text(
+                        'Your friends list is empty. \nMake a friend request!',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  ),
+                );
+              }
               return Column(children: [
                 ListView.builder(
                   itemCount: snapshot.data.friends.length,
@@ -94,7 +108,7 @@ class _addFriendsState extends State<addFriends>
                   height: 30 * sh,
                 ),
                 Text(
-                   'Receive List',
+                  'Receive List',
                   style: TextStyle(
                     fontSize: 18.0,
                     color: Color(0xff2B2B2B),
