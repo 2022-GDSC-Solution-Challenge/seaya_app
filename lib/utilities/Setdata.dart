@@ -237,6 +237,7 @@ Future<mCompetition> getCompetitionname() async {
   final response = await get.getJson(id, link);
   final data = json.decode(response!);
   competitor = mCompetition.fromJson(data);
+  print(competitor);
   return competitor;
 }
 

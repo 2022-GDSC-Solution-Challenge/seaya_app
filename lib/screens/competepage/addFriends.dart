@@ -18,19 +18,19 @@ class addFriends extends StatefulWidget {
 // ignore: camel_case_types
 class _addFriendsState extends State<addFriends>
     with SingleTickerProviderStateMixin {
-      Future? _future;
+  // Future? _future;
+  late Future _getFriend;
 
-  Future<dynamic> sendData() async{
-    final _getFriend = await  getReceivename();
-    final _getCompetereq = await getCompetitionname();
-    return [_getFriend,_getCompetereq];
-  }
+  // Future<dynamic> sendData() async {
+  //   final _getFriend = await getReceivename();
+  //   final _getCompetereq = await getCompetitionname();
+  //   return [_getFriend, _getCompetereq];
+  // }
 
-  
   @override
   void initState() {
-    _future = sendData();
     super.initState();
+    _getFriend = getReceivename();
   }
 
   @override
@@ -55,7 +55,7 @@ class _addFriendsState extends State<addFriends>
           ),
           //겨루기 수락
           Text(
-            'Accept Competition',
+            'Friends List',
             style: TextStyle(
               fontSize: 18.0,
               color: Color(0xff2B2B2B),
@@ -66,71 +66,52 @@ class _addFriendsState extends State<addFriends>
             height: 5 * (height / standardDeviceHeight),
           ),
 
-         FutureBuilder (
-              future: _future,
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                if (!snapshot.hasData) {
-                  print("loading  data");
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.data == null || snapshot.hasError) {
-                  print('error from get data accept');
-                  return Text('No data exists');
-                }
-                print(snapshot.data![0].acceptWaiting);
-                print(snapshot.data![0].acceptWaiting.length);
-                print(snapshot.data![1].acceptWaiting);
-                print(snapshot.data![1].acceptWaiting.length);
-                final data0 = snapshot.data[0].acceptWaiting;
-                final data1 = snapshot.data[1].acceptWaiting;
-                return ListView.builder(
-                  itemCount: snapshot.data[0].acceptWaiting.length,
+          FutureBuilder(
+            future: _getFriend,
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              if (!snapshot.hasData) {
+                print("loading  data");
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.data == null || snapshot.hasError) {
+                print('error from get data accept');
+                return Text('No data exists');
+              }
+              print(snapshot.data.acceptWaiting);
+              print(snapshot.data.acceptWaiting.length);
+              print(snapshot.data.friends);
+              print(snapshot.data.friends.length);
+              
+              return Column(children: [
+                ListView.builder(
+                  itemCount: snapshot.data.friends.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return competeAccept(
-                        context, sh, sd, snapshot.data![0].acceptWaiting[index]);
+                    return competeReq(
+                        context, sh, sd, snapshot.data.friends[index]);
                   },
-                );
-              },
-            ),
-          
-          SizedBox(
-            height: 30 * sh,
-          ),
-          Text(
-            'Receive List',
-            style: TextStyle(
-              fontSize: 18.0,
-              color: Color(0xff2B2B2B),
-              fontFamily: 'PTSansRegular',
-            ),
-          ),
-          SizedBox(
-            height: 5 * (height / standardDeviceHeight),
-          ),
-          //친구 리스트
-         FutureBuilder(
-              future: _future,
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                if (!snapshot.hasData) {
-                  print("loading friends data");
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.data == null || snapshot.hasError) {
-                  print('error from get friends receive');
-                  return Text('No data exists');
-                }
-                print(snapshot.data[1].acceptWaiting);
-                print(snapshot.data[1].acceptWaiting.length);
-                return ListView.builder(
-                  itemCount: snapshot.data[1].acceptWaiting.length,
+                ),
+                SizedBox(
+                  height: 30 * sh,
+                ),
+                Text(
+                   'Receive List',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: Color(0xff2B2B2B),
+                    fontFamily: 'PTSansRegular',
+                  ),
+                ),
+                ListView.builder(
+                  itemCount: snapshot.data.acceptWaiting.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     return friendRec(
-                        context, sh, sd, snapshot.data[1].acceptWaiting[index]);
+                        context, sh, sd, snapshot.data.acceptWaiting[index]);
                   },
-                );
-              },
-            ),
-          
+                ),
+              ]);
+            },
+          ),
         ],
       ),
     );
@@ -142,9 +123,9 @@ Widget searchFriends(BuildContext context, double sh, double sd) {
   return GestureDetector(
     onTap: () {
       Navigator.push(
-context,
-MaterialPageRoute(builder: (context) => SearchFriendBar()),
-);
+        context,
+        MaterialPageRoute(builder: (context) => SearchFriendBar()),
+      );
     },
     child: Container(
       margin: EdgeInsets.only(top: 20 * sh, bottom: 10 * sh),
@@ -175,13 +156,12 @@ MaterialPageRoute(builder: (context) => SearchFriendBar()),
   );
 }
 
-//친구 겨루기 승인
-Widget competeAccept(BuildContext context, double sh, double sd, Competitors competitor) {
-  final id = competitor.id!;
-  return  Expanded(
-    child: Container(
-      margin: EdgeInsets.fromLTRB(3*sd, 3*sh, 3*sd, 3*sh),
-      padding: EdgeInsets.fromLTRB(5*sd, 5*sh, 5*sd, 5*sh),
+//겨루기 신청창 및 친구 리스트
+Widget competeReq(BuildContext context, double sh, double sd, Friends friends) {
+  final id = friends.id!;
+  return Container(
+      margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 3 * sd, 3 * sh),
+      padding: EdgeInsets.fromLTRB(5 * sd, 5 * sh, 5 * sd, 5 * sh),
       height: 50.0 * sh,
       width: 350 * sd,
       decoration: BoxDecoration(
@@ -197,43 +177,55 @@ Widget competeAccept(BuildContext context, double sh, double sd, Competitors com
       child: Row(
         children: [
           Expanded(
-            flex : 4,
-          child:
-          Container(
-            padding: EdgeInsets.only(left: 20 * sd),
-            child: Text(
-              competitor.name!,
-              style: TextStyle(
-                fontSize: 18.0,
-                color: Color(0xff2B2B2B),
-                fontFamily: 'PTSansRegular',
+            flex: 3,
+            child: Container(
+              padding: EdgeInsets.only(left: 20 * sd),
+              child: Text(
+                friends.name!,
+                style: TextStyle(
+                  fontSize: 18.0,
+                  color: Color(0xff2B2B2B),
+                  fontFamily: 'PTSansRegular',
+                ),
               ),
             ),
-          ),),
+          ),
           //SizedBox(width: 180 * sd),
-           Expanded(
+          Expanded(
             flex: 1,
-          child:
-          Container(
-            margin: EdgeInsets.fromLTRB(3*sd, 3*sh, 20*sd, 3*sh),
-            width: 40 * sd,
-            height: 40 * sh,
-            child: ElevatedButton(
-              style: ButtonStyle(
-                  padding: MaterialStateProperty.all<EdgeInsets>(
-                    const EdgeInsets.only(),
+            child: Container(
+              margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 20 * sd, 3 * sh),
+              //padding: EdgeInsets.fromLTRB(10*sd, 3*sh, 10*sd, 3*sh),
+              width: 70 * sd,
+              height: 40 * sh,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    padding: MaterialStateProperty.all<EdgeInsets>(
+                      const EdgeInsets.only(left: 5, right: 5),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 202, 210, 224),
+                    )),
+                onPressed: () async {
+                  final state = await competeFriend(id);
+                  if (state == 0) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Already requested')),
+                    );
+                  }
+                },
+                child: const Text(
+                  'start',
+                  style: TextStyle(
+                    color: Color(0xff2B2B2B),
+                    fontFamily: 'PTSansRegular',
                   ),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    Color.fromARGB(255, 202, 210, 224),
-                  )),
-              onPressed: () {
-                acceptFriend(id);
-              },
-              child: Icon(Icons.check),
+                ),
+              ),
             ),
-          ),),
+          ),
         ],
-      ),),);
+      ));
 }
 
 //친구 신청 승인
@@ -241,8 +233,8 @@ Widget friendRec(BuildContext context, double sh, double sd, Friends friends) {
   final id = friends.id!;
 
   return Container(
-      margin: EdgeInsets.fromLTRB(3*sd, 3*sh, 3*sd, 3*sh),
-      padding: EdgeInsets.fromLTRB(5*sd, 5*sh, 5*sd, 5*sh),
+      margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 3 * sd, 3 * sh),
+      padding: EdgeInsets.fromLTRB(5 * sd, 5 * sh, 5 * sd, 5 * sh),
       height: 50.0 * sh,
       width: 350 * sd,
       decoration: BoxDecoration(
@@ -258,47 +250,47 @@ Widget friendRec(BuildContext context, double sh, double sd, Friends friends) {
       child: Row(
         children: [
           Expanded(
-            flex : 3,
-          child:
-          Container(
-            padding: EdgeInsets.only(left: 20 * sd),
-            child: Text(
-              friends.name!, //friends name
-              style: TextStyle(
-                fontSize: 18.0,
-                color: Color(0xff2B2B2B),
-                fontFamily: 'PTSansRegular',
-              ),
-            ),
-          ),),
-         // SizedBox(width: 180),
-         Expanded(
-            flex: 1,
-          child: 
-          Container(
-            margin: EdgeInsets.fromLTRB(3*sd, 3*sh, 20*sd, 3*sh),
-            width: 70 * sd,
-            height: 40 * sh,
-            child: ElevatedButton(
-              style: ButtonStyle(
-                  padding: MaterialStateProperty.all<EdgeInsets>(
-                    const EdgeInsets.only(),
-                  ),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    Color.fromARGB(255, 202, 210, 224),
-                  )),
-              onPressed: () {
-                acceptCompete(id);
-              },
-              child: const Text(
-                'accept',
+            flex: 3,
+            child: Container(
+              padding: EdgeInsets.only(left: 20 * sd),
+              child: Text(
+                friends.name!, //friends name
                 style: TextStyle(
+                  fontSize: 18.0,
                   color: Color(0xff2B2B2B),
                   fontFamily: 'PTSansRegular',
                 ),
               ),
             ),
-          ),),
+          ),
+          // SizedBox(width: 180),
+          Expanded(
+            flex: 1,
+            child: Container(
+              margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 20 * sd, 3 * sh),
+              width: 70 * sd,
+              height: 40 * sh,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    padding: MaterialStateProperty.all<EdgeInsets>(
+                      const EdgeInsets.only(),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 202, 210, 224),
+                    )),
+                onPressed: () {
+                  acceptCompete(id);
+                },
+                child: const Text(
+                  'accept',
+                  style: TextStyle(
+                    color: Color(0xff2B2B2B),
+                    fontFamily: 'PTSansRegular',
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ));
 }
