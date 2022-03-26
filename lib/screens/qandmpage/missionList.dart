@@ -140,12 +140,13 @@ class _missionListState extends State<missionList> {
               ),
             ),
             Text(
-              '${mission.title}',
+              '${mission.title}ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ',
               style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontFamily: 'PTSansRegular',
-                  overflow: TextOverflow.clip),
+                color: Colors.black,
+                fontSize: 15,
+                fontFamily: 'PTSansRegular',
+              ),
+              overflow: TextOverflow.clip,
             ),
             Container(
               width: 20 * (width / standardDeviceWidth),

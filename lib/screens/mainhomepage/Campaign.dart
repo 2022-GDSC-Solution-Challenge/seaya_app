@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:seaya_app/screens/mainhomepage/campaignDialog.dart';
 import 'package:seaya_app/utilities/Setdata.dart';
 import 'package:seaya_app/models/campaignModel.dart';
 import 'package:seaya_app/widgets/menuwidget/Menu.dart';
 import 'package:seaya_app/screens/loginpage/login.dart';
 import 'package:seaya_app/screens/mainhomepage/Home.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CampaignPage extends StatefulWidget {
   const CampaignPage({Key? key}) : super(key: key);
@@ -64,8 +66,12 @@ class _CampaignState extends State<CampaignPage>
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
-                        onTap: () {
-                          //클릭하면해당사이트로
+                        onTap: () async {
+                          showDialog(
+                              context: context,
+                              builder: (context) => campaignDialog(
+                                    campaign: snapshot.data.campaign[index],
+                                  ));
                           print('${snapshot.data.campaign[index].id} clicked');
                         },
                         child: camCard(

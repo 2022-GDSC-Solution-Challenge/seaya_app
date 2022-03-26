@@ -195,6 +195,23 @@ Future<bool> addNewsPoint(int newsId) async {
   }
 }
 
+Future<bool> addCampaignPoint(int campaignId) async {
+  final _authInstance = FirebaseAuth.instance;
+  final makeJson post = makeJson();
+  try {
+    String id = await _authInstance.currentUser!.getIdToken(true);
+    String link = 'campaign/${campaignId}';
+    String json = '''{}''';
+
+    final response = await post.postJson(id, link, json);
+    return true;
+  } on Exception catch (e) {
+    print('error from clear mission');
+    print(e);
+    return false;
+  }
+}
+
 //친구 수락 하기 전 승인리스트 / 전체 친구 정보
 Future<mFriend> getReceivename() async {
   late mFriend friends;
@@ -226,6 +243,7 @@ Future<bool> acceptFriend(int userId) async {
     return false;
   }
 }
+
 //겨루기 전체 리스트 / 겨루기 승인요청 및 겨루기 중인 리스트
 Future<mCompetition> getCompetitionname() async {
   late mCompetition competitor;
