@@ -152,8 +152,8 @@ MaterialPageRoute(builder: (context) => SearchFriendBar()),
 //친구 겨루기 승인
 Widget competeAccept(BuildContext context, double sh, double sd) {
   return Container(
-      margin: EdgeInsets.fromLTRB(3, 3, 3, 3),
-      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+      margin: EdgeInsets.fromLTRB(3*sd, 3*sh, 3*sd, 3*sh),
+      padding: EdgeInsets.fromLTRB(5*sd, 5*sh, 5*sd, 5*sh),
       height: 50.0 * sh,
       width: 350 * sd,
       decoration: BoxDecoration(
@@ -168,6 +168,9 @@ Widget competeAccept(BuildContext context, double sh, double sd) {
           ]),
       child: Row(
         children: [
+          Expanded(
+            flex : 4,
+          child:
           Container(
             padding: EdgeInsets.only(left: 20 * sd),
             child: Text(
@@ -178,9 +181,13 @@ Widget competeAccept(BuildContext context, double sh, double sd) {
                 fontFamily: 'PTSansRegular',
               ),
             ),
-          ),
-          SizedBox(width: 200 * sd),
+          ),),
+          //SizedBox(width: 180 * sd),
+           Expanded(
+            flex: 1,
+          child:
           Container(
+            margin: EdgeInsets.fromLTRB(3*sd, 3*sh, 20*sd, 3*sh),
             width: 40 * sd,
             height: 40 * sh,
             child: ElevatedButton(
@@ -194,7 +201,7 @@ Widget competeAccept(BuildContext context, double sh, double sd) {
               onPressed: null,
               child: Icon(Icons.check),
             ),
-          ),
+          ),),
         ],
       ));
 }
@@ -204,8 +211,8 @@ Widget friendRec(BuildContext context, double sh, double sd, Friends friends) {
   final id = friends.id!;
 
   return Container(
-      margin: EdgeInsets.fromLTRB(3, 3, 3, 3),
-      padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+      margin: EdgeInsets.fromLTRB(3*sd, 3*sh, 3*sd, 3*sh),
+      padding: EdgeInsets.fromLTRB(5*sd, 5*sh, 5*sd, 5*sh),
       height: 50.0 * sh,
       width: 350 * sd,
       decoration: BoxDecoration(
@@ -220,6 +227,9 @@ Widget friendRec(BuildContext context, double sh, double sd, Friends friends) {
           ]),
       child: Row(
         children: [
+          Expanded(
+            flex : 3,
+          child:
           Container(
             padding: EdgeInsets.only(left: 20 * sd),
             child: Text(
@@ -230,9 +240,13 @@ Widget friendRec(BuildContext context, double sh, double sd, Friends friends) {
                 fontFamily: 'PTSansRegular',
               ),
             ),
-          ),
-          SizedBox(width: 180),
+          ),),
+         // SizedBox(width: 180),
+         Expanded(
+            flex: 1,
+          child: 
           Container(
+            margin: EdgeInsets.fromLTRB(3*sd, 3*sh, 20*sd, 3*sh),
             width: 70 * sd,
             height: 40 * sh,
             child: ElevatedButton(
@@ -254,7 +268,7 @@ Widget friendRec(BuildContext context, double sh, double sd, Friends friends) {
                 ),
               ),
             ),
-          ),
+          ),),
         ],
       ));
 }
