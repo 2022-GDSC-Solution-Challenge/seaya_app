@@ -67,6 +67,7 @@ Future<mNews> setNewsData() async {
   String link = "news";
 
   final response = await get.getJson(id, link);
+  if (response == 430) return new mNews();
   final data = json.decode(response!);
   news = mNews.fromJson(data);
   return news;

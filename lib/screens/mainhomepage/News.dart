@@ -57,6 +57,7 @@ class _NewsState extends State<NewsPage> with SingleTickerProviderStateMixin {
                     itemCount: snapshot.data.news.length,
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
+                      print(snapshot.data.news[index].isRead);
                       if (index % 2 == 0) {
                         return newsone(
                             context, sh, sd, snapshot.data.news[index]);
@@ -87,7 +88,9 @@ Widget newsone(BuildContext context, double sh, double sd, News news) {
         padding: const EdgeInsets.only(left: 16, right: 16, bottom: 0),
         child: Container(
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 67, 101, 175),
+                color: news.isRead!
+                    ? Color.fromARGB(255, 73, 79, 95)
+                    : Color.fromARGB(255, 67, 101, 175),
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(65.0),
                   topRight: Radius.circular(10),
@@ -95,10 +98,15 @@ Widget newsone(BuildContext context, double sh, double sd, News news) {
                 gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  colors: [
-                    Color.fromARGB(255, 85, 150, 194),
-                    Color.fromARGB(255, 43, 145, 204),
-                  ],
+                  colors: news.isRead!
+                      ? [
+                          Color.fromARGB(255, 115, 132, 167),
+                          Color.fromARGB(255, 110, 120, 138),
+                        ]
+                      : [
+                          Color.fromARGB(255, 85, 150, 194),
+                          Color.fromARGB(255, 43, 145, 204),
+                        ],
                 ),
                 boxShadow: [
                   BoxShadow(
@@ -138,7 +146,8 @@ Widget newsone(BuildContext context, double sh, double sd, News news) {
                       width: 11.5 * sd,
                     ),
                     Text(
-                      "Publisher", //news.publisher!,
+                      // "Publisher",
+                      news.publisher!,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 12,
@@ -186,10 +195,15 @@ Widget newstwo(BuildContext context, double sh, double sd, News news) {
               gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
-                colors: [
-                  Color.fromARGB(255, 87, 124, 206),
-                  Color.fromARGB(255, 90, 133, 190),
-                ],
+                colors: news.isRead!
+                    ? [
+                        Color.fromARGB(255, 115, 132, 167),
+                        Color.fromARGB(255, 110, 120, 138),
+                      ]
+                    : [
+                        Color.fromARGB(255, 87, 124, 206),
+                        Color.fromARGB(255, 90, 133, 190),
+                      ],
               ),
               boxShadow: [
                 BoxShadow(
@@ -228,7 +242,8 @@ Widget newstwo(BuildContext context, double sh, double sd, News news) {
                     width: 11.5 * sd,
                   ),
                   Text(
-                    "Publisher", //news.publisher!
+                    // "Publisher",
+                    news.publisher!,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 12,

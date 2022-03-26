@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seaya_app/models/newsModel.dart';
 import 'package:seaya_app/utilities/Setdata.dart';
+import 'package:url_launcher/url_launcher.dart';
 // import 'package:seaya/screens/Routes/Menu.dart';
 // import 'package:seaya/screens/Routes/login.dart';
 // import 'package:seaya/screens/Tabs/Sea.dart';
@@ -62,7 +63,8 @@ class _newsDialogState extends State<newsDialog> {
                   width: 11.5,
                 ),
                 Text(
-                  "Publisher", //widget.news.publisher
+                  // "Publisher",
+                  widget.news.publisher!,
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 11,
@@ -102,8 +104,9 @@ class _newsDialogState extends State<newsDialog> {
                             print('error from get news');
                             return Text('loading news fail');
                           }
+                          if (!(widget.news.isRead!))
+                            addNewsPoint(widget.news.id!);
 
-                          addNewsPoint(widget.news.id!);
                           url = snapshot.data['url'];
                           return Text(
                             snapshot.data['summarized_text'], //'Contents',
@@ -129,9 +132,11 @@ class _newsDialogState extends State<newsDialog> {
                         )),
                         backgroundColor: MaterialStateProperty.all<Color>(
                             Color.fromARGB(255, 201, 218, 231))),
-                    onPressed: () {
+                    onPressed: () async {
                       //누르면 뉴스 홈페이지로 이동
                       //url변수에 링크 담겨있음(요약된 본문과 같이 넘어와서 공백일경우 처리 따로 해줘야함)
+                      await launch(url!,
+                          forceWebView: false, forceSafariVC: false);
                     },
                     child: const Text(
                       'News Site',

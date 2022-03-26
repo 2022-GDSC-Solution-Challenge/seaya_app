@@ -19,8 +19,10 @@ class News {
   int? id;
   String? date;
   String? title;
+  String? publisher;
+  String? reporter;
   int? point;
-  int? isRead;
+  bool? isRead;
 
   News({this.id, this.date, this.title, this.point, this.isRead});
 
@@ -28,7 +30,9 @@ class News {
     id = json['id'];
     date = json['date'];
     title = json['title'];
+    publisher = json['publishing_company'];
+    reporter = json['reporter'];
     point = json['point'];
-    isRead = json['isRead'];
+    isRead = json['isRead'] == 1 ? true : false;
   }
 }
