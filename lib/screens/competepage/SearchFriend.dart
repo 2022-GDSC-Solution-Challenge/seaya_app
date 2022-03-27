@@ -126,7 +126,7 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
                   ? Text(
                       'Find Your New Friend!',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20),
+                      //style: TextStyle(fontSize: 20),
                     )
                   : Container(
                       height: 300 * sh,
@@ -145,6 +145,7 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
                           // print(textvalue);
                           // print(snapshot.data.result);
                           // print(snapshot.data.result.length);
+                          
                           state = 1;
                           if (snapshot.data.result.length == 0)
                             return Center(
@@ -174,6 +175,8 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
 Widget usertofriendRec(
     BuildContext context, double sh, double sd, Result result) {
   final id = result.id!;
+  final isFriend = result.isFriend!;
+
 
   return Container(
       margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 3 * sd, 3 * sh),
@@ -221,11 +224,22 @@ Widget usertofriendRec(
                     backgroundColor: MaterialStateProperty.all<Color>(
                       Color.fromARGB(255, 202, 210, 224),
                     )),
-                onPressed: () {
-                  reqFriend(id);
+                
+                 onPressed: () {
+                   (isFriend == 0)? reqFriend(id) : null;
                 },
-                child: const Text(
+                
+                child: 
+                (isFriend == 0)
+                 ?Text(
                   'request',
+                  style: TextStyle(
+                    color: Color(0xff2B2B2B),
+                    fontFamily: 'PTSansRegular',
+                  ),
+                )
+                :Text(
+                  'waiting..',
                   style: TextStyle(
                     color: Color(0xff2B2B2B),
                     fontFamily: 'PTSansRegular',

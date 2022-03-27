@@ -18,6 +18,7 @@ class makeJson {
         return data;
       } else {
         print(response.reasonPhrase);
+        print(response.body);
         return response.statusCode;
       }
     } catch (e) {

@@ -95,7 +95,7 @@ class _NavigationState extends State<Navigation> {
                   Icons.group_rounded,
                   size: 22,
                 ),
-                label: 'Competition',
+                label: 'Social',
               ),
             ],
           ),

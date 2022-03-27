@@ -3,8 +3,14 @@ class mFriend {
   List<Friends>? friends;
   List<Friends>? acceptWaiting;
   List<Friends>? requestWaiting;
+  List? cpt_list;
 
-  mFriend({this.state, this.friends, this.acceptWaiting, this.requestWaiting});
+  mFriend({
+    this.state,
+    this.friends,
+    this.acceptWaiting,
+    this.requestWaiting,
+  });
 
   mFriend.fromJson(Map<String, dynamic> json) {
     state = json['state'];
@@ -25,6 +31,10 @@ class mFriend {
       json['request_waiting'].forEach((v) {
         requestWaiting!.add(new Friends.fromJson(v));
       });
+    }
+    if (json['cpt_list'] != null) {
+      cpt_list = <int>[];
+      cpt_list = json['cpt_list'];
     }
   }
 }

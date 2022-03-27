@@ -12,6 +12,7 @@ class mFinduser {
         result!.add(new Result.fromJson(v));
       });
     }
+    
   }
 
   Map<String, dynamic> toJson() {
@@ -20,6 +21,7 @@ class mFinduser {
     if (this.result != null) {
       data['result'] = this.result!.map((v) => v.toJson()).toList();
     }
+   
     return data;
   }
 }
@@ -28,6 +30,7 @@ class Result {
   int? id;
   String? name;
   int? point;
+  int? isFriend;
 
   Result({this.id, this.name, this.point});
 
@@ -35,6 +38,7 @@ class Result {
     id = json['id'];
     name = json['name'];
     point = json['point'];
+    isFriend = json['isFriend'];
   }
 
   Map<String, dynamic> toJson() {
@@ -42,6 +46,7 @@ class Result {
     data['id'] = this.id;
     data['name'] = this.name;
     data['point'] = this.point;
+    data['isFriend'] = this.isFriend;
     return data;
   }
 }

@@ -88,10 +88,10 @@ class _CompetitionState extends State<Competition>
                   unselectedLabelColor: const Color(0xff575757),
                   tabs: const [
                     Tab(
-                      text: 'Friends',
+                      text: 'Competition',
                     ),
                     Tab(
-                      text: 'Add',
+                      text: 'Friend',
                     ),
                   ],
                 ),

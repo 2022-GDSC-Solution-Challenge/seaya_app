@@ -267,7 +267,7 @@ Future<bool> acceptFriend(int userId) async {
   final makeJson post = makeJson();
   try {
     String id = await _authInstance.currentUser!.getIdToken(true);
-    String link = 'friend/${userId}/request';
+    String link = 'friend/${userId}/accept';
     String json = '''{}''';
 
     final response = await post.postJson(id, link, json);

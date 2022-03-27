@@ -53,7 +53,7 @@ class _addFriendsState extends State<addFriends>
           SizedBox(
             height: 10 * (height / standardDeviceHeight),
           ),
-          //겨루기 수락
+          //겨루기 신청
           Text(
             'Friends List',
             style: TextStyle(
@@ -100,8 +100,8 @@ class _addFriendsState extends State<addFriends>
                   itemCount: snapshot.data.friends.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return competeReq(
-                        context, sh, sd, snapshot.data.friends[index]);
+                    return competeReq(context, sh, sd,
+                        snapshot.data.friends[index], snapshot.data.cpt_list);
                   },
                 ),
                 SizedBox(
@@ -121,6 +121,25 @@ class _addFriendsState extends State<addFriends>
                   itemBuilder: (BuildContext context, int index) {
                     return friendRec(
                         context, sh, sd, snapshot.data.acceptWaiting[index]);
+                  },
+                ),
+                SizedBox(
+                  height: 30 * sh,
+                ),
+                Text(
+                  'Request List',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: Color(0xff2B2B2B),
+                    fontFamily: 'PTSansRegular',
+                  ),
+                ),
+                ListView.builder(
+                  itemCount: snapshot.data.requestWaiting.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return friendRec(
+                        context, sh, sd, snapshot.data.requestWaiting[index]);
                   },
                 ),
               ]);
@@ -171,8 +190,20 @@ Widget searchFriends(BuildContext context, double sh, double sd) {
 }
 
 //겨루기 신청창 및 친구 리스트
-Widget competeReq(BuildContext context, double sh, double sd, Friends friends) {
+Widget competeReq(BuildContext context, double sh, double sd, Friends friends,
+    List<int> list) {
   final id = friends.id!;
+  final friendlist = list;
+  int? state;
+
+  for (int i = 0; i < friendlist.length; i++) {
+    if (friendlist[i] == id) {
+      state = 1;
+      break;
+    } else {
+      state = 0;
+    }
+  }
   return Container(
       margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 3 * sd, 3 * sh),
       padding: EdgeInsets.fromLTRB(5 * sd, 5 * sh, 5 * sd, 5 * sh),
@@ -221,12 +252,7 @@ Widget competeReq(BuildContext context, double sh, double sd, Friends friends) {
                       Color.fromARGB(255, 202, 210, 224),
                     )),
                 onPressed: () async {
-                  final state = await competeFriend(id);
-                  if (state == 0) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Already requested')),
-                    );
-                  }
+                  (state == 0) ? null : await competeFriend(id);
                 },
                 child: const Text(
                   'start',
@@ -293,10 +319,77 @@ Widget friendRec(BuildContext context, double sh, double sd, Friends friends) {
                       Color.fromARGB(255, 202, 210, 224),
                     )),
                 onPressed: () {
-                  acceptCompete(id);
+                 acceptFriend(id);
                 },
                 child: const Text(
                   'accept',
+                  style: TextStyle(
+                    color: Color(0xff2B2B2B),
+                    fontFamily: 'PTSansRegular',
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ));
+}
+
+Widget friendRequest(
+    BuildContext context, double sh, double sd, Friends friends) {
+  final id = friends.id!;
+
+  return Container(
+      margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 3 * sd, 3 * sh),
+      padding: EdgeInsets.fromLTRB(5 * sd, 5 * sh, 5 * sd, 5 * sh),
+      height: 50.0 * sh,
+      width: 350 * sd,
+      decoration: BoxDecoration(
+          color: Color.fromARGB(255, 236, 239, 243),
+          borderRadius: BorderRadius.circular(10.0),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                offset: const Offset(-1.0, 1.0),
+                blurRadius: 0,
+                spreadRadius: 0),
+          ]),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Container(
+              padding: EdgeInsets.only(left: 20 * sd),
+              child: Text(
+                friends.name!, //friends name
+                style: TextStyle(
+                  fontSize: 18.0,
+                  color: Color(0xff2B2B2B),
+                  fontFamily: 'PTSansRegular',
+                ),
+              ),
+            ),
+          ),
+          // SizedBox(width: 180),
+          Expanded(
+            flex: 1,
+            child: Container(
+              margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 20 * sd, 3 * sh),
+              width: 70 * sd,
+              height: 40 * sh,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    padding: MaterialStateProperty.all<EdgeInsets>(
+                      const EdgeInsets.only(),
+                    ),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 202, 210, 224),
+                    )),
+                onPressed: () {
+                  null;
+                },
+                child: const Text(
+                  'waiting..',
                   style: TextStyle(
                     color: Color(0xff2B2B2B),
                     fontFamily: 'PTSansRegular',
