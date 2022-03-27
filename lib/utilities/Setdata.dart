@@ -236,11 +236,13 @@ Future<mFinduser> getUsername(String name) async {
   String link = "friend/${name}";
 
   final response = await get.getJson(id, link);
+  print(response);
   final data = json.decode(response!);
   print(data);
   user = mFinduser.fromJson(data);
-  return  user;
+  return user;
 }
+
 //친구 신청
 Future<int> reqFriend(int userId) async {
   final _authInstance = FirebaseAuth.instance;

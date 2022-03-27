@@ -27,14 +27,15 @@ class _campaignDialogState extends State<campaignDialog> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              widget.campaign.title!, //'Title',
-              style: TextStyle(
-                color: Color.fromARGB(133, 0, 35, 100),
-                fontSize: 22,
-                fontFamily: 'PTSansBold',
+            SingleChildScrollView(
+              child: Text(
+                widget.campaign.title!, //'Title',
+                style: TextStyle(
+                  color: Color.fromARGB(133, 0, 35, 100),
+                  fontSize: 22,
+                  fontFamily: 'PTSansBold',
+                ),
               ),
-              overflow: TextOverflow.clip,
             ),
             SizedBox(
               height: 10,

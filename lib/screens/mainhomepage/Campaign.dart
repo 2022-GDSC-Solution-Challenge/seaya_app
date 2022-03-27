@@ -104,15 +104,17 @@ Widget camCard(BuildContext context, double sh, double sd, Campaign campgn) {
         ),
         child: Container(
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 241, 241, 241),
+            color: Color.fromARGB(255, 241, 241, 241).withOpacity(0.7),
             borderRadius: BorderRadius.circular(10.0),
           ),
           margin: const EdgeInsets.only(
-            top: 125,
+            top: 90,
           ),
           padding: const EdgeInsets.only(top: 10, left: 20),
           child: Text(
             campgn.title!, //"Title",
+            overflow: TextOverflow.ellipsis,
+            maxLines: 3,
             style: TextStyle(
                 fontSize: 16,
                 color: const Color(0xff575757),

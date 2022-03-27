@@ -37,7 +37,6 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
     //_getFindUser = getUsername(_nameTextEditController.text);
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
-    
 
     final standardDeviceWidth = 390;
     final standardDeviceHeight = 844;
@@ -105,12 +104,10 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
                     state = 1;
                     _getFindUser = getUsername(_nameTextEditController.text);
                   },
-
                   style: TextStyle(
                       color: Color(0xff607463),
                       fontSize: 15,
                       fontFamily: 'PTSansRegular'),
-                  
                   decoration: InputDecoration(
                       labelText: "Name Search",
                       fillColor: Color(0xff607463),
@@ -124,44 +121,46 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
               SizedBox(
                 height: 15 * (height / standardDeviceHeight),
               ),
-              
 
               state == 0
-                ? Text(
-                  'Find Your New Friend!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20),
-                )
-              
-               : Container(
-                  height: 300 * sh,
-                  child: FutureBuilder(
-                    future: _getFindUser,
-                    builder: (BuildContext context,
-                        AsyncSnapshot<dynamic> snapshot) {
-                      if (!snapshot.hasData) {
-                        print("loading  data");
-                        return Center(child: CircularProgressIndicator());
-                      } else if (snapshot.data == null || snapshot.hasError) {
-                        print('error from get data accept');
-                        return Text('No data exists');
-                      }
-                      print(textvalue);
-                      print(snapshot.data.result);
-                      print(snapshot.data.result.length);
-                      state = 1;
-
-                      return ListView.builder(
-                        itemCount: snapshot.data.result.length,
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          return usertofriendRec(
-                              context, sh, sd, snapshot.data.result[index]);
+                  ? Text(
+                      'Find Your New Friend!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20),
+                    )
+                  : Container(
+                      height: 300 * sh,
+                      child: FutureBuilder(
+                        future: _getFindUser,
+                        builder: (BuildContext context,
+                            AsyncSnapshot<dynamic> snapshot) {
+                          if (!snapshot.hasData) {
+                            print("loading  data");
+                            return Center(child: CircularProgressIndicator());
+                          } else if (snapshot.data == null ||
+                              snapshot.hasError) {
+                            print('error from get data accept');
+                            return Text('No data exists');
+                          }
+                          // print(textvalue);
+                          // print(snapshot.data.result);
+                          // print(snapshot.data.result.length);
+                          state = 1;
+                          if (snapshot.data.result.length == 0)
+                            return Center(
+                                child: Text(
+                                    'No results were found for your search.'));
+                          return ListView.builder(
+                            itemCount: snapshot.data.result.length,
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, int index) {
+                              return usertofriendRec(
+                                  context, sh, sd, snapshot.data.result[index]);
+                            },
+                          );
                         },
-                      );
-                    },
-                  ),
-                ),
+                      ),
+                    ),
             ],
           ),
         ),

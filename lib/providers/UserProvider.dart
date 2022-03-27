@@ -11,7 +11,6 @@ class UserProvider with ChangeNotifier {
   fetchData() async {
     print('get user data');
     user = await setUserData();
-    print(user);
     notifyListeners(); // data 가 수정되었다고 알려주기
   }
 

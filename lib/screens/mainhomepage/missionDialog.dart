@@ -31,7 +31,6 @@ class _missionDialogState extends State<missionDialog> {
                   fontSize: 22,
                   fontFamily: 'PTSansBold',
                 ),
-                overflow: TextOverflow.clip,
               ),
             ),
           ],
