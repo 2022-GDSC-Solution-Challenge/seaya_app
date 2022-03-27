@@ -62,6 +62,7 @@ class _friendsListState extends State<friendsList>
           FutureBuilder(
             future: _getCompetereq,
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              print(snapshot.hasData);
               if (!snapshot.hasData) {
                 print("loading  data");
                 return Center(child: CircularProgressIndicator());
@@ -73,8 +74,9 @@ class _friendsListState extends State<friendsList>
               print(snapshot.data!.acceptWaiting.length);
               print(snapshot.data!.competitors);
               print(snapshot.data!.competitors.length);
+              print(snapshot.data!.requestWaiting.length);
 
-              if (snapshot.data!.acceptWaiting.length == 0) {
+              if ( snapshot.data!.competitors.length == 0 && snapshot.data!.requestWaiting.length == 0 && snapshot.data!.acceptWaiting.length == 0) {
                 return Center(
                   child: Column(
                     children: [
@@ -90,7 +92,8 @@ class _friendsListState extends State<friendsList>
               }
               return Column(
                 children: [
-                  ListView.builder(
+                  (snapshot.data!.competitors.competition.startAt == null && snapshot.data!.competitors.competition.endAt == null)
+                  ?ListView.builder(
                     itemCount: snapshot.data!.competitors.length,
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
@@ -101,7 +104,12 @@ class _friendsListState extends State<friendsList>
                         snapshot.data.competitors[index],
                       );
                     },
-                  ),
+                  )
+                  :Text(
+                        'Competition was not conducted',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20),
+                      ),
                   SizedBox(
                     height: 30 * sh,
                   ),
@@ -133,11 +141,11 @@ class _friendsListState extends State<friendsList>
                     ),
                   ),
                   ListView.builder(
-                    itemCount: snapshot.data.request_waiting.length,
+                    itemCount: snapshot.data.requestWaiting.length,
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
                       return competeRequest(context, sh, sd,
-                          snapshot.data.request_waiting[index]);
+                          snapshot.data.requestWaiting[index]);
                     },
                   ),
                 ],
@@ -157,18 +165,27 @@ Widget competeFriends(
   final id = compete.id!;
   final int? mypoint;
   final int? yourpoint;
-  String? datestr = compete.competition!.startAt!;
-  final DateTime today = DateTime.now();
-  datestr = datestr.substring(0, 10);
-  var date = DateFormat('yyyy-MM-dd').parse(datestr);
+  var date;
+  var datestr = compete.competition![compete.competition!.length].startAt;
+
+  //오늘 시간
+  DateTime today = DateTime.now();
+  today = new DateTime(today.year, today.month,today.day);
+  if(datestr == "0"){
+    date = new DateTime(today.year, today.month,today.day + 1);
+  }
+  else {
+  datestr = datestr!.substring(0, 10);
+  date = DateFormat('yyyy-MM-dd').parse(datestr);
+  }
   int difference = int.parse(today.difference(date).inDays.toString());
 
-  if (id == compete.competition!.acceptId!) {
-    yourpoint = compete.competition!.auPoint!;
-    mypoint = compete.competition!.ruPoint!;
+  if (id == compete.competition![compete.competition!.length].acceptId) {
+    yourpoint = compete.competition![compete.competition!.length].auPoint;
+    mypoint = compete.competition![compete.competition!.length].ruPoint;
   } else {
-    yourpoint = compete.competition!.ruPoint!;
-    mypoint = compete.competition!.auPoint!;
+    yourpoint = compete.competition![compete.competition!.length].ruPoint;
+    mypoint = compete.competition![compete.competition!.length].auPoint;
   }
 
   return Container(
@@ -333,7 +350,7 @@ Widget competeAccept(
                       Color.fromARGB(255, 202, 210, 224),
                     )),
                 onPressed: () {
-                  acceptFriend(id);
+                  acceptCompete(id);
                 },
                 child: Icon(Icons.check),
               ),

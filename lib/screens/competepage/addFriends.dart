@@ -80,8 +80,12 @@ class _addFriendsState extends State<addFriends>
               print(snapshot.data.acceptWaiting.length);
               print(snapshot.data.friends);
               print(snapshot.data.friends.length);
+              print(snapshot.data.requestWaiting);
+              print(snapshot.data.requestWaiting.length);
 
-              if (snapshot.data.acceptWaiting.length == 0) {
+              if (snapshot.data.friends.length == 0 &&
+                  snapshot.data.acceptWaiting.length == 0 &&
+                  snapshot.data.requestWaiting.length == 0) {
                 return Center(
                   child: Column(
                     children: [
@@ -138,7 +142,7 @@ class _addFriendsState extends State<addFriends>
                   itemCount: snapshot.data.requestWaiting.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return friendRec(
+                    return friendRequest(
                         context, sh, sd, snapshot.data.requestWaiting[index]);
                   },
                 ),
@@ -191,7 +195,7 @@ Widget searchFriends(BuildContext context, double sh, double sd) {
 
 //겨루기 신청창 및 친구 리스트
 Widget competeReq(BuildContext context, double sh, double sd, Friends friends,
-    List<int> list) {
+    List<dynamic> list) {
   final id = friends.id!;
   final friendlist = list;
   int? state;
@@ -319,7 +323,7 @@ Widget friendRec(BuildContext context, double sh, double sd, Friends friends) {
                       Color.fromARGB(255, 202, 210, 224),
                     )),
                 onPressed: () {
-                 acceptFriend(id);
+                  acceptFriend(id);
                 },
                 child: const Text(
                   'accept',

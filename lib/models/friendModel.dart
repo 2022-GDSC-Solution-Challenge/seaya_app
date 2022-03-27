@@ -3,7 +3,7 @@ class mFriend {
   List<Friends>? friends;
   List<Friends>? acceptWaiting;
   List<Friends>? requestWaiting;
-  List? cpt_list;
+  List<dynamic>? cpt_list;
 
   mFriend({
     this.state,
@@ -33,7 +33,7 @@ class mFriend {
       });
     }
     if (json['cpt_list'] != null) {
-      cpt_list = <int>[];
+      cpt_list = <dynamic>[];
       cpt_list = json['cpt_list'];
     }
   }

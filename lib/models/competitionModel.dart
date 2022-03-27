@@ -33,40 +33,43 @@ class mCompetition {
 class Competitors {
   int? id;
   String? name;
-  Competition? competition;
+  List<Competition>? competition;
 
   Competitors({this.id, this.name, this.competition});
 
   Competitors.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    competition = json['Competition'] != null
-        ? new Competition.fromJson(json['Competition'])
-        : null;
+    if (json['Competition'] != null) {
+      competition = <Competition>[];
+      json['Competition'].forEach((v) {
+        competition!.add(new Competition.fromJson(v));
+      });
+    }
   }
 }
 
 class Competition {
-  int? id;
+  int id = 0;
   //String? name;
-  bool? state;
-  int? ruPoint;
-  int? auPoint;
+  bool state = false;
+  int ruPoint=0;
+  int auPoint=0;
   String? startAt;
   String? endAt;
-  int? requestId;
-  int? acceptId;
+  int requestId =0;
+  int acceptId =0;
 
   Competition(
-      {this.id,
+      {required this.id,
       //this.name,
-      this.state,
-      this.ruPoint,
-      this.auPoint,
+      required this.state,
+      required this.ruPoint,
+      required this.auPoint,
       this.startAt,
       this.endAt,
-      this.requestId,
-      this.acceptId});
+      required this.requestId,
+      required this.acceptId});
 
   Competition.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -74,8 +77,13 @@ class Competition {
     state = json['state'];
     ruPoint = json['ruPoint'];
     auPoint = json['auPoint'];
-    startAt = json['startAt'];
-    endAt = json['endAt'];
+
+    if(json['startAt']==null){
+    startAt = "0";
+    }else startAt = json['startAt'];
+    if(json['endAt']==null){
+    endAt = "0";
+    }else endAt = json['endAt'];
     requestId = json['requestId'];
     acceptId = json['acceptId'];
   }
