@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:seaya_app/providers/UserProvider.dart';
 import 'package:seaya_app/screens/mainhomepage/Sea.dart';
 import 'package:flutter/widgets.dart';
 import 'package:seaya_app/widgets/aniwidget/AnimatedWave.dart';
@@ -14,6 +16,9 @@ class _SeawavesState extends State<Seawaves>
     with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController _controller;
+  late UserProvider _userProvider;
+  late Color color1;
+  late Color color2;
 
   @override
   void initState() {
@@ -37,6 +42,7 @@ class _SeawavesState extends State<Seawaves>
 
   @override
   Widget build(BuildContext context) {
+     _userProvider = Provider.of<UserProvider>(context, listen: true);
 
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
@@ -47,6 +53,18 @@ class _SeawavesState extends State<Seawaves>
     final double sh = (height / standardDeviceHeight);
     final double sd = (width / standardDeviceWidth);
 
+    if(_userProvider.user!.totalp <= 100){
+      color1 = Color(0xff9EB5D0);
+      color2 = Color(0xffD3E0E5);
+    }
+    else if(_userProvider.user!.totalp > 100 && _userProvider.user!.totalp <= 200){
+      color1 = Color(0xffB9D0E6);
+      color2 = Color(0xffD8E9EA);
+    }
+    else{
+      color1 = Color(0xffD8EEFC);
+      color2 = Color(0xffE0F8F9);
+    }
     return Container(
         //padding: new EdgeInsets.fromLTRB(15*sd, 20 * sh, 15*sd, 20*sh),
         //width: 340 * (width / standardDeviceWidth),
@@ -57,14 +75,14 @@ class _SeawavesState extends State<Seawaves>
             animation: animation,
             bottom: 0,
             opacity: 0.5,
-            color: Color.fromARGB(255, 193, 241, 243),
+            color: color1,
             direction: 1,
           ),
           AnimatedWave(
             animation: animation,
             bottom: 0,
             opacity: 0.5,
-            color: Color.fromARGB(255, 207, 228, 255),
+            color: color2,
             direction: 0,
           ),
 
