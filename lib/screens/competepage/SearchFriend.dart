@@ -15,12 +15,13 @@ class SearchFriendBar extends StatefulWidget {
 class _SearchFriendBarState extends State<SearchFriendBar> {
   Future? _getFindUser;
   final _nameTextEditController = TextEditingController();
+  final String? textvalue = null;
 
   @override
   void initState() {
     super.initState();
     //_getFindUser = getUsername();
-    _getFindUser = getUsername(_nameTextEditController.text);
+    //_getFindUser = getUsername(_nameTextEditController.text);
   }
 
   @override
@@ -30,6 +31,7 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
 
   @override
   Widget build(BuildContext context) {
+    //_getFindUser = getUsername(_nameTextEditController.text);
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
 
@@ -39,6 +41,7 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
     final double sd = (width / standardDeviceWidth);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
@@ -93,11 +96,11 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
                 child: TextField(
                   controller: _nameTextEditController,
                   keyboardType: TextInputType.text,
-                  onSubmitted: (value) async {
-                    _nameTextEditController.text = value;
-                    _getFindUser = (await getUsername(_nameTextEditController.text)) as Future;
+                  onSubmitted: (textvalue) {
+                    _nameTextEditController.text = textvalue;
+                    _getFindUser = getUsername(_nameTextEditController.text);
                   },
-                  
+
                   style: TextStyle(
                       color: Color(0xff607463),
                       fontSize: 15,
@@ -111,36 +114,55 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)))),
-                          
                 ),
               ),
-               SizedBox(
+              SizedBox(
                 height: 15 * (height / standardDeviceHeight),
               ),
-              FutureBuilder(
-                future: _getFindUser,
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                  if (!snapshot.hasData) {
-                    print("loading  data");
-                    return Center(child: CircularProgressIndicator());
-                  } else if (snapshot.data == null || snapshot.hasError) {
-                    print('error from get data accept');
-                    return Text('No data exists');
-                  }
-                  print(snapshot.data.result);
-                  print(snapshot.data.result.length);
 
-                  return ListView.builder(
-                    itemCount: snapshot.data.result.length,
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      return usertofriendRec(
-                          context, sh, sd, snapshot.data.result[index]);
+              if (textvalue == null)
+                Text(
+                  'Find Your New Friend!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20),
+                ),
+              if (textvalue != null)
+                Container(
+                  height: 300 * sh,
+                  child: FutureBuilder(
+                    future: _getFindUser,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<dynamic> snapshot) {
+                      if (!snapshot.hasData) {
+                        print("loading  data");
+                        return Center(child: CircularProgressIndicator());
+                      } else if (snapshot.data == null || snapshot.hasError) {
+                        print('error from get data accept');
+                        return Text('No data exists');
+                      }
+                      print(snapshot.data.result);
+                      print(snapshot.data.result.length);
+                      if (snapshot.data!.result.length == 0) {
+                        return Center(
+                          child: Text(
+                            'Find Your New Friend!',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        );
+                      }
+
+                      return ListView.builder(
+                        itemCount: snapshot.data.result.length,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return usertofriendRec(
+                              context, sh, sd, snapshot.data.result[index]);
+                        },
+                      );
                     },
-                  );
-                },
-              ),
+                  ),
+                ),
             ],
           ),
         ),
@@ -151,7 +173,8 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
 
 // 검색된 유저 리스트
 
-Widget usertofriendRec(BuildContext context, double sh, double sd, Result result) {
+Widget usertofriendRec(
+    BuildContext context, double sh, double sd, Result result) {
   final id = result.id!;
 
   return Container(
@@ -216,4 +239,3 @@ Widget usertofriendRec(BuildContext context, double sh, double sd, Result result
         ],
       ));
 }
-
