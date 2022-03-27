@@ -13,15 +13,18 @@ class SearchFriendBar extends StatefulWidget {
 }
 
 class _SearchFriendBarState extends State<SearchFriendBar> {
-  Future? _getFindUser;
+  late Future _getFindUser;
   final _nameTextEditController = TextEditingController();
-  final String? textvalue = null;
+  String? textvalue;
+  int? state;
 
   @override
   void initState() {
     super.initState();
     //_getFindUser = getUsername();
     //_getFindUser = getUsername(_nameTextEditController.text);
+    textvalue = null;
+    state = 0;
   }
 
   @override
@@ -34,6 +37,7 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
     //_getFindUser = getUsername(_nameTextEditController.text);
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
+    
 
     final standardDeviceWidth = 390;
     final standardDeviceHeight = 844;
@@ -98,6 +102,7 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
                   keyboardType: TextInputType.text,
                   onSubmitted: (textvalue) {
                     _nameTextEditController.text = textvalue;
+                    state = 1;
                     _getFindUser = getUsername(_nameTextEditController.text);
                   },
 
@@ -105,7 +110,7 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
                       color: Color(0xff607463),
                       fontSize: 15,
                       fontFamily: 'PTSansRegular'),
-                  //controller: _nameTextEditController,
+                  
                   decoration: InputDecoration(
                       labelText: "Name Search",
                       fillColor: Color(0xff607463),
@@ -119,15 +124,16 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
               SizedBox(
                 height: 15 * (height / standardDeviceHeight),
               ),
+              
 
-              if (textvalue == null)
-                Text(
+              state == 0
+                ? Text(
                   'Find Your New Friend!',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20),
-                ),
-              if (textvalue != null)
-                Container(
+                )
+              
+               : Container(
                   height: 300 * sh,
                   child: FutureBuilder(
                     future: _getFindUser,
@@ -140,17 +146,10 @@ class _SearchFriendBarState extends State<SearchFriendBar> {
                         print('error from get data accept');
                         return Text('No data exists');
                       }
+                      print(textvalue);
                       print(snapshot.data.result);
                       print(snapshot.data.result.length);
-                      if (snapshot.data!.result.length == 0) {
-                        return Center(
-                          child: Text(
-                            'Find Your New Friend!',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        );
-                      }
+                      state = 1;
 
                       return ListView.builder(
                         itemCount: snapshot.data.result.length,

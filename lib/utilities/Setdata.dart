@@ -237,6 +237,7 @@ Future<mFinduser> getUsername(String name) async {
 
   final response = await get.getJson(id, link);
   final data = json.decode(response!);
+  print(data);
   user = mFinduser.fromJson(data);
   return  user;
 }
