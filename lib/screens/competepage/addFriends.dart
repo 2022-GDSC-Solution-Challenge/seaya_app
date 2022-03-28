@@ -256,15 +256,23 @@ Widget competeReq(BuildContext context, double sh, double sd, Friends friends,
                       Color.fromARGB(255, 202, 210, 224),
                     )),
                 onPressed: () async {
-                  (state == 0) ? null : await competeFriend(id);
+                  (state == 1) ? null : await competeFriend(id);
                 },
-                child: const Text(
+                child: (state == 0)
+                ?const Text(
                   'start',
                   style: TextStyle(
                     color: Color(0xff2B2B2B),
                     fontFamily: 'PTSansRegular',
                   ),
-                ),
+                )
+                :Text(
+                      'waiting..',
+                      style: TextStyle(
+                        color: Color(0xff2B2B2B),
+                        fontFamily: 'PTSansRegular',
+                      ),
+                    ),
               ),
             ),
           ),

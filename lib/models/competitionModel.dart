@@ -87,12 +87,14 @@ class Competition {
     state = json['state'];
     ruPoint = json['ruPoint'];
     auPoint = json['auPoint'];
+    final cnt1 = json['startAt'];
+    final cnt2 = json['endAt'];
 
-    if (json['startAt'] == null) {
+    if (cnt1 == null) {
       startAt = "0";
     } else
       startAt = json['startAt'];
-    if (json['endAt'] == null) {
+    if (cnt2 == null) {
       endAt = "0";
     } else
       endAt = json['endAt'];

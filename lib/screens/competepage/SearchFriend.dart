@@ -239,7 +239,7 @@ Widget usertofriendRec(
                   ),
                 )
                 :Text(
-                  'waiting..',
+                  'already',
                   style: TextStyle(
                     color: Color(0xff2B2B2B),
                     fontFamily: 'PTSansRegular',

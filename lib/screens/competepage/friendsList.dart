@@ -128,7 +128,12 @@ class _friendsListState extends State<friendsList>
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
                       return competeAccept(
-                          context, sh, sd, snapshot.data.acceptWaiting[index]);
+                        context,
+                        sh,
+                        sd,
+                        snapshot.data.acceptWaiting[index],
+                        snapshot.data.competitors,
+                      );
                     },
                   ),
                   SizedBox(
@@ -172,14 +177,23 @@ Widget competeFriends(
 
   //오늘 시간
   DateTime today = DateTime.now();
+
+  //끝나는 시간
   today = new DateTime(today.year, today.month, today.day);
+  print(today);
   if (datestr == "0") {
     date = new DateTime(today.year, today.month, today.day + 1);
+  } else if (datestr == null) {
+    date = new DateTime(today.year, today.month, today.day + 1);
   } else {
-    datestr = datestr!.substring(0, 10);
+    datestr = datestr.substring(0, 10);
     date = DateFormat('yyyy-MM-dd').parse(datestr);
   }
-  int difference = int.parse(today.difference(date).inDays.toString());
+  print(date);
+  var date2 = new DateTime(date.year, date.month, date.day + 7);
+  print(date2);
+  int difference = int.parse(date2.difference(today).inDays.toString());
+  print(difference);
 
   if (id == compete.competition!.acceptId) {
     yourpoint = compete.competition!.auPoint;
@@ -279,19 +293,30 @@ Widget competeFriends(
             color: Color.fromARGB(255, 202, 210, 224),
             borderRadius: BorderRadius.circular(5.0),
           ),
-          child: Column(children: [
-            SizedBox(
-              height: 20 * sh,
-            ),
-            Text(
-              'D-${difference}',
-              style: TextStyle(
-                fontSize: 12.0,
-                color: Color(0xff2B2B2B),
-                fontFamily: 'PTSansRegular',
+          child: Column(
+            children: [
+              SizedBox(
+                height: 20 * sh,
               ),
-            ),
-          ]),
+              (difference <= 7)
+                  ? Text(
+                      'D-${difference}',
+                      style: TextStyle(
+                        fontSize: 12.0,
+                        color: Color(0xff2B2B2B),
+                        fontFamily: 'PTSansRegular',
+                      ),
+                    )
+                  : Text(
+                      'Not yet',
+                      style: TextStyle(
+                        fontSize: 12.0,
+                        color: Color(0xff2B2B2B),
+                        fontFamily: 'PTSansRegular',
+                      ),
+                    ),
+            ],
+          ),
         ),
       ],
     ),
@@ -299,66 +324,82 @@ Widget competeFriends(
 }
 
 //친구 겨루기 승인
-Widget competeAccept(
-    BuildContext context, double sh, double sd, Competitors competitor) {
+Widget competeAccept(BuildContext context, double sh, double sd,
+    Competitors competitor, List<Competitors> competitors) {
   final id = competitor.id!;
+  var state1 = false;
+  final state2 = competitor.competition!.state;
+  List<Competitors> competelist = competitors;
 
-  return Expanded(
-    child: Container(
-      margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 3 * sd, 3 * sh),
-      padding: EdgeInsets.fromLTRB(5 * sd, 5 * sh, 5 * sd, 5 * sh),
-      height: 50.0 * sh,
-      width: 350 * sd,
-      decoration: BoxDecoration(
-          color: Color.fromARGB(255, 236, 239, 243),
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                offset: const Offset(-1.0, 1.0),
-                blurRadius: 0,
-                spreadRadius: 0),
-          ]),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 4,
-            child: Container(
-              padding: EdgeInsets.only(left: 20 * sd),
-              child: Text(
-                competitor.name!,
-                style: TextStyle(
-                  fontSize: 18.0,
-                  color: Color(0xff2B2B2B),
-                  fontFamily: 'PTSansRegular',
-                ),
+  for (int i = 0; i < competelist.length; i++) {
+    if (id == competelist[i].id) {
+      state1 = true;
+      break;
+    }
+  }
+
+  return Container(
+    margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 3 * sd, 3 * sh),
+    padding: EdgeInsets.fromLTRB(5 * sd, 5 * sh, 5 * sd, 5 * sh),
+    height: 50.0 * sh,
+    width: 350 * sd,
+    decoration: BoxDecoration(
+        color: Color.fromARGB(255, 236, 239, 243),
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              offset: const Offset(-1.0, 1.0),
+              blurRadius: 0,
+              spreadRadius: 0),
+        ]),
+    child: Row(
+      children: [
+        Expanded(
+          flex: 4,
+          child: Container(
+            padding: EdgeInsets.only(left: 20 * sd),
+            child: Text(
+              competitor.name!,
+              style: TextStyle(
+                fontSize: 18.0,
+                color: Color(0xff2B2B2B),
+                fontFamily: 'PTSansRegular',
               ),
             ),
           ),
-          //SizedBox(width: 180 * sd),
-          Expanded(
-            flex: 1,
-            child: Container(
-              margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 20 * sd, 3 * sh),
-              width: 40 * sd,
-              height: 40 * sh,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                    padding: MaterialStateProperty.all<EdgeInsets>(
-                      const EdgeInsets.only(),
+        ),
+        //SizedBox(width: 180 * sd),
+        Expanded(
+          flex: 1,
+          child: Container(
+            margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 20 * sd, 3 * sh),
+            width: 40 * sd,
+            height: 40 * sh,
+            child: ElevatedButton(
+              style: ButtonStyle(
+                  padding: MaterialStateProperty.all<EdgeInsets>(
+                    const EdgeInsets.only(),
+                  ),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    Color.fromARGB(255, 202, 210, 224),
+                  )),
+              onPressed: () {
+                (state2 == false) ? acceptCompete(id) : null;
+              },
+              child: (state2 == false)
+                  ? Icon(Icons.check)
+                  : Text(
+                      'already',
+                      style: TextStyle(
+                        color: Color(0xff2B2B2B),
+                        fontFamily: 'PTSansRegular',
+                      ),
                     ),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      Color.fromARGB(255, 202, 210, 224),
-                    )),
-                onPressed: () {
-                  acceptCompete(id);
-                },
-                child: Icon(Icons.check),
-              ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }
@@ -367,68 +408,66 @@ Widget competeAccept(
 Widget competeRequest(
     BuildContext context, double sh, double sd, Competitors competitor) {
   final id = competitor.id!;
-  return Expanded(
-    child: Container(
-      margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 3 * sd, 3 * sh),
-      padding: EdgeInsets.fromLTRB(5 * sd, 5 * sh, 5 * sd, 5 * sh),
-      height: 50.0 * sh,
-      width: 350 * sd,
-      decoration: BoxDecoration(
-          color: Color.fromARGB(255, 236, 239, 243),
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                offset: const Offset(-1.0, 1.0),
-                blurRadius: 0,
-                spreadRadius: 0),
-          ]),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 4,
-            child: Container(
-              padding: EdgeInsets.only(left: 20 * sd),
-              child: Text(
-                competitor.name!,
+  return Container(
+    margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 3 * sd, 3 * sh),
+    padding: EdgeInsets.fromLTRB(5 * sd, 5 * sh, 5 * sd, 5 * sh),
+    height: 50.0 * sh,
+    width: 350 * sd,
+    decoration: BoxDecoration(
+        color: Color.fromARGB(255, 236, 239, 243),
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              offset: const Offset(-1.0, 1.0),
+              blurRadius: 0,
+              spreadRadius: 0),
+        ]),
+    child: Row(
+      children: [
+        Expanded(
+          flex: 4,
+          child: Container(
+            padding: EdgeInsets.only(left: 20 * sd),
+            child: Text(
+              competitor.name!,
+              style: TextStyle(
+                fontSize: 18.0,
+                color: Color(0xff2B2B2B),
+                fontFamily: 'PTSansRegular',
+              ),
+            ),
+          ),
+        ),
+        //SizedBox(width: 180 * sd),
+        Expanded(
+          flex: 1,
+          child: Container(
+            margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 20 * sd, 3 * sh),
+            width: 40 * sd,
+            height: 40 * sh,
+            child: ElevatedButton(
+              style: ButtonStyle(
+                  padding: MaterialStateProperty.all<EdgeInsets>(
+                    const EdgeInsets.only(),
+                  ),
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    Color.fromARGB(255, 202, 210, 224),
+                  )),
+              onPressed: () {
+                null;
+              },
+              child: const Text(
+                'waiting..',
                 style: TextStyle(
-                  fontSize: 18.0,
                   color: Color(0xff2B2B2B),
                   fontFamily: 'PTSansRegular',
                 ),
               ),
             ),
           ),
-          //SizedBox(width: 180 * sd),
-          Expanded(
-            flex: 1,
-            child: Container(
-              margin: EdgeInsets.fromLTRB(3 * sd, 3 * sh, 20 * sd, 3 * sh),
-              width: 40 * sd,
-              height: 40 * sh,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                    padding: MaterialStateProperty.all<EdgeInsets>(
-                      const EdgeInsets.only(),
-                    ),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      Color.fromARGB(255, 202, 210, 224),
-                    )),
-                onPressed: () {
-                  null;
-                },
-                child: const Text(
-                  'waiting..',
-                  style: TextStyle(
-                    color: Color(0xff2B2B2B),
-                    fontFamily: 'PTSansRegular',
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }
