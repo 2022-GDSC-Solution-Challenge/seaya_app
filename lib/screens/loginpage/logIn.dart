@@ -47,7 +47,7 @@ class LogInState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset : false,
+      resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
       backgroundColor: const Color(0xffffffff),
       body: SafeArea(
@@ -177,108 +177,6 @@ class LogInState extends State<LogIn> {
                             const SizedBox(
                               height: 80.0,
                             ),
-                            Column(children: [
-                              //구글로 로그인
-                              Stack(
-                                children: [
-                                  Container(
-                                    width: 310.0,
-                                    height: 40.0,
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        primary: const Color(0xffffffff),
-                                        shape: RoundedRectangleBorder(
-                                          side: const BorderSide(
-                                            color: Color.fromARGB(
-                                                134, 236, 236, 236),
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(7),
-                                        ),
-                                      ),
-                                      child: const Text(
-                                        '         Sign in with Google',
-                                        style: TextStyle(
-                                          fontSize: 12.0,
-                                          color: Color(0xff2B2B2B),
-                                          fontFamily: 'PTSansRegular',
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          /*
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) => BasicPage(),
-                                    ),
-                                  );
-                                  */
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 77.0),
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: const Image(
-                                      width: 16.0,
-                                      image: AssetImage(
-                                        'images/google_icon.png',
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              //페이스북으로 로그인
-                              Stack(
-                                children: [
-                                  Container(
-                                    width: 310.0,
-                                    height: 40.0,
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        primary: const Color(0xff3B5898),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(7),
-                                        ),
-                                      ),
-                                      child: const Text(
-                                        '          Log in with Facebook',
-                                        style: TextStyle(
-                                          fontSize: 12.0,
-                                          color: Color(0xffffffff),
-                                          fontFamily: 'PTSansRegular',
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          /*
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) => BasicPage(),
-                                    ),
-                                  );
-                                  */
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 75.0),
-                                    padding: const EdgeInsets.all(14.0),
-                                    child: const Image(
-                                      width: 19.0,
-                                      image: AssetImage(
-                                        'images/Facebook_icon.png',
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ]),
                           ],
                         ),
                       )))

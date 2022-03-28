@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class mCompetition {
   String? state;
   List<Competitors>? competitors;
@@ -33,18 +35,26 @@ class mCompetition {
 class Competitors {
   int? id;
   String? name;
-  List<Competition>? competition;
+  Competition? competition;
 
   Competitors({this.id, this.name, this.competition});
 
   Competitors.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+
+    // print('json');
+    print('json' + json.toString());
     if (json['Competition'] != null) {
-      competition = <Competition>[];
-      json['Competition'].forEach((v) {
-        competition!.add(new Competition.fromJson(v));
-      });
+      competition = new Competition(
+          id: json['Competition']['id'],
+          state: json['Competition']['state'],
+          ruPoint: json['Competition']['ruPoint'],
+          auPoint: json['Competition']['auPoint'],
+          startAt: json['Competition']['startAt'],
+          endAt: json['Competition']['endAt'],
+          acceptId: json['Competition']['acceptId'],
+          requestId: json['Competition']['requestId']);
     }
   }
 }
@@ -53,12 +63,12 @@ class Competition {
   int id = 0;
   //String? name;
   bool state = false;
-  int ruPoint=0;
-  int auPoint=0;
+  int ruPoint = 0;
+  int auPoint = 0;
   String? startAt;
   String? endAt;
-  int requestId =0;
-  int acceptId =0;
+  int requestId = 0;
+  int acceptId = 0;
 
   Competition(
       {required this.id,
@@ -78,12 +88,14 @@ class Competition {
     ruPoint = json['ruPoint'];
     auPoint = json['auPoint'];
 
-    if(json['startAt']==null){
-    startAt = "0";
-    }else startAt = json['startAt'];
-    if(json['endAt']==null){
-    endAt = "0";
-    }else endAt = json['endAt'];
+    if (json['startAt'] == null) {
+      startAt = "0";
+    } else
+      startAt = json['startAt'];
+    if (json['endAt'] == null) {
+      endAt = "0";
+    } else
+      endAt = json['endAt'];
     requestId = json['requestId'];
     acceptId = json['acceptId'];
   }

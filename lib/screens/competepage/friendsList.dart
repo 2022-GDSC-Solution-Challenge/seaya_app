@@ -76,7 +76,9 @@ class _friendsListState extends State<friendsList>
               print(snapshot.data!.competitors.length);
               print(snapshot.data!.requestWaiting.length);
 
-              if ( snapshot.data!.competitors.length == 0 && snapshot.data!.requestWaiting.length == 0 && snapshot.data!.acceptWaiting.length == 0) {
+              if (snapshot.data!.competitors.length == 0 &&
+                  snapshot.data!.requestWaiting.length == 0 &&
+                  snapshot.data!.acceptWaiting.length == 0) {
                 return Center(
                   child: Column(
                     children: [
@@ -92,24 +94,24 @@ class _friendsListState extends State<friendsList>
               }
               return Column(
                 children: [
-                  (snapshot.data!.competitors.competition.startAt == null && snapshot.data!.competitors.competition.endAt == null)
-                  ?ListView.builder(
-                    itemCount: snapshot.data!.competitors.length,
-                    shrinkWrap: true,
-                    itemBuilder: (BuildContext context, int index) {
-                      return competeFriends(
-                        context,
-                        sh,
-                        sd,
-                        snapshot.data.competitors[index],
-                      );
-                    },
-                  )
-                  :Text(
-                        'Competition was not conducted',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20),
-                      ),
+                  (snapshot.data!.competitors.length != 0)
+                      ? ListView.builder(
+                          itemCount: snapshot.data!.competitors.length,
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            return competeFriends(
+                              context,
+                              sh,
+                              sd,
+                              snapshot.data.competitors[index],
+                            );
+                          },
+                        )
+                      : Text(
+                          'Competition was not conducted',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20),
+                        ),
                   SizedBox(
                     height: 30 * sh,
                   ),
@@ -144,8 +146,8 @@ class _friendsListState extends State<friendsList>
                     itemCount: snapshot.data.requestWaiting.length,
                     shrinkWrap: true,
                     itemBuilder: (BuildContext context, int index) {
-                      return competeRequest(context, sh, sd,
-                          snapshot.data.requestWaiting[index]);
+                      return competeRequest(
+                          context, sh, sd, snapshot.data.requestWaiting[index]);
                     },
                   ),
                 ],
@@ -166,26 +168,25 @@ Widget competeFriends(
   final int? mypoint;
   final int? yourpoint;
   var date;
-  var datestr = compete.competition![compete.competition!.length].startAt;
+  var datestr = compete.competition!.startAt;
 
   //오늘 시간
   DateTime today = DateTime.now();
-  today = new DateTime(today.year, today.month,today.day);
-  if(datestr == "0"){
-    date = new DateTime(today.year, today.month,today.day + 1);
-  }
-  else {
-  datestr = datestr!.substring(0, 10);
-  date = DateFormat('yyyy-MM-dd').parse(datestr);
+  today = new DateTime(today.year, today.month, today.day);
+  if (datestr == "0") {
+    date = new DateTime(today.year, today.month, today.day + 1);
+  } else {
+    datestr = datestr!.substring(0, 10);
+    date = DateFormat('yyyy-MM-dd').parse(datestr);
   }
   int difference = int.parse(today.difference(date).inDays.toString());
 
-  if (id == compete.competition![compete.competition!.length].acceptId) {
-    yourpoint = compete.competition![compete.competition!.length].auPoint;
-    mypoint = compete.competition![compete.competition!.length].ruPoint;
+  if (id == compete.competition!.acceptId) {
+    yourpoint = compete.competition!.auPoint;
+    mypoint = compete.competition!.ruPoint;
   } else {
-    yourpoint = compete.competition![compete.competition!.length].ruPoint;
-    mypoint = compete.competition![compete.competition!.length].auPoint;
+    yourpoint = compete.competition!.ruPoint;
+    mypoint = compete.competition!.auPoint;
   }
 
   return Container(
