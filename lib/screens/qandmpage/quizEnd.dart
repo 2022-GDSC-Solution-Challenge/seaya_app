@@ -243,6 +243,7 @@ class _quizEndState extends State<quizEnd> with SingleTickerProviderStateMixin {
     return Column(
       children: [
         Container(
+          width: double.infinity,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 255, 255, 255),
             borderRadius: BorderRadius.circular(30),
@@ -254,8 +255,8 @@ class _quizEndState extends State<quizEnd> with SingleTickerProviderStateMixin {
                     : Border.all(
                         width: 1, color: Color.fromARGB(255, 185, 203, 218)),
           ),
-          padding: EdgeInsets.fromLTRB(
-              100, 7, 100, 7), //content padding inside button
+          padding:
+              EdgeInsets.fromLTRB(80, 7, 80, 7), //content padding inside button
           child: Text(
             answer.content!,
             style: TextStyle(
@@ -263,6 +264,7 @@ class _quizEndState extends State<quizEnd> with SingleTickerProviderStateMixin {
               fontSize: 12,
               fontFamily: 'PTSansRegular',
             ),
+            textAlign: TextAlign.center,
           ),
         ),
         SizedBox(

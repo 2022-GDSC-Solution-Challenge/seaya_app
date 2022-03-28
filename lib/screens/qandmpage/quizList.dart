@@ -128,8 +128,8 @@ class _quizListState extends State<quizList> {
             style: ButtonStyle(
                 padding:
                     MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.only(
-                  left: 100,
-                  right: 100,
+                  left: 90,
+                  right: 90,
                   top: 10,
                   bottom: 10,
                 )),
