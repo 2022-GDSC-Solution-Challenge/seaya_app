@@ -88,7 +88,9 @@ class _quizListState extends State<quizList> {
                   itemBuilder: (BuildContext context, int index) {
                     print(widget.quizzes.length);
                     print(index);
-                    return quiz_card(sh, sd, context, widget.quizzes[index]);
+                    return SingleChildScrollView(
+                        child:
+                            quiz_card(sh, sd, context, widget.quizzes[index]));
                   },
                 ),
               ),
