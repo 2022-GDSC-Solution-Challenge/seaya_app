@@ -70,6 +70,72 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570226016815:android:fbfe33accdf41e5eabbcda",
+        "android_client_info": {
+          "package_name": "com.scsch.seaya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "570226016815-0he2hc8qude4q0i4lp49fkc3auqc0v7d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.scsch.seaya",
+            "certificate_hash": "9fb3776e6ae879031f63d13eb4b658d6e14ffacd"
+          }
+        },
+        {
+          "client_id": "570226016815-ekdlc4ovbnb4qi0o2bpuj3t6mp7gp3am.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByndnxz-07_V_1Yg0qkr9dDZKfS8OUmR8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570226016815-ekdlc4ovbnb4qi0o2bpuj3t6mp7gp3am.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570226016815:android:8f8d9225c2e8c6b5abbcda",
+        "android_client_info": {
+          "package_name": "com.scsch.seaya_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "570226016815-ekdlc4ovbnb4qi0o2bpuj3t6mp7gp3am.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByndnxz-07_V_1Yg0qkr9dDZKfS8OUmR8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570226016815-ekdlc4ovbnb4qi0o2bpuj3t6mp7gp3am.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

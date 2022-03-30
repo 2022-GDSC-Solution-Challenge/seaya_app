@@ -1,4 +1,4 @@
-package com.example.seaya_app
+package com.scsch.seaya_app
 
 import io.flutter.embedding.android.FlutterActivity
 
