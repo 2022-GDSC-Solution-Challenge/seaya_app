@@ -19,7 +19,7 @@ Our service 'Seaya' has chosen the topic of marine pollution, which is of low in
 Therefore, the more people use the visual field app, the more interested they will be in marine pollution, and furthermore, they will act to reduce environmental pollution on the planet.
 Our ultimate goal is to change the attitudes of people who look down on environmental issues and make everyone act voluntarily for the environment.
 
-### Brief description of functions
+### Brief description of functions:
 - You can see the home screen that changes according to the user's score.
 - You can easily and quickly check the environmental news summarized through machine learning.
 - You can get environmental knowledge by taking environmental quizzes.
