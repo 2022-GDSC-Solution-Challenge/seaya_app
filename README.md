@@ -68,7 +68,7 @@ Our ultimate goal is to change the attitudes of people who look down on environm
 
 ## 5. File Structure
 
-
+```
 📦lib
  ┣ 📂models
  ┃ ┣ 📜campaignModel.dart
@@ -121,7 +121,7 @@ Our ultimate goal is to change the attitudes of people who look down on environm
  ┃ ┗ 📂naviwidget
  ┃ ┃ ┗ 📜Navigation.dart
  ┗ 📜main.dart
-
+```
 
 
 
