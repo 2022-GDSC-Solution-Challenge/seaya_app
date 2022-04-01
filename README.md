@@ -40,7 +40,7 @@ Our ultimate goal is to change the attitudes of people who look down on environm
 
  Google Cloud Platform(Compute Engine) - for running server
  
- ## Tech Stack
+ ## 4. Tech Stack
  
  - **Design**
     - [Adobe XD](https://www.adobe.com/products/xd.html)
