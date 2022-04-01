@@ -202,7 +202,7 @@ The request list displays the application I sent.
 
 You can search friend and send friend requests.
 
-## 8. About Seaya
+## 8. Contributors
 
 - [Park SeolYeon](https://github.com/seolyeonpark) : Front-End
 - [Ham YounJin](https://github.com/YounJ00) : Design
