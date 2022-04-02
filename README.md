@@ -138,7 +138,7 @@ Our ultimate goal is to change the attitudes of people who look down on environm
 
 **LogIn & SignUp**
 
-<img src="https://user-images.githubusercontent.com/66460670/161186578-70d075c8-c5cf-4c32-a486-8d069900c330.png" width="20%" height="20%"> <img src="https://user-images.githubusercontent.com/66460670/161186583-a05ef615-06fa-471b-82e5-23130a1994f4.png" width="20%" height="20%">
+<img src="https://user-images.githubusercontent.com/66460670/161186578-70d075c8-c5cf-4c32-a486-8d069900c330.png" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/66460670/161186583-a05ef615-06fa-471b-82e5-23130a1994f4.png" width="20%" height="20%">
 
 
 Log in with your email and password.
