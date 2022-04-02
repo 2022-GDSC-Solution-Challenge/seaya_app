@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/66460670/161184505-784d6ad7-e2b5-4bb3-8105-bf616b86acea.png" width="90%" height="90%">
+<img src="https://user-images.githubusercontent.com/66460670/161184505-784d6ad7-e2b5-4bb3-8105-bf616b86acea.png" width="100%" height="100%">
 
 
 ## 1. Noted UN-SGDs
