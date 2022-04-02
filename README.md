@@ -168,7 +168,7 @@ Introduce these campaigns to encourage direct participation.
 
 - quiz
 
-<img src="https://user-images.githubusercontent.com/66460670/161188394-a9edd432-dfb1-44ed-ac5f-f0e7c5025e54.png" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/66460670/161188389-e234e685-cd8a-41cb-9704-c79fe5ac6809.png" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/66460670/161188377-0d08632a-2380-4a44-b62d-9cc728083964.png" width="30%" height="30%">
+<img src="https://user-images.githubusercontent.com/66460670/161188394-a9edd432-dfb1-44ed-ac5f-f0e7c5025e54.png" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/66460670/161188377-0d08632a-2380-4a44-b62d-9cc728083964.png" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/66460670/161188389-e234e685-cd8a-41cb-9704-c79fe5ac6809.png" width="30%" height="30%">
 
 It provides an opportunity to easily access and learn environmental knowledge through quizzes.
 For the wrong question, you can mark the correct answer to check which question you are wrong and what was the correct answer.
