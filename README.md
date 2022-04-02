@@ -138,7 +138,7 @@ Our ultimate goal is to change the attitudes of people who look down on environm
 
 **LogIn & SignUp**
 
-<img src="https://user-images.githubusercontent.com/66460670/161186578-70d075c8-c5cf-4c32-a486-8d069900c330.png" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/66460670/161186583-a05ef615-06fa-471b-82e5-23130a1994f4.png" width="20%" height="20%">
+<img src="https://user-images.githubusercontent.com/66460670/161186578-70d075c8-c5cf-4c32-a486-8d069900c330.png" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/66460670/161186583-a05ef615-06fa-471b-82e5-23130a1994f4.png" width="30%" height="30%">
 
 
 Log in with your email and password.
@@ -147,19 +147,19 @@ Log in with your email and password.
 **Home Tab**
 - sea
 
-<img src="https://user-images.githubusercontent.com/66460670/161187212-a02e798e-429b-460e-b647-ee660aa6466c.png" width="20%" height="20%"> <img src="https://user-images.githubusercontent.com/66460670/161187271-85cff399-dc99-4de3-8613-935f8555a63e.png" width="20%" height="20%">
+<img src="https://user-images.githubusercontent.com/66460670/161187212-a02e798e-429b-460e-b647-ee660aa6466c.png" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/66460670/161187271-85cff399-dc99-4de3-8613-935f8555a63e.png" width="30%" height="30%">
 
 You can see the scores they earned while using the app in detail, and when they earn points, the sea on the screen becomes clearer.
 The percent index rises with the sentence "the view of the sea has been expanded."
 
 - News & Campaign
 
-<img src="https://user-images.githubusercontent.com/66460670/161187486-dc927b54-918f-49d4-9699-f75c0fd119c1.png" width="20%" height="20%"> <img src="https://user-images.githubusercontent.com/66460670/161187475-96283861-ffc2-46ed-aacb-9659c859fed2.png" width="20%" height="20%">
+<img src="https://user-images.githubusercontent.com/66460670/161187486-dc927b54-918f-49d4-9699-f75c0fd119c1.png" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/66460670/161187475-96283861-ffc2-46ed-aacb-9659c859fed2.png" width="30%" height="30%">
 
 
 By summarizing news articles through machine learning, you can access news more easily and quickly, and learn information about social issues responding to environmental problems by reading articles.
 
-<img src="https://user-images.githubusercontent.com/66460670/161187723-c8ef5a2d-793b-4009-a889-131b5b52ec5a.png" width="20%" height="20%">
+<img src="https://user-images.githubusercontent.com/66460670/161187723-c8ef5a2d-793b-4009-a889-131b5b52ec5a.png" width="30%" height="30%">
 
 Currently, a number of campaign activities are being carried out without our knowledge, but most people are often unaware.
 Introduce these campaigns to encourage direct participation.
@@ -168,14 +168,14 @@ Introduce these campaigns to encourage direct participation.
 
 - quiz
 
-<img src="https://user-images.githubusercontent.com/66460670/161188394-a9edd432-dfb1-44ed-ac5f-f0e7c5025e54.png" width="20%" height="20%"> <img src="https://user-images.githubusercontent.com/66460670/161188389-e234e685-cd8a-41cb-9704-c79fe5ac6809.png" width="20%" height="20%"> <img src="https://user-images.githubusercontent.com/66460670/161188377-0d08632a-2380-4a44-b62d-9cc728083964.png" width="20%" height="20%">
+<img src="https://user-images.githubusercontent.com/66460670/161188394-a9edd432-dfb1-44ed-ac5f-f0e7c5025e54.png" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/66460670/161188389-e234e685-cd8a-41cb-9704-c79fe5ac6809.png" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/66460670/161188377-0d08632a-2380-4a44-b62d-9cc728083964.png" width="30%" height="30%">
 
 It provides an opportunity to easily access and learn environmental knowledge through quizzes.
 For the wrong question, you can mark the correct answer to check which question you are wrong and what was the correct answer.
 
 - mission
 
-<img src="https://user-images.githubusercontent.com/66460670/161188594-b67eb17d-b93b-469f-8819-f4f4e111de52.png" width="20%" height="20%"> <img src="https://user-images.githubusercontent.com/66460670/161188584-7c05063f-733f-4b57-9cb3-7d853aae42a5.png" width="20%" height="20%">
+<img src="https://user-images.githubusercontent.com/66460670/161188594-b67eb17d-b93b-469f-8819-f4f4e111de52.png" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/66460670/161188584-7c05063f-733f-4b57-9cb3-7d853aae42a5.png" width="30%" height="30%">
 
 
 It provides environmental missions that can be carried out in a day to help small practices become habits in life.
@@ -186,14 +186,14 @@ Click on the list tile for more information.
 
 - competition
 
-<img src="https://user-images.githubusercontent.com/66460670/161188911-ca1eecdd-5df0-4d72-bfc3-d526102b3b2d.png" width="20%" height="20%">
+<img src="https://user-images.githubusercontent.com/66460670/161188911-ca1eecdd-5df0-4d72-bfc3-d526102b3b2d.png" width="30%" height="30%">
 
 
 You can compete with your friends for a week with the scores you get from using the app.
 
 - Friend & Search
 
-<img src="https://user-images.githubusercontent.com/66460670/161189002-3cf0f906-b26b-41eb-934d-9a3530bb0780.png" width="20%" height="20%"> <img src="https://user-images.githubusercontent.com/66460670/161188996-ba545495-ad71-4e6d-8037-5c43f77ae020.png" width="20%" height="20%">
+<img src="https://user-images.githubusercontent.com/66460670/161189002-3cf0f906-b26b-41eb-934d-9a3530bb0780.png" width="30%" height="30%"> <img src="https://user-images.githubusercontent.com/66460670/161188996-ba545495-ad71-4e6d-8037-5c43f77ae020.png" width="30%" height="30%">
 
 
 You can search for friends on the Friends page.
