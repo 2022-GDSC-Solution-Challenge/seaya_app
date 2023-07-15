@@ -205,7 +205,7 @@ You can search friend and send friend requests.
 ## 8. Contributors
 
 - [Park SeolYeon](https://github.com/seolyeonpark) : Front-End
-- [Ham YounJin](https://github.com/YounJ00) : Design
+- [Ham YounJin](https://github.com/YounJ00) : Design, Front-End
 - [Park EunChong](https://github.com/0001010) : ML
 - [Yi JoonYong](https://github.com/given-dragon): Back-End
 
